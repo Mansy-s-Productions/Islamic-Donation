@@ -1,0 +1,323 @@
+@font-face {
+  font-family: "kufi";
+  src: url("../fonts/droid-arabic-kufi.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "kufi-regular";
+  src: url("../fonts/kufi-regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: kufi, sans-serif !important;
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "hafs";
+  src: url("../fonts/hafs.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "hafs", sans-serif;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: #1980B6;
+}
+
+.grey-nav {
+  background-color: #fafafa;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main-navbar {
+  padding: 50px 0% !important;
+}
+.main-navbar img {
+  width: 245px;
+}
+.main-navbar a {
+  font-size: 20px;
+  color: #1980B6;
+}
+.main-navbar .navbar-toggler svg {
+  font-size: 19px;
+}
+.main-navbar .navbar-collapse {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.main-navbar .login-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-navbar .login-buttons a {
+  border-radius: 7px;
+  padding: 10px 25px;
+  background-color: #316EEC;
+  margin: 0 5px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 42px;
+  -webkit-border-radius: 42px;
+  -moz-border-radius: 42px;
+  -ms-border-radius: 42px;
+  -o-border-radius: 42px;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+.main-navbar .login-buttons a:hover {
+  background-color: #275bc4;
+  color: #fff;
+}
+.main-navbar .login-buttons a:hover svg {
+  opacity: 1;
+  visibility: visible;
+  margin-left: 7px;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+.main-navbar .login-buttons svg {
+  opacity: 0;
+  visibility: hidden;
+  margin-left: -20px;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+@media screen and (min-width: 768px) {
+  .main-navbar .nav-item {
+    margin: 0 10px;
+  }
+}
+@media screen and (min-width: 576px) {
+  .main-navbar img {
+    width: 268px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .main-navbar .login-buttons {
+    order: 1;
+  }
+  .main-navbar .login-buttons {
+    order: 2;
+  }
+  .main-navbar .navbar-toggler {
+    order: 3;
+  }
+  .main-navbar .navbar-collapse {
+    order: 4;
+  }
+}
+
+.sura {
+  padding: 40px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin: 25px 20px;
+  font-size: 21px;
+  border-radius: 0.75rem;
+  -webkit-border-radius: 0.75rem;
+  -moz-border-radius: 0.75rem;
+  -ms-border-radius: 0.75rem;
+  -o-border-radius: 0.75rem;
+}
+.sura p {
+  margin: 0;
+}
+
+#ayaList .aya {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  padding: 20px 30px 10px;
+  margin: 15px 0;
+  text-align: center;
+}
+#ayaList .aya a {
+  text-decoration: none;
+  color: #252525;
+}
+#ayaList .aya .image {
+  font-size: 22px;
+}
+#ayaList .aya .aya-ar-name {
+  font-family: "hafs", sans-serif;
+  font-size: 21px;
+  color: #1980B6;
+}
+#ayaList .aya .note_btns {
+  text-align: left;
+}
+
+#hadithList .hadith {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  padding: 27px 30px 15px;
+  margin: 15px 0;
+  text-align: center;
+}
+#hadithList .hadith a {
+  text-decoration: none;
+  color: #252525;
+}
+#hadithList .hadith .image {
+  font-size: 22px;
+}
+#hadithList .hadith .aya-ar-name {
+  font-family: "hafs", sans-serif;
+  font-size: 21px;
+  color: #1980B6;
+}
+#hadithList .hadith .note_btns {
+  text-align: left;
+}
+
+.modal img {
+  width: 100%;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.toast {
+  position: fixed;
+  bottom: -50px;
+  left: 50%;
+  top: auto;
+  transform: translate(-50%, 0%);
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  width: auto;
+  -webkit-user-select: none;
+  /*Safari*/
+  -ms-user-select: none;
+  /*IE10andIE11*/
+  user-select: none;
+}
+.toast.active {
+  bottom: 50px;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+}
+
+.checkbox-wrapper-31:hover .check {
+  stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-31 {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+}
+
+.checkbox-wrapper-31 .background {
+  fill: #ffffff;
+  transition: ease all 0.6s;
+  -webkit-transition: ease all 0.6s;
+  stroke: #ccc;
+  stroke-width: 1px;
+}
+
+.checkbox-wrapper-31 .stroke {
+  fill: none;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  stroke-width: 2px;
+  stroke-dashoffset: 100;
+  stroke-dasharray: 100;
+  transition: ease all 0.6s;
+  -webkit-transition: ease all 0.6s;
+}
+
+.checkbox-wrapper-31 .check {
+  fill: none;
+  stroke: #ccc;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+  stroke-dashoffset: 22;
+  stroke-dasharray: 22;
+  transition: ease all 0.6s;
+  -webkit-transition: ease all 0.6s;
+}
+
+.checkbox-wrapper-31 input[type=radio] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  margin: 0;
+  opacity: 0;
+  -appearance: none;
+  -webkit-appearance: none;
+}
+
+.checkbox-wrapper-31 input[type=radio]:hover {
+  cursor: pointer;
+}
+
+.checkbox-wrapper-31 input[type=radio]:checked + svg .background {
+  fill: #6cbe45;
+}
+
+.checkbox-wrapper-31 input[type=radio]:checked + svg .check {
+  stroke: #ffffff !important;
+}
+
+.checkbox-wrapper-31 input[type=radio]:checked + svg .stroke {
+  stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-31 input[type=radio]:checked + svg .check {
+  stroke-dashoffset: 0;
+}
+
+#mainPage .section {
+  text-align: center;
+  height: 200px;
+  padding: 0px 45px;
+}
+#mainPage .section a {
+  margin-top: 90px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 22px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+/*# sourceMappingURL=app.css.map */
