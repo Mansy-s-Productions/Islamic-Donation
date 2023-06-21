@@ -8,7 +8,7 @@
                         <a href="{{route('quranList')}}">القرآن الكريم</a>
                     </div>
                     <div class="col-6 section">
-                        <a href="{{route('hadithList')}}">الحديث</a>
+                        <a href="{{route('categoriesList', 'ar')}}">الحديث</a>
                     </div>
                 </div>
             </div>

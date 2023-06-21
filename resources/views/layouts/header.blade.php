@@ -15,7 +15,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
         <!-- font awesome -->
         {{-- <link rel="stylesheet" href="{{url('public/css/flowbite-1.6.5.min.css')}}" /> --}}
-
         {{-- Fontawesome --}}
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">
         <!-- Css -->

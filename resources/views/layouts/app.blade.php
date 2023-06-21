@@ -32,8 +32,9 @@
                 {{ $slot }}
             </main>
         </div>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script> --}}
         {{-- Flowbite Js --}}
-        <script src="{{url('public/js/flowbite-1.6.5.min.js')}}"></script>
+        {{-- <script src="{{url('public/js/flowbite-1.6.5.min.js')}}"></script> --}}
         {{-- Font Awesome --}}
         <script src="{{url('public/js/all.min.js')}}"></script>
         {{-- PopperJs --}}

@@ -43,7 +43,7 @@ elementsToCopy.forEach(function(element) {
 });
 
 let submitDesign = document.querySelectorAll('.submit-design-btn');
-function makeAjaxRequest(type,id, user ,input ,checkBox, spinner) {
+function makeAjaxRequest(type,id, user, language ,input ,checkBox, spinner) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/submit-design', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -74,7 +74,8 @@ function makeAjaxRequest(type,id, user ,input ,checkBox, spinner) {
     var requestData = JSON.stringify({
         design_id: id,
         type: type,
-        user_id: user
+        user_id: user,
+        lang: language,
     }); // Replace with your request payload
     xhr.send(requestData);
 }
@@ -96,7 +97,8 @@ submitDesign.forEach(function(design) {
             let id = design.dataset.id;
             let type = design.dataset.type;
             let user = design.dataset.user;
-            makeAjaxRequest(type, id, user ,input ,checkBox, spinner);
+            let language = design.dataset.language;
+            makeAjaxRequest(type, id, user, language ,input ,checkBox, spinner);
         }
         setTimeout(sendRequest, delay);
     }

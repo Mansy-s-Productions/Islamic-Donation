@@ -17,4 +17,10 @@ class Hadith extends Model{
     public function getHadithImageAttribute($lang = 'ar'){
         return url('storage/app/public/hadith/').'/'.$lang.'/'.$this->image;
     }
+    public function getHadithImageSrcAttribute($lang = 'ar', $id){
+        return url('storage/app/public/hadith/').'/'.$lang.'/'.$id.'.jpg';
+    }
+    public function Language(){
+        return $this->belongsTo(Language::class, 'lang_code', 'lang_code');
+    }
 }

@@ -60,6 +60,9 @@ class QuranController extends Controller{
         $ArSura = ArQuran::where([
             'ar_sura_number' => $id,
         ])->orderBy('aya_number', 'ASC')->get();
+        if($TheSura->isEmpty() || $TheSura->isEmpty()){
+            return redirect()->route('admin.quran.all')->withErrors("لم يتم العثور على سورة بهذه اللغة");
+        }
         return view('admin.quran.single', compact('TheSura' ,'ArSura' , 'lang'));
     }
     public function getEditAya($lang, $id){

@@ -40,6 +40,50 @@ a {
   flex-direction: column;
 }
 
+.languages-menu {
+  max-height: 200px;
+  overflow: auto;
+}
+.languages-menu a {
+  font-size: 15px;
+}
+
+.languages-btn {
+  border-radius: 7px;
+  padding: 8px 15px;
+  background-color: #316EEC;
+  margin: 0 5px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 42px;
+  -webkit-border-radius: 42px;
+  -moz-border-radius: 42px;
+  -ms-border-radius: 42px;
+  -o-border-radius: 42px;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+.languages-btn:hover {
+  background-color: #275bc4;
+  color: #fff;
+}
+.languages-btn:hover .login-icon {
+  opacity: 1;
+  visibility: visible;
+  margin-left: 7px;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+
 .main-navbar {
   padding: 50px 0% !important;
 }
@@ -47,7 +91,7 @@ a {
   width: 245px;
 }
 .main-navbar a {
-  font-size: 20px;
+  font-size: 17px;
   color: #1980B6;
 }
 .main-navbar .navbar-toggler svg {
@@ -62,7 +106,7 @@ a {
   justify-content: center;
   align-items: center;
 }
-.main-navbar .login-buttons a {
+.main-navbar .login-buttons .login-btn {
   border-radius: 7px;
   padding: 10px 25px;
   background-color: #316EEC;
@@ -83,11 +127,11 @@ a {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
 }
-.main-navbar .login-buttons a:hover {
+.main-navbar .login-buttons .login-btn:hover {
   background-color: #275bc4;
   color: #fff;
 }
-.main-navbar .login-buttons a:hover svg {
+.main-navbar .login-buttons .login-btn:hover .login-icon {
   opacity: 1;
   visibility: visible;
   margin-left: 7px;
@@ -97,7 +141,7 @@ a {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
 }
-.main-navbar .login-buttons svg {
+.main-navbar .login-buttons .login-icon {
   opacity: 0;
   visibility: hidden;
   margin-left: -20px;
@@ -146,6 +190,17 @@ a {
 }
 .sura p {
   margin: 0;
+}
+
+#categoriesList .category {
+  height: 60px;
+  text-align: center;
+  padding: 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 18px;
+  color: #1980B6;
 }
 
 #ayaList .aya {
@@ -318,6 +373,31 @@ a {
   border-radius: 10px;
   font-size: 22px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /*# sourceMappingURL=app.css.map */

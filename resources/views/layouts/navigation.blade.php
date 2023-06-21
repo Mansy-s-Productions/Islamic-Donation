@@ -14,10 +14,24 @@
                         {{ __('Quran') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.hadith.all', 'ar')" :active="request()->routeIs('admin.hadith.all')">
-                        {{ __('Hadith') }}
-                    </x-nav-link>
+                <div class="hidden sm:flex items-center">
+                    <x-dropdown :href="'#'" :active="request()->routeIs('padron.*')">
+                        <x-slot name="trigger">
+                            <button id="navLanguages" data-dropdown-toggle="dropdown" class="focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                Hadith <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="navLanguages">
+                                    <li>
+                                        <a href="{{route('admin.hadith.all', [1, 'ar'])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All hadith</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('admin.hadith.getCreate')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add new</a>
+                                    </li>
+                                </ul>
+                        </x-slot>
+                    </x-dropdown>
                 </div>
                 <div class="hidden sm:flex items-center">
                     <x-dropdown :href="'#'" :active="request()->routeIs('padron.*')">

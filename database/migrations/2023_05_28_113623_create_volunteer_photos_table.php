@@ -16,6 +16,7 @@ return new class extends Migration
             $table->enum('type', ['quran', 'hadith']);
             $table->integer('design_id');
             $table->integer('user_id');
+            $table->string('lang');
             $table->timestamps();
         });
     }

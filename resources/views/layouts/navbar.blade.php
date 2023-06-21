@@ -19,8 +19,8 @@
                         الكريم</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('hadithList') }}"
-                        class="{{ request()->is('hadithList') ? 'active' : '' }} nav-link"
+                    <a href="{{ route('categoriesList', 'ar') }}"
+                        class="{{ request()->is('categoriesList') ? 'active' : '' }} nav-link"
                         aria-current="page">الحديث</a>
                 </li>
             </ul>
@@ -28,12 +28,12 @@
         <div class="login-buttons">
             @if (Auth::check())
                 <!-- Authentication -->
-                <x-responsive-nav-link :href="route('logout')">
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i> {{ __('تسجيل الخروج') }}
+                <x-responsive-nav-link :href="route('logout')" class="login-btn">
+                    <i class="login-icon fa-solid fa-arrow-right-to-bracket"></i> {{ __('تسجيل الخروج') }}
                 </x-responsive-nav-link>
             @else
-                <x-responsive-nav-link :href="route('login')">
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i> {{ __('تسجيل الدخول') }}
+                <x-responsive-nav-link :href="route('login')" class="login-btn">
+                    <i class="login-icon fa-solid fa-arrow-right-to-bracket"></i> {{ __('تسجيل الدخول') }}
                 </x-responsive-nav-link>
                 {{-- <a class="nav-link" href="{{route('login')}}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  تسجيل الدخول  </a> --}}
             @endif
