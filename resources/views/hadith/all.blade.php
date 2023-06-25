@@ -21,8 +21,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach ($AllHadith as $key => $hadith)
-                    @if (in_array($hadith['id'], $ImagesFiles))
+                    @foreach ($FinalHadith as $key => $hadith)
                     <div class="col-12">
                         <div class="hadith rounded">
                             @if ($lang == 'ar')
@@ -39,7 +38,7 @@
                                     <div class="d-flex align-items-ceeter">
                                         <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$hadith['title']}} </span><i class="fa-regular fa-copy"></i></a>
                                         <div class="checkbox-wrapper-31">
-                                            <input type="radio" data-type="hadith" data-id="{{$hadith['id']}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($hadith['id'] ,$arrays)) class="submit-design-btn active" checked data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/>
+                                            <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{$hadith['id']}}" data-target="#platformModal{{$hadith['id']}}" data-type="hadith" data-id="{{$hadith['id']}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($hadith['id'] ,$arrays)) class="submit-design-btn active" checked data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/>
                                             <svg viewBox="0 0 35.6 35.6">
                                                 <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>
                                                 <circle class="stroke" cx="17.8" cy="17.8" r="14.37"></circle>
@@ -64,10 +63,25 @@
                             @endif
                         </div>
                     </div>
-                    @endif
+                    <!-- Modal -->
+                    <div class="modal fade" id="platformModal{{$hadith['id']}}" tabindex="-1" aria-labelledby="platform" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header" dir="rtl">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel{{$hadith['id']}}">المنصات التي تم النشر عليها</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex flex-column justify-content-center text-center">
+                                <span class="social-platform facebook" data-platform="facebook" data-input="platformModal{{$hadith['id']}}" data-submit="#ModalSubmit{{$hadith['id']}}">Facebook</span>
+                                <span class="social-platform whatsapp" data-platform="whatsapp" data-input="platformModal{{$hadith['id']}}" data-submit="#ModalSubmit{{$hadith['id']}}">Whatsapp</span>
+                                <span class="social-platform instagram" data-platform="instagram" data-input="platformModal{{$hadith['id']}}" data-submit="#ModalSubmit{{$hadith['id']}}">Instagram</span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                     @endforeach
                     <div class="mt-5">
-                        {{$AllHadith->links('vendor.pagination.bootstrap-5')}}
+                        {{$FinalHadith->links('vendor.pagination.bootstrap-5')}}
                     </div>
                 </div>
             </div>

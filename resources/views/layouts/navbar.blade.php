@@ -15,12 +15,12 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('quranList') }}"
-                        class="{{ request()->is('quranList') ? 'active' : '' }} nav-link" aria-current="page">القرآن
+                        class="{{ request()->is('quran') ? 'active' : '' }} nav-link" aria-current="page">القرآن
                         الكريم</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('categoriesList', 'ar') }}"
-                        class="{{ request()->is('categoriesList') ? 'active' : '' }} nav-link"
+                        class="nav-link"
                         aria-current="page">الحديث</a>
                 </li>
             </ul>

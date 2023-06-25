@@ -13,34 +13,48 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Image as ImageLib;
 use Illuminate\Support\Facades\Http;
-
+use Throwable;
 
 class HadithController extends Controller{
-    public function getAdminAll($category_id = 1, $lang = 'en'){
-        $AllHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language='.$lang.'&category_id='.$category_id.'&per_page=1600');
-        $AllArHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language=ar'.'&category_id='.$category_id.'&per_page=1600');
+    public function getAdminAll($lang = 'en', $category_id = 1){
+        $AllHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language='.$lang.'&category_id='.$category_id.'&per_page=1600')->collect();
+        // dd($AllHadith);
+        $AllArHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language=ar'.'&category_id='.$category_id.'&per_page=1600')->collect();
         $AllHadith = $AllHadith['data'];
         $AllHadith = collect($AllHadith)->paginate(100);
-        $AllLanguages = Language::all();
+        // dd($AllHadith);
+        $AllLanguages = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/languages')->collect();
+        // dd($AllLanguages);
         return view('admin.hadith.all', compact('AllHadith', 'AllArHadith', 'lang', 'AllLanguages'));
     }
     public function getAllCategories($lang ='ar'){
         $AllCategories = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/categories/roots/?language='.$lang);
         $AllCategories = $AllCategories->object();
-        // dd($AllCategories);
         return view('hadith.categories.all', compact('AllCategories', 'lang'));
     }
     public function getAllHadith($lang = 'ar', $category_id = 1){
-        $Images = File::files('storage/app/public/hadith/'.$lang);
-        $ImagesFiles = [];
-        $string = ".jpg";
-        foreach($Images as $key => $Image) {
-            $NewImage = trim(basename($Image), $string);
-            array_push($ImagesFiles, $NewImage);
+        try {
+            $Images = File::files('storage/app/public/hadith/'.$lang);
+            $ImagesFiles = [];
+            $string = ".jpg";
+            foreach($Images as $key => $Image) {
+                $NewImage = trim(basename($Image), $string);
+                array_push($ImagesFiles, $NewImage);
+            }
+            // Validate the value...
+        } catch (Throwable $e) {
+            report($e);
         }
         $AllHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language='.$lang.'&category_id='.$category_id.'&per_page=1600')['data'];
         $AllArHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language=ar'.'&category_id='.$category_id.'&per_page=1600');
         $AllHadith = collect($AllHadith)->paginate(100);
+        $FinalHadith =[];
+        foreach ($AllHadith as $key => $hadith){
+            if (in_array($hadith['id'], $ImagesFiles)){
+                array_push($FinalHadith, $hadith);
+            }
+        }
+        $FinalHadith = collect($FinalHadith)->paginate(100);
         if(Auth::check()){
             $AllSubmitted = VolunteerPhotos::where([
                 'user_id' => Auth::user()->id,
@@ -53,9 +67,9 @@ class HadithController extends Controller{
                 }else{
                     $arrays = [];
                 }
-            return view('hadith.all', compact('AllHadith','arrays', 'lang', 'AllArHadith', 'ImagesFiles'));
+            return view('hadith.all', compact('FinalHadith','arrays', 'lang', 'AllArHadith', 'ImagesFiles'));
         }else{
-            return view('hadith.all', compact('AllHadith', 'lang', 'AllArHadith', 'ImagesFiles'));
+            return view('hadith.all', compact('FinalHadith', 'lang', 'AllArHadith', 'ImagesFiles'));
         }
     }
     public function getCreateHadith(){
@@ -90,11 +104,12 @@ class HadithController extends Controller{
     public function getEditHadith($id , $lang){
         $TheHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/one/?language='.$lang.'&id='.$id);
         $TheHadith = $TheHadith->collect();
-        // dd($TheHadith);
+        // dd($lang);
         return view('admin.hadith.edit', compact('TheHadith', 'lang'));
     }
-    public function postEditHadith(Request $r, $id){
-        $TheHadith = Hadith::findOrFail($id);
+    public function postEditHadith(Request $r, $id, $lang){
+        // $TheHadith = Hadith::findOrFail($id);
+        $TheHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/one/?language='.$lang.'&id='.$id)->collect();
         $Rules = [
             'image' =>'required|image|mimes:png,jpg,jpeg,webp',
         ];
@@ -103,16 +118,19 @@ class HadithController extends Controller{
             return back()->withErrors($Validator->errors()->all());
         }else{
             $Data = $r->all();
-            $TimeNow = Carbon::now()->timestamp;
-            $lang = $TheHadith->lang_code;
+            // dd($TheHadith);
+            // $lang = $TheHadith['code'];
             if($r->has('image')){
                 //Resize the image file & upload it (250x250) (60x60) (650x650)
                 $img = ImageLib::make($r->image);
-                $img->save('storage/app/public/hadith/'.$lang.'/'.$TimeNow.'.'.$r->image->getClientOriginalExtension());
-                $Data['image'] = $TimeNow.'.'.$r->image->getClientOriginalExtension();
+                $save_path = 'storage/app/public/hadith/'.$lang;
+                if (!file_exists($save_path)) {
+                    File::makeDirectory($save_path, 0777, true, true);
+                }
+                $img->save('storage/app/public/hadith/'.$lang.'/'.$TheHadith['id'].'.'.$r->image->getClientOriginalExtension());
+                $Data['image'] = $TheHadith['id'].'.'.$r->image->getClientOriginalExtension();
             }
-            $TheHadith->update($Data);
-            return redirect()->route('admin.hadith.all')->withSuccess("تم تعديل التصميم بنجاح");
+            return redirect()->route('admin.hadith.all', [$lang, 1])->withSuccess("تم تعديل التصميم بنجاح");
         }
     }
     public function deleteHadith($id){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\VolunteerPhotos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -14,11 +15,11 @@ class AdminController extends Controller{
     }
     public function usersList(){
         $AllUsers = User::all()->except(Auth::id())->paginate(2);
-        return view('admin.users-list', compact('AllUsers'));
+        return view('admin.users.list', compact('AllUsers'));
     }
     public function userEdit($id){
         $TheUser = User::findOrFail($id);
-        return view('admin.user-edit', compact('TheUser'));
+        return view('admin.users.edit', compact('TheUser'));
     }
     public function postUserEdit(Request $r, $id){
         $TheUser = User::findOrFail($id);
@@ -26,9 +27,12 @@ class AdminController extends Controller{
             $r->has('active') ? $Data['active'] = 1 : $Data['active'] = 0;
             $r->has('role') ? $Data['role'] = 1 : $Data['role'] = 0;
             $TheUser->update($Data);
-            // dd($Data);
-            // return view('admin.user-edit', compact('TheUser'));
             return redirect()->route('usersList')->withSuccess("تم تعديل المستخدم بنجاح");
+    }
+    public function getUserReport($id){
+        $UserDesigns = VolunteerPhotos::where('user_id', $id)->with('User', 'Quran')->get();
+        // dd($UserDesigns);
+        return view('admin.users.report', compact('UserDesigns'));
     }
     public function logout(){
         if(Auth::check()){

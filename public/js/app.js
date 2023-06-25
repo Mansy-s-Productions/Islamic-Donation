@@ -43,7 +43,8 @@ elementsToCopy.forEach(function(element) {
 });
 
 let submitDesign = document.querySelectorAll('.submit-design-btn');
-function makeAjaxRequest(type,id, user, language ,input ,checkBox, spinner) {
+let PlatformOption = document.querySelectorAll('.social-platform');
+function makeAjaxRequest(type,id, user, language, platform, sura ,input ,checkBox, spinner) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/submit-design', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -60,6 +61,7 @@ function makeAjaxRequest(type,id, user, language ,input ,checkBox, spinner) {
             checkBox.classList.remove('d-none');
             spinner.classList.add('d-none');
             input.classList.add('active');
+            input.checked = true;
             SubmitMessage(response.message, 200)
             } else {
             var response = JSON.parse(xhr.responseText);
@@ -76,15 +78,36 @@ function makeAjaxRequest(type,id, user, language ,input ,checkBox, spinner) {
         type: type,
         user_id: user,
         lang: language,
+        platform: platform,
+        sura_id: sura,
     }); // Replace with your request payload
     xhr.send(requestData);
 }
 submitDesign.forEach(function(design) {
-    design.addEventListener('click', function() {
-    let delay = 3000; // 5 Seconds
+    design.addEventListener('click', function(e) {
+    e.preventDefault();
     if (design.classList.contains('active')) {
-        console.log('yes')
+        SubmitMessage('تم التأكيد مسبقاً', 400)
     }else{
+        const TargetInput = design.dataset.target;
+        var myModal2 = new bootstrap.Modal(document.querySelector('.modal' + TargetInput));
+        myModal2.show();
+    }
+});
+});
+PlatformOption.forEach(function(platform) {
+    platform.addEventListener('click', function(e) {
+
+        let platform = e.target.dataset.platform;
+        const TargetInput = e.target.dataset.input;
+        const TargetSubmit = e.target.dataset.submit;
+        var myModalEl = document.querySelector('.modal#' + TargetInput)
+        var modal = bootstrap.Modal.getInstance(myModalEl)
+        modal.hide();
+        var design = document.querySelector(TargetSubmit);
+        design.dataset.submit = platform;
+        console.log(design);
+        let delay = 3000; // 5 Seconds
         const spinner = document.createElement('div');
         spinner.classList.add('spinner-border');
         spinner.setAttribute("role", "status");
@@ -92,15 +115,16 @@ submitDesign.forEach(function(design) {
         let checkBox = design.parentElement.children[1];
         checkBox.classList.add('d-none')
         design.parentElement.appendChild(spinner);
-        console.log(checkBox);
+        // console.log(checkBox);
         function sendRequest(){
             let id = design.dataset.id;
             let type = design.dataset.type;
             let user = design.dataset.user;
             let language = design.dataset.language;
-            makeAjaxRequest(type, id, user, language ,input ,checkBox, spinner);
+            let platform = design.dataset.submit;
+            let sura = design.dataset.sura;
+            makeAjaxRequest(type, id, user, language, platform, sura ,input ,checkBox, spinner);
         }
         setTimeout(sendRequest, delay);
-    }
-});
+    });
 });

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-right">
-            {{ __('كل السور') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-right" dir="rtl">
+            {{ __('كل السور: '. $suraKey) }}
         </h2>
     </x-slot>
 
@@ -10,19 +10,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="pb-4 bg-white dark:bg-gray-900 flex justify-end">
-                        <button id="dropdownDefaultButton" data-dropdown-toggle="SuraLanguages" class="text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                            Language
-                            <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-                        <!-- Dropdown menu -->
-                        <div id="SuraLanguages" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                                    @foreach ($AllLanguages as $Language)
-                                    <li>
-                                        <a href="{{route('admin.quran.all', $Language->lang_code)}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{$Language->lang_name}}</a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                        </div>
+                        <select id="languages" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>اللغة</option>
+                            <option @if ($suraKey == 'arabic')  selected @endif value="ar" data-lang="ar" data-key="arabic">
+                                العربية
+                            </option>
+                            @foreach ($AllLanguages['translations'] as $language)
+                                <option @if ($language['key'] == $suraKey) selected @endif value="{{$language['key']}}" data-lang="{{$language['language_iso_code']}}" data-key="{{$language['key']}}">
+                                    {{$language['key']}}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <table class="table w-full text-left text-gray-500 dark:text-gray-400" id="myTable">
                         <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -38,7 +36,7 @@
                                     <th scope="row" class="px-6 py-4">{{$key+1}}</th>
                                     <td class="px-6 py-4">{{$Aya->sura_name}}</td>
                                     <td class="px-6 py-4">
-                                        <a href="{{route('admin.sura.getEdit', [$lang, $Aya->id])}}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <a href="{{route('admin.sura.getEdit', [$lang, $Aya->id, $suraKey])}}"><i class="fa-regular fa-pen-to-square"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -49,4 +47,18 @@
         </div>
     </div>
 @include('components.data-tables')
+@push('other-scripts')
+    <script>
+        $(document).ready(function() {
+            $(function(){
+                $('#languages').on('change', function () {
+                // var url = $(this).val(); // get selected value
+                var lang =  $(this).find(":selected").data('lang'); // en
+                var key =  $(this).find(":selected").data('key'); // english_rwwad
+                    window.location.href = "{{URL::to('dashboard/quran/')}}"+'/'+lang+'/'+key;
+            });
+        });
+        });
+    </script>
+@endpush
 </x-app-layout>

@@ -12,8 +12,8 @@
                             <select id="languages" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected>اللغة</option>
                                 @foreach ($AllLanguages as $language)
-                                    <option @if ($language->lang_code == $lang) selected @endif value="{{$language->lang_code}}">
-                                        {{$language->lang_name}}
+                                    <option @if ($language['code'] == $lang) selected @endif value="{{$language['code']}}">
+                                        {{$language['native']}}
                                     </option>
                                 @endforeach
                             </select>
@@ -47,20 +47,7 @@
                                             <img width="100" class="lazy" data-src="{{HadithImageSrc($lang, $hadith['id'])}}" alt=""></td>
                                         </a>
                                     <td class="px-6 py-4">
-                                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{$hadith['id']}}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                        </button>
-                                        <!-- Dropdown menu -->
-                                        <div id="dropdownDots{{$hadith['id']}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
-                                            <li>
-                                                <a href="{{route('admin.hadith.getEdit', [$hadith['id'], $lang])}}" class="block px-4 py-2 hover:bg-green-500 hover:text-white dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-regular fa-eye"></i> Edit</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('admin.hadith.delete', [$hadith['id'], $lang])}}" class="block px-4 py-2 hover:bg-red-500 hover:text-white  dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-solid fa-trash"></i> Delete</a>
-                                            </li>
-                                            </ul>
-                                        </div>
+                                        <a href="{{route('admin.hadith.getEdit', [$hadith['id'], $lang])}}"><i class="fa-regular fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -29,13 +29,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('quran')->group(function () {
     Route::get('/', [QuranController::class, 'getAllQuran'])->name('quranList');
-    Route::get('/{lang}/sura/{id}', [QuranController::class, 'singleSura'])->name('singleSura');
+    Route::get('sura/{lang}/{key}/{id}', [QuranController::class, 'singleSura'])->name('singleSura');
 });
 Route::prefix('hadith/{lang?}')->group(function () {
     Route::get('categories/list/', [HadithController::class, 'getAllCategories'])->name('categoriesList');
-    // Route::get('categories/list/', [HadithController::class, 'getAllCategories'])->name('categoriesList');
     Route::get('list/category/{id?}', [HadithController::class, 'getAllHadith'])->name('hadithList');
-    // Route::get('/{lang}/sura/{id}', [HadithController::class, 'singleSura'])->name('singleSura');
 });
 
 //Auth System Routes
@@ -52,32 +50,38 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth', 'verified', 'admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/users-list', [AdminController::class, 'usersList'])->name('usersList');
-    Route::get('/user/{id}', [AdminController::class, 'userEdit'])->name('userEdit');
-    Route::post('/user/{id}', [AdminController::class, 'postUserEdit'])->name('userEdit.post');
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('/users-list', [AdminController::class, 'usersList'])->name('usersList');
+        Route::prefix('user')->group(function () {
+            Route::get('edit/{id}', [AdminController::class, 'userEdit'])->name('userEdit');
+            Route::post('edit/{id}', [AdminController::class, 'postUserEdit'])->name('userEdit.post');
+            Route::get('report/{id}', [AdminController::class, 'getUserReport'])->name('userReport.get');
+        });
+        Route::prefix('quran')->group(function () {
+            Route::get('{lang?}/{key}', [QuranController::class, 'getAdminAll'])->name('admin.quran.all');
+            Route::get('sura/{lang}/{id}/{key}', [QuranController::class, 'getEditSura'])->name('admin.sura.getEdit');
+            Route::get('aya/{lang}/{key?}/{suraId}/{ayaId}', [QuranController::class, 'getEditAya'])->name('admin.aya.getEdit');
+            Route::post('aya/{lang}/{suraId}/{ayaId}', [QuranController::class, 'postEditAya'])->name('admin.aya.postEdit');
+        });
+        Route::prefix('hadith')->group(function () {
+            Route::get('all/{category_id}/{lang}', [HadithController::class, 'getAdminAll'])->name('admin.hadith.all');
+            Route::get('new', [HadithController::class , 'getCreateHadith'])->name('admin.hadith.getCreate');
+            Route::post('new', [HadithController::class , 'postCreateHadith'])->name('admin.hadith.postCreate');
+            Route::get('edit/{id}/{lang?}', [HadithController::class, 'getEditHadith'])->name('admin.hadith.getEdit');
+            Route::post('edit/{id}/{lang?}', [HadithController::class, 'postEditHadith'])->name('admin.hadith.postEdit');
+            Route::get('delete/{id}/{lang?}', [HadithController::class , 'deleteHadith'])->name('admin.hadith.delete');
+        });
+        Route::prefix('languages')->group(function(){
+            Route::get('/', [LanguageController::class , 'getAdminLanguages'])->name('admin.languages.all');
+            Route::get('new', [LanguageController::class , 'getCreateLanguage'])->name('admin.languages.getCreate');
+            Route::post('new', [LanguageController::class , 'postCreateLanguage'])->name('admin.languages.postCreate');
+            Route::get('edit/{id}', [LanguageController::class , 'getEditLanguage'])->name('admin.languages.getEdit');
+            Route::post('edit/{id}', [LanguageController::class , 'postEditLanguage'])->name('admin.languages.postEdit');
+            Route::get('delete/{id}', [LanguageController::class , 'deleteLanguage'])->name('admin.languages.delete');
+        });
+    });
 
-    Route::prefix('quran-list/{lang?}')->group(function () {
-        Route::get('/', [QuranController::class, 'getAdminAll'])->name('admin.quran.all');
-        Route::get('sura-edit/{id}', [QuranController::class, 'getEditSura'])->name('admin.sura.getEdit');
-        Route::get('aya/{id}', [QuranController::class, 'getEditAya'])->name('admin.aya.getEdit');
-        Route::post('aya/{id}', [QuranController::class, 'postEditAya'])->name('admin.aya.postEdit');
-    });
-    Route::prefix('hadith-list')->group(function () {
-        Route::get('all/category/{id}/{lang?}', [HadithController::class, 'getAdminAll'])->name('admin.hadith.all');
-        Route::get('new', [HadithController::class , 'getCreateHadith'])->name('admin.hadith.getCreate');
-        Route::post('new', [HadithController::class , 'postCreateHadith'])->name('admin.hadith.postCreate');
-        Route::get('edit/{id}/{lang?}', [HadithController::class, 'getEditHadith'])->name('admin.hadith.getEdit');
-        Route::post('edit/{id}/{lang?}', [HadithController::class, 'postEditHadith'])->name('admin.hadith.postEdit');
-        Route::get('delete/{id}/{lang?}', [HadithController::class , 'deleteHadith'])->name('admin.hadith.delete');
-    });
-    Route::prefix('languages')->group(function(){
-        Route::get('/', [LanguageController::class , 'getAdminLanguages'])->name('admin.languages.all');
-        Route::get('new', [LanguageController::class , 'getCreateLanguage'])->name('admin.languages.getCreate');
-        Route::post('new', [LanguageController::class , 'postCreateLanguage'])->name('admin.languages.postCreate');
-        Route::get('edit/{id}', [LanguageController::class , 'getEditLanguage'])->name('admin.languages.getEdit');
-        Route::post('edit/{id}', [LanguageController::class , 'postEditLanguage'])->name('admin.languages.postEdit');
-        Route::get('delete/{id}', [LanguageController::class , 'deleteLanguage'])->name('admin.languages.delete');
-    });
 
 });
 require __DIR__.'/auth.php';

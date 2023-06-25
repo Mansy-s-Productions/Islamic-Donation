@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Users list') }}
         </h2>
     </x-slot>
 
@@ -16,6 +16,7 @@
                                 <th scope="row" class="px-6 py-4 font-medium text-xl text-gray-900 whitespace-nowrap dark:text-white">إسم المتطوع</th>
                                 <th scope="row" class="px-6 py-4 font-medium text-xl text-gray-900 whitespace-nowrap dark:text-white">البريد الألكتروني</th>
                                 <th scope="row" class="px-6 py-4 font-medium text-xl text-gray-900 whitespace-nowrap dark:text-white">التصاميم المنشورة</th>
+                                <th scope="row" class="px-6 py-4 font-medium text-xl text-gray-900 whitespace-nowrap dark:text-white">تقرير</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,6 +26,12 @@
                                     <td class="px-6 py-4">{{$User->name}}</td>
                                     <td class="px-6 py-4">{{$User->email}}</td>
                                     <td class="px-6 py-4">{{count($User->UserSubmits)}}</td>
+                                    <td class="px-6 py-4">
+                                        @if (count($User->UserSubmits))
+                                            <a href="{{route('userReport.get', $User->id)}}"><i class="fa-regular fa-eye"></i></a>
+                                            @else
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

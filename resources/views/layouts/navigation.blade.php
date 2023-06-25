@@ -10,7 +10,7 @@
                     </a>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.quran.all', 'ar')" :active="request()->routeIs('admin.quran.all')">
+                    <x-nav-link :href="route('admin.quran.all', ['en', 'english_rwwad'])" :active="request()->routeIs('admin.quran.all')">
                         {{ __('Quran') }}
                     </x-nav-link>
                 </div>
@@ -24,7 +24,7 @@
                         <x-slot name="content">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="navLanguages">
                                     <li>
-                                        <a href="{{route('admin.hadith.all', [1, 'ar'])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All hadith</a>
+                                        <a href="{{route('admin.hadith.all', ['ar' ,1])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All hadith</a>
                                     </li>
                                     <li>
                                         <a href="{{route('admin.hadith.getCreate')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add new</a>

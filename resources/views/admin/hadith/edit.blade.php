@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="container">
-                        <form action="{{route('admin.hadith.postEdit', $TheHadith['id'])}}" method="POST" enctype="multipart/form-data" >
+                        <form action="{{route('admin.hadith.postEdit', [$TheHadith['id'], $lang])}}" method="POST" enctype="multipart/form-data" >
                             @csrf
                                 <p class="mb-5 border-b p-2 rounded text-right" dir="rtl">
                                     {{$TheHadith['title']}}

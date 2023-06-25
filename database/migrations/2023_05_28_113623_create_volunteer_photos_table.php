@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('volunteer_photos', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['quran', 'hadith']);
+            $table->integer('sura_id')->nullable();
             $table->integer('design_id');
             $table->integer('user_id');
             $table->string('lang');

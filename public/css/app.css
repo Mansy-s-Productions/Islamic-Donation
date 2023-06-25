@@ -247,6 +247,24 @@ a {
   text-align: left;
 }
 
+.social-platform {
+  padding: 20px;
+  color: #fff;
+  font-size: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.social-platform.facebook {
+  background-color: #3b5998;
+}
+.social-platform.whatsapp {
+  background-color: #128c7e;
+}
+.social-platform.instagram {
+  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}
+
 .modal img {
   width: 100%;
   border-radius: 15px;

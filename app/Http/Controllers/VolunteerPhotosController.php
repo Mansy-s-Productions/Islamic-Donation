@@ -13,7 +13,8 @@ class VolunteerPhotosController extends Controller{
             $Rules = [
                 'type' => 'required|in:quran,hadith',
                 'design_id' => 'required',
-                'user_id' => 'required'
+                'user_id' => 'required',
+                'platform' => 'required',
             ];
             $Validator = Validator::make($r->all() , $Rules);
             if($Validator->fails()){
@@ -22,7 +23,7 @@ class VolunteerPhotosController extends Controller{
             else{
                 $RequestData = $r->all();
                 VolunteerPhotos::create($RequestData);
-                return response()->json(['message' => 'تم التاكيد'], 200);
+                return response()->json(['message' => 'تم التأكيد بنجاح'], 200);
             }
     }
 }
