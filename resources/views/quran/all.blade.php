@@ -7,7 +7,7 @@
                 @foreach ($AllSuras as $Sura)
                 <div class="col-3">
                     <div class="sura">
-                        <a href="{{route('singleSura', ['en', 'english_rwwad' ,$Sura->id])}}">
+                        <a href="{{route('singleSura', ['en',$Sura->id])}}">
                             {{$Sura->sura_name}}
                         </a>
                     </div>

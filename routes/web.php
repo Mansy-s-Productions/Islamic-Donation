@@ -27,10 +27,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::prefix('quran')->group(function () {
-    Route::get('/', [QuranController::class, 'getAllQuran'])->name('quranList');
-    Route::get('sura/{lang}/{key}/{id}', [QuranController::class, 'singleSura'])->name('singleSura');
-});
+Route::get('quran', [QuranController::class, 'getAllQuran'])->name('quranList');
+Route::get('{lang}/sura/{id}', [QuranController::class, 'singleSura'])->name('singleSura');
+
 Route::prefix('hadith/{lang?}')->group(function () {
     Route::get('categories/list/', [HadithController::class, 'getAllCategories'])->name('categoriesList');
     Route::get('list/category/{id?}', [HadithController::class, 'getAllHadith'])->name('hadithList');

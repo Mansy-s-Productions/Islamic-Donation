@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach ($FinalHadith as $key => $hadith)
+                    @forelse ($FinalHadith as $key => $hadith)
                     <div class="col-12">
                         <div class="hadith rounded">
                             @if ($lang == 'ar')
@@ -79,7 +79,9 @@
                         </div>
                         </div>
                     </div>
-                    @endforeach
+                        @empty
+                        <p class="text-center">  <span class="badge text-bg-danger">لم يتم إضافة تصميمات بعد في هذا القسم</span></p>
+                    @endforelse
                     <div class="mt-5">
                         {{$FinalHadith->links('vendor.pagination.bootstrap-5')}}
                     </div>

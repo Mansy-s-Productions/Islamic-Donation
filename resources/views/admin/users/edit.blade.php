@@ -12,7 +12,6 @@
                     <h1 class="mb-5 text-4xl font-bold dark:text-white">Edit: <span class="text-red-500">{{$TheUser->name}}</span></h1>
                     <div class="container">
                         <form action="{{route('userEdit.post', $TheUser->id)}}" method="POST">
-
                             @csrf
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-1 mb-8">
                                 <div class="flex items-center">
