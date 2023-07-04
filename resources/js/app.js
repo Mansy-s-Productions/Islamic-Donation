@@ -2,6 +2,7 @@ import {Fancybox} from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import LazyLoad from "vanilla-lazyload";
 import './bootstrap';
+import '../css/app.css';
 import 'flowbite';
 
 import Alpine from 'alpinejs';
