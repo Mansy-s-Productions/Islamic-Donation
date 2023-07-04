@@ -19,4 +19,6 @@
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">
         <!-- Css -->
         <link href="{{url('public/css/app.css')}}" rel="stylesheet">
+
+        @vite(['resources/scss/app.scss','resources/scss/admin.scss', 'resources/js/app.js'])
     </head>

@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="{{url('public/css/flowbite-1.6.5.min.css')}}" />
         {{-- Css --}}
         <link href="{{url('public/css/admin.css')}}" rel="stylesheet">
-        <link href="{{url('resources/css/app.css')}}" rel="stylesheet">
 
     </head>
     <body class="font-sans antialiased">
@@ -42,5 +41,6 @@
         <script src="{{url('public/js/popper.min.js')}}"></script>
         {{-- FancyBox --}}
         @stack('other-scripts')
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </body>
 </html>
