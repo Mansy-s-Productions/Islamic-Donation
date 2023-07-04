@@ -71,7 +71,7 @@
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="platformModal{{$Aya['id']}}" tabindex="-1" aria-labelledby="platform" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" data-bs-config={backdrop:true}>
+                            <div class="modal-dialog modal-dialog-centered" data-bs-backdrop="static">
                             <div class="modal-content">
                                 <div class="modal-body d-flex flex-column justify-content-center text-center">
                                     <span class="social-platform facebook" data-platform="facebook" data-input="platformModal{{$Aya['id']}}" data-submit="#ModalSubmit{{$Aya['id']}}">Facebook</span>
