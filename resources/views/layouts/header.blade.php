@@ -20,5 +20,5 @@
         <!-- Css -->
         <link href="{{url('public/css/app.css')}}" rel="stylesheet">
 
-        @vite(['resources/scss/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
