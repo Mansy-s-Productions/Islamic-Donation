@@ -7,7 +7,8 @@
         <title>IslamHouse</title>
         <link rel="icon" href="{{url('public/img/logo.png')}}">
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}">
+        {{-- <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}"> --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap-grid.min.css" integrity="sha512-Aa+z1qgIG+Hv4H2W3EMl3btnnwTQRA47ZiSecYSkWavHUkBF2aPOIIvlvjLCsjapW1IfsGrEO3FU693ReouVTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="{{url('public/css/datatables.min.css')}}" rel="stylesheet"/>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
