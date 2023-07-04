@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <!-- Modal -->
-                        <div class="modal fade" id="platformModal{{$Aya['id']}}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="platform" aria-hidden="true">
+                        <div class="modal fade" id="platformModal{{$Aya['id']}}"  tabindex="-1" aria-labelledby="platform" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-body d-flex flex-column justify-content-center text-center">

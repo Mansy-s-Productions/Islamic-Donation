@@ -2,9 +2,8 @@
 {{-- <script src="{{url('public/js/jquery-2.2.4.min.js')}}"></script> --}}
 {{-- PopperJs --}}
 <script src="{{url('public/js/popper.min.js')}}"></script>
-{{-- Bootstrap Js --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>{{-- Bootstrap Js --}}
 {{-- <script src="{{url('public/js/bootstrap.min.js')}}"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {{-- Datatable --}}
 <script src="{{url('public/js/datatables.min.js')}}"></script>
 {{-- Font Awesome --}}
