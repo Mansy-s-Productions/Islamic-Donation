@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="{{url('public/css/flowbite-1.6.5.min.css')}}" />
         {{-- Css --}}
         <link href="{{url('public/css/admin.css')}}" rel="stylesheet">
+        <link href="{{url('resources/css/app.css')}}" rel="stylesheet">
 
     </head>
     <body class="font-sans antialiased">
