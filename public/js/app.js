@@ -92,6 +92,7 @@ submitDesign.forEach(function(design) {
         const TargetInput = design.dataset.target;
         var myModal2 = new bootstrap.Modal(document.querySelector('.modal' + TargetInput));
         myModal2.show();
+
     }
 });
 });
