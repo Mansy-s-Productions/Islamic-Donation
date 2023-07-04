@@ -14,7 +14,9 @@
         <link rel="stylesheet" href="{{url('public/css/flowbite-1.6.5.min.css')}}" />
         {{-- Css --}}
         <link href="{{url('public/css/admin.css')}}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('app.css') }}">
+        <link href="{{url('public/build/assets/app-2db575ce.css')}}" rel="stylesheet">
+        <link href="{{url('public/build/assets/app-96b3474b.css')}}" rel="stylesheet">
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -41,7 +43,7 @@
         <script src="{{url('public/js/popper.min.js')}}"></script>
         {{-- FancyBox --}}
         @stack('other-scripts')
-        <link rel="stylesheet" href="{{ asset('app.js') }}">
+        <script src="{{url('public/build/assets/app-194e6bba.js')}}"></script>
 
     </body>
 </html>

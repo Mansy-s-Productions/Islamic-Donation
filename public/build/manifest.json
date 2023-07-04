@@ -10,9 +10,10 @@
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-2db575ce.css"
+      "assets/app-2db575ce.css",
+      "assets/app-96b3474b.css"
     ],
-    "file": "assets/app-3cc6ded3.js",
+    "file": "assets/app-194e6bba.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
