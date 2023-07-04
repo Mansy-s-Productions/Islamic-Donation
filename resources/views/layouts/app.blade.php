@@ -41,6 +41,5 @@
         <script src="{{url('public/js/popper.min.js')}}"></script>
         {{-- FancyBox --}}
         @stack('other-scripts')
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </body>
 </html>
