@@ -18,7 +18,7 @@ class VolunteerPhotosController extends Controller{
             ];
             $Validator = Validator::make($r->all() , $Rules);
             if($Validator->fails()){
-                return response(['message' => 'تأكد من تسجيل الدخول اولاً' ], 400);
+                return response(['message' => 'تأكد من تسجيل الدخول' ], 400);
             }
             else{
                 $RequestData = $r->all();

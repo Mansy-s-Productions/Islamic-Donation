@@ -7,7 +7,9 @@
         <title>IslamHouse</title>
         <link rel="icon" href="{{url('public/img/logo.png')}}">
         <!-- Bootstrap -->
-        {{-- <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}"> --}}
+        <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}">
+
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
         <link href="{{url('public/css/datatables.min.css')}}" rel="stylesheet"/>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,8 +18,8 @@
         <!-- font awesome -->
         {{-- <link rel="stylesheet" href="{{url('public/css/flowbite-1.6.5.min.css')}}" /> --}}
         {{-- Fontawesome --}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">
         <!-- Css -->
         <link href="{{url('public/css/app.css')}}" rel="stylesheet">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>

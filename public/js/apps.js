@@ -45,10 +45,12 @@ elementsToCopy.forEach(function(element) {
 let submitDesign = document.querySelectorAll('.submit-design-btn');
 let PlatformOption = document.querySelectorAll('.social-platform');
 function makeAjaxRequest(type,id, user, language, platform, sura ,input ,checkBox, spinner) {
+    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    console.log(csrfToken);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/submit-design', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRF-TOKEN', 'xHOztgiVBG9D0k4Cclk5SAASb028epFGFZdvXvgV'); // If you're using CSRF protection
+    xhr.setRequestHeader('X-CSRF-TOKEN', 's2CZoDYVvenRDGaU3zHuZD5Km5ekJvGQk4VgkhJG'); // If you're using CSRF protection
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 401) {
@@ -83,31 +85,36 @@ function makeAjaxRequest(type,id, user, language, platform, sura ,input ,checkBo
     }); // Replace with your request payload
     xhr.send(requestData);
 }
+    var Input;
+    var Type;
+    var Sura;
+    var Id;
+    var User;
+    var Language;
+    var modal;
 submitDesign.forEach(function(design) {
     design.addEventListener('click', function(e) {
     e.preventDefault();
     if (design.classList.contains('active')) {
         SubmitMessage('تم التأكيد مسبقاً', 400)
     }else{
-        const TargetInput = design.dataset.target;
-        var myModal2 = new bootstrap.Modal(document.querySelector('.modal' + TargetInput));
-        myModal2.show();
-
+        Input = design.id;
+        Type = design.dataset.type;
+        Sura = design.dataset.sura;
+        Id = design.dataset.id;
+        User = design.dataset.user;
+        Language = design.dataset.language;
     }
 });
 });
 PlatformOption.forEach(function(platform) {
     platform.addEventListener('click', function(e) {
-
-        let platform = e.target.dataset.platform;
-        const TargetInput = e.target.dataset.input;
-        const TargetSubmit = e.target.dataset.submit;
-        var myModalEl = document.querySelector('.modal#' + TargetInput)
-        var modal = bootstrap.Modal.getInstance(myModalEl)
-        modal.hide();
-        var design = document.querySelector(TargetSubmit);
-        design.dataset.submit = platform;
-        console.log(design);
+        let TargetPlatform = e.target.dataset.platform;
+        modal = document.querySelector('.modal');
+        var TheModal = bootstrap.Modal.getInstance(modal)
+        TheModal.hide();
+        modal.classList.remove('show')
+        var design = document.querySelector('.submit-design-btn'+'#'+Input);
         let delay = 3000; // 5 Seconds
         const spinner = document.createElement('div');
         spinner.classList.add('spinner-border');
@@ -116,15 +123,9 @@ PlatformOption.forEach(function(platform) {
         let checkBox = design.parentElement.children[1];
         checkBox.classList.add('d-none')
         design.parentElement.appendChild(spinner);
-        // console.log(checkBox);
         function sendRequest(){
-            let id = design.dataset.id;
-            let type = design.dataset.type;
-            let user = design.dataset.user;
-            let language = design.dataset.language;
-            let platform = design.dataset.submit;
-            let sura = design.dataset.sura;
-            makeAjaxRequest(type, id, user, language, platform, sura ,input ,checkBox, spinner);
+            console.log(Id, Type, User, Language, TargetPlatform, Sura);
+            makeAjaxRequest(Type, Id, User, Language, TargetPlatform, Sura ,input ,checkBox, spinner);
         }
         setTimeout(sendRequest, delay);
     });
