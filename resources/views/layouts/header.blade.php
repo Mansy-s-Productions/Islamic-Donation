@@ -23,6 +23,5 @@
         <!-- Css -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{url('public/css/app.css')}}" rel="stylesheet">
-        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-
+        @vite(['resources/js/app.js'])
     </head>

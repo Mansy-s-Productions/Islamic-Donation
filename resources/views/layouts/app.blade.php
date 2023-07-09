@@ -43,7 +43,7 @@
         <script src="{{url('public/js/popper.min.js')}}"></script>
         {{-- FancyBox --}}
         @stack('other-scripts')
-        @vite(['resources/scss/app.scss', 'resources/js/app.js', 'resources/js/custom.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/custom.js'])
         {{-- <script src="{{url('public/build/assets/app-194e6bba.js')}}"></script> --}}
     </body>
 </html>
