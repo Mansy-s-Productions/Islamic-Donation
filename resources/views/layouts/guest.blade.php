@@ -11,11 +11,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">
-
         <link href="{{url('public/css/admin.css')}}" rel="stylesheet">
-        <link href="{{url('public/build/assets/app-2db575ce.css')}}" rel="stylesheet">
-        <link href="{{url('public/build/assets/app-96b3474b.css')}}" rel="stylesheet">
-
         <!-- Scripts -->
     </head>
     <body class="font-sans text-gray-900 antialiased">
@@ -30,7 +26,8 @@
             </div>
         </div>
         <script src="{{url('public/js/all.min.js')}}"></script>
-        <script src="{{url('public/build/assets/app-194e6bba.js')}}"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/custom.js'])
+
 
     </body>
 </html>
