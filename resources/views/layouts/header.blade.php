@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>IslamHouse</title>
-        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 
         <link rel="icon" href="{{url('public/img/logo.png')}}">
         <!-- Bootstrap -->
@@ -24,4 +23,6 @@
         <!-- Css -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{url('public/css/app.css')}}" rel="stylesheet">
+        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+
     </head>
