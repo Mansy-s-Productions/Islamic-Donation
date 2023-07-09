@@ -8,15 +8,27 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="pb-4 bg-white dark:bg-gray-900 flex justify-end">
-                            <select id="languages" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>اللغة</option>
-                                @foreach ($AllLanguages as $language)
-                                    <option @if ($language['code'] == $lang) selected @endif value="{{$language['code']}}">
-                                        {{$language['native']}}
+                    <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
+                        <div class="pb-4 bg-white dark:bg-gray-900">
+                            <select id="categories" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected>القسم</option>
+                                @foreach ($AllCategories as $category)
+                                    <option @if ($category['id'] == $category_id) selected @endif value="{{$category['id']}}">
+                                        {{$category['title']}}
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="pb-4 bg-white dark:bg-gray-900">
+                                <select id="languages" class="float-end bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>اللغة</option>
+                                    @foreach ($AllLanguages as $language)
+                                        <option @if ($language['code'] == $lang) selected @endif value="{{$language['code']}}">
+                                            {{$language['native']}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                        </div>
                     </div>
                     <table class="table w-full text-left text-gray-500 dark:text-gray-400" id="myTable">
                         <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -63,6 +75,14 @@
         $(document).ready(function() {
             $(function(){
             $('#languages').on('change', function () {
+                var url = $(this).val(); // get selected value
+                if (url) { // require a URL
+                    console.log(url);
+                    window.location = url; // redirect
+                }
+                return false;
+            });
+            $('#categories').on('change', function () {
                 var url = $(this).val(); // get selected value
                 if (url) { // require a URL
                     console.log(url);

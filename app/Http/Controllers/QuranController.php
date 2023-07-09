@@ -22,13 +22,13 @@ class QuranController extends Controller{
         return view('quran.all', compact('AllSuras'));
     }
     public function singleSura($lang ,$id){
-        // dd($lang);
         $LanguagesList = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/isocodes')->collect('isocodes_languages');
         $keys = $LanguagesList->keys();
         $values = $LanguagesList->values();
         $SuraLanguage = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/list/'.$lang)->collect('translations')[0];
         // dd('https://quranenc.com/api/v1/translation/sura/'.$SuraLanguage.'/'.$id);
         $SuraTranslation = Http::accept('application/json')->get('https://quranenc.com/api/v1/translation/sura/'.$SuraLanguage['key'].'/'.$id)->collect('result');
+        // dd($SuraTranslation);
         //    dd($SuraTranslation);
         try {
             $ImagesFiles = [];
@@ -72,38 +72,43 @@ class QuranController extends Controller{
         }
             // dd($AllSubmitted);
     }
-    public function getAdminAll($lang = 'en', $suraKey){
+    public function getAdminAll($lang = 'en'){
         $AllSura = SuraList::all();
-        $AllLanguages = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/list')->collect();
-        return view('admin.quran.all', compact('AllSura', 'lang', 'AllLanguages', 'suraKey'));
+        $LanguagesList = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/isocodes')->collect('isocodes_languages');
+        $keys = $LanguagesList->keys();
+        $AllLanguages = $LanguagesList->values();
+        return view('admin.quran.all', compact('AllSura', 'lang', 'AllLanguages', 'keys'));
     }
-    public function getEditSura($lang, $id, $suraKey){
-        // dd($lang);
-        $AllLanguages = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/list')->collect();
-        if($suraKey == 'arabic'){
-        $TranslationsList = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/list')->collect();
+    public function getEditSura($lang, $id){
+        $AllLanguages = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/isocodes')->collect('isocodes_languages');
+        $langKeys = $AllLanguages->keys();
+        $AllLanguages = $AllLanguages->values();
+        if($lang == 'ar'){
             $ArSura = ArQuran::where([
                 'ar_sura_number' => $id,
                 ])->orderBy('aya_number', 'ASC')->get();
-        return view('admin.quran.single', compact('suraKey' ,'TranslationsList' ,'AllLanguages' , 'ArSura', 'lang'));
+            return view('admin.quran.single', compact('AllLanguages' , 'ArSura', 'lang', 'langKeys'));
         }
-        $TheSura = Http::accept('application/json')->get('https://quranenc.com/api/v1/translation/sura/'.$suraKey.'/'.$id)->collect();
+        // dd('https://quranenc.com/api/v1/translations/list/'.$lang);
+        $SuraTranslation = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/list/'.$lang)->collect('translations')[0];
+        $TheSura = Http::accept('application/json')->get('https://quranenc.com/api/v1/translation/sura/'.$SuraTranslation['key'].'/'.$id)->collect('result');
+        // dd($AllLanguages);
         $TranslationsList = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/list')->collect();
         $ArSura = ArQuran::where([
             'ar_sura_number' => $id,
             ])->orderBy('aya_number', 'ASC')->get();
             // dd($TheSura);
-        return view('admin.quran.single', compact('TheSura' ,'suraKey' ,'TranslationsList' ,'AllLanguages' , 'ArSura', 'lang'));
+            // dd('en' == 'en');
+        return view('admin.quran.single', compact('TheSura' ,'TranslationsList' ,'AllLanguages' ,'ArSura' ,'lang', 'langKeys'));
     }
-    public function getEditAya($lang ,$key, $suraId, $ayaId){
-        $TheAya = Http::accept('application/json')->get('https://quranenc.com/api/v1/translation/aya/'.$key.'/'.$suraId.'/'.$ayaId)->collect();
-        $TheAya = $TheAya['result'];
+    public function getEditAya($lang ,$suraId ,$ayaId){
+        $SuraTranslation = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/list/'.$lang)->collect('translations')[0];
+        $TheAya = Http::accept('application/json')->get('https://quranenc.com/api/v1/translation/aya/'.$SuraTranslation['key'].'/'.$suraId.'/'.$ayaId)->collect('result');
         return view('admin.quran.edit', compact('TheAya', 'lang'));
     }
     public function postEditAya(Request $r, $lang, $suraId, $ayaId){
         // $TheAya = Http::accept('application/json')->get('https://quranenc.com/api/v1/translation/aya/english_saheeh/'.$suraId.'/'.$ayaId)->collect();
         $Rules = [
-            'aya_text' => 'required',
             'image' =>'image|mimes:png,jpg,jpeg,webp',
         ];
         $Validator = Validator::make($r->all(), $Rules);

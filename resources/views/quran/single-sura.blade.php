@@ -3,7 +3,7 @@
         @include('layouts.navbar')
         @include('layouts.noto')
         <nav class="grey-nav">
-            <h1 class="text-center">سورة - {{$ArSura[0]->sura_ar_name}}</h1>
+            <h1 class="text-center"> سورة - {{$ArSura[0]->sura_ar_name}}</h1>
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>

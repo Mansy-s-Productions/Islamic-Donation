@@ -18,14 +18,13 @@ use Throwable;
 class HadithController extends Controller{
     public function getAdminAll($lang = 'en', $category_id = 1){
         $AllHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language='.$lang.'&category_id='.$category_id.'&per_page=1600')->collect();
-        // dd($AllHadith);
-        $AllArHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language=ar'.'&category_id='.$category_id.'&per_page=1600')->collect();
+        $AllCategories = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/categories/roots/?language='.$lang)->collect();
+        // dd($AllCategories);
+        $AllArHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language=ar'.'&category_id='.$category_id.'&per_page=3000');
         $AllHadith = $AllHadith['data'];
         $AllHadith = collect($AllHadith)->paginate(100);
-        // dd($AllHadith);
         $AllLanguages = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/languages')->collect();
-        // dd($AllLanguages);
-        return view('admin.hadith.all', compact('AllHadith', 'AllArHadith', 'lang', 'AllLanguages'));
+        return view('admin.hadith.all', compact('AllHadith', 'AllArHadith', 'lang', 'AllLanguages', 'AllCategories', 'category_id'));
     }
     public function getAllCategories($lang ='ar'){
         $AllCategories = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/categories/roots/?language='.$lang);
@@ -73,34 +72,34 @@ class HadithController extends Controller{
         }
     }
     public function getCreateHadith(){
-        $AllLanguages = Language::all();
+        $AllLanguages = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/languages')->collect();
         return view('admin.hadith.new', compact('AllLanguages'));
     }
-    public function postCreateHadith(Request $r){
-        $Rules = [
-            'hadith_id' => 'required|numeric',
-            'title' =>'required',
-            'lang_code' =>'required',
-            'image' =>'required|image|mimes:png,jpg,jpeg,webp',
-        ];
-        $Validator = Validator::make($r->all(), $Rules);
-        if($Validator->fails()){
-            return back()->withErrors($Validator->errors()->all());
-        }else{
-            $Data = $r->all();
-            $lang = $Data['lang_code'];
-            // dd($Data);
-            $TimeNow = Carbon::now()->timestamp;
-            if($r->has('image')){
-                //Resize the image file & upload it (250x250) (60x60) (650x650)
-                $img = ImageLib::make($r->image);
-                $img->save('storage/app/public/hadith/'.$lang.'/'.$TimeNow.'.'.$r->image->getClientOriginalExtension());
-                $Data['image'] = $TimeNow.'.'.$r->image->getClientOriginalExtension();
-            }
-            Hadith::Create($Data);
-            return redirect()->route('admin.hadith.all')->withSuccess("تم إضافة الحديث بنجاح");
-        }
-    }
+    // public function postCreateHadith(Request $r){
+    //     $Rules = [
+    //         'hadith_id' => 'required|numeric',
+    //         'title' =>'required',
+    //         'lang_code' =>'required',
+    //         'image' =>'required|image|mimes:png,jpg,jpeg,webp',
+    //     ];
+    //     $Validator = Validator::make($r->all(), $Rules);
+    //     if($Validator->fails()){
+    //         return back()->withErrors($Validator->errors()->all());
+    //     }else{
+    //         $Data = $r->all();
+    //         $lang = $Data['lang_code'];
+    //         // dd($Data);
+    //         $TimeNow = Carbon::now()->timestamp;
+    //         if($r->has('image')){
+    //             //Resize the image file & upload it (250x250) (60x60) (650x650)
+    //             $img = ImageLib::make($r->image);
+    //             $img->save('storage/app/public/hadith/'.$lang.'/'.$TimeNow.'.'.$r->image->getClientOriginalExtension());
+    //             $Data['image'] = $TimeNow.'.'.$r->image->getClientOriginalExtension();
+    //         }
+    //         Hadith::Create($Data);
+    //         return redirect()->route('admin.hadith.all')->withSuccess("تم إضافة الحديث بنجاح");
+    //     }
+    // }
     public function getEditHadith($id , $lang){
         $TheHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/one/?language='.$lang.'&id='.$id);
         $TheHadith = $TheHadith->collect();
@@ -108,7 +107,6 @@ class HadithController extends Controller{
         return view('admin.hadith.edit', compact('TheHadith', 'lang'));
     }
     public function postEditHadith(Request $r, $id, $lang){
-        // $TheHadith = Hadith::findOrFail($id);
         $TheHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/one/?language='.$lang.'&id='.$id)->collect();
         $Rules = [
             'image' =>'required|image|mimes:png,jpg,jpeg,webp',

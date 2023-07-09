@@ -25,8 +25,8 @@
                                     <select name="lang_code" id="lang" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option selected>Choose a language</option>
                                     @foreach ($AllLanguages as $language)
-                                        <option value="{{$language->lang_code}}">
-                                            {{$language->lang_name}}
+                                        <option value="{{$language['code']}}">
+                                            {{$language['native']}}
                                         </option>
                                     @endforeach
                                     </select>

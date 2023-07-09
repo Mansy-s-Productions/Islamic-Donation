@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>IslamHouse</title>
+        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+
         <link rel="icon" href="{{url('public/img/logo.png')}}">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}">
@@ -20,6 +22,6 @@
         {{-- Fontawesome --}}
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">
         <!-- Css -->
-        <link href="{{url('public/css/app.css')}}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link href="{{url('public/css/app.css')}}" rel="stylesheet">
     </head>

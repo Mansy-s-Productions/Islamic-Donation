@@ -130,3 +130,7 @@ PlatformOption.forEach(function(platform) {
         setTimeout(sendRequest, delay);
     });
 });
+
+
+
+

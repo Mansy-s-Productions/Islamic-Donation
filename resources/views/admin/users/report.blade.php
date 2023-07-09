@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" dir="rtl">
-            {{ __('تقرير عن المتطوع : ' .$UserDesigns[0]->User->name) }}
+            تقرير عن المتطوع:  <span class="text-red-500">{{$UserDesigns[0]->User->name}}</span>
         </h2>
     </x-slot>
 
@@ -18,13 +18,12 @@
                                 <th scope="row" class="px-6 py-4 font-medium text-xl text-gray-900 whitespace-nowrap dark:text-white">اللغة</th>
                                 <th scope="row" class="px-6 py-4 font-medium text-xl text-gray-900 whitespace-nowrap dark:text-white">الرقم</th>
                                 <th scope="row" class="px-6 py-4 font-medium text-xl text-gray-900 whitespace-nowrap dark:text-white">المنصه</th>
-                                <th scope="row" class="px-6 py-4 font-medium text-xl text-gray-900 whitespace-nowrap dark:text-white">تقرير</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($UserDesigns as $key => $User)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="px-6">{{$key+1}}</th>
+                                    <th scope="row" class="px-6 py-4">{{$key+1}}</th>
                                     <td class="px-6 py-4">
                                         @if ($User->type == 'quran')
                                         <span class="badge text-bg-info">قرآن</span>
@@ -36,7 +35,7 @@
                                         @if ($User->type == 'quran')
                                         <span class="">{{$User->Quran->sura_ar_name}}</span>
                                         @else
-                                        N/A
+                                            N/A
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">{{$User->lang}}</td>
@@ -49,9 +48,6 @@
                                         @elseif ($User->platform == 'instagram')
                                         <span class="badge text-bg-danger">Instagram</span>
                                         @endif
-                                    </td>
-                                    <td class="px-6 py-4">
-                                            <a href="{{route('userReport.get', $User->id)}}"><i class="fa-regular fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
