@@ -33,12 +33,12 @@ class UserController extends Controller{
             ]);
             auth()->loginUsingId($NewUser->id);
                 //Redirect back to homepage
-                return redirect()->route('index')->withSuccesss('Your are now logged in as ' . auth()->user()->name);
+                return redirect()->route('home')->withSuccesss('Your are now logged in as ' . auth()->user()->name);
             // }
         } else {
             auth()->loginUsingId($FindUser->first()->id);
                 //Redirect back to homepage
-                return redirect()->route('index')->withSuccesss('Your are now logged in as ' . auth()->user()->name);
+                return redirect()->route('home')->withSuccesss('Your are now logged in as ' . auth()->user()->name);
             // }
         }
     }
