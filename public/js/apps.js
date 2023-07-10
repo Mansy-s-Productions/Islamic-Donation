@@ -64,6 +64,7 @@ function makeAjaxRequest(type,id, user, language, platform, sura ,input ,checkBo
             spinner.classList.add('d-none');
             input.classList.add('active');
             input.checked = true;
+            input.setAttribute('disabled', 'true');
             SubmitMessage(response.message, 200)
             } else {
             var response = JSON.parse(xhr.responseText);
