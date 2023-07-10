@@ -33,6 +33,6 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://islamic-designs.test/login/google/callback',
+        'redirect' => 'https://volunteer.islamhouse.com/login/google/callback',
      ],
 ];
