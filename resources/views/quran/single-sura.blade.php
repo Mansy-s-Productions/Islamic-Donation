@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    @forelse ($SuraTranslation as $key => $Aya)
+                    @forelse ($FinalQuran as $key => $Aya)
                         <div class="col-12">
                             <div class="aya rounded">
                                 <p class="aya-ar-name">{{$Aya['arabic_text']}}</p>

@@ -46,7 +46,7 @@ class QuranController extends Controller{
                 array_push($FinalQuran, $quran);
             }
         }
-        $FinalQuran = collect($FinalQuran)->paginate(100);
+        $FinalQuran = collect($FinalQuran);
             $ArSura = ArQuran::where([
                 'ar_sura_number' => $id,
                 ])->get();
@@ -63,9 +63,9 @@ class QuranController extends Controller{
                 }else{
                     $arrays = [];
                 }
-                return view('quran.single-sura', compact('ImagesFiles', 'SuraTranslation' ,'ArSura' ,'lang' , 'arrays', 'values', 'keys'));
+                return view('quran.single-sura', compact('FinalQuran','ImagesFiles', 'SuraTranslation' ,'ArSura' ,'lang' , 'arrays', 'values', 'keys'));
         }else{
-            return view('quran.single-sura', compact('ImagesFiles', 'SuraTranslation' ,'ArSura' ,'lang' , 'values', 'keys'));
+            return view('quran.single-sura', compact('FinalQuran','ImagesFiles', 'SuraTranslation' ,'ArSura' ,'lang' , 'values', 'keys'));
         }
             // dd($AllSubmitted);
     }

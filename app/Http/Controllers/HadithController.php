@@ -34,7 +34,6 @@ class HadithController extends Controller{
     public function getAllHadith($lang = 'ar', $category_id = 1){
         try {
             $Images = File::files('storage/app/public/hadith/'.$lang);
-            dd($Images);
             $ImagesFiles = [];
             $string = ".jpg";
             foreach($Images as $key => $Image) {
@@ -79,7 +78,6 @@ class HadithController extends Controller{
     public function getEditHadith($id , $lang){
         $TheHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/one/?language='.$lang.'&id='.$id);
         $TheHadith = $TheHadith->collect();
-        // dd($lang);
         return view('admin.hadith.edit', compact('TheHadith', 'lang'));
     }
     public function postEditHadith(Request $r, $id, $lang){
@@ -92,8 +90,6 @@ class HadithController extends Controller{
             return back()->withErrors($Validator->errors()->all());
         }else{
             $Data = $r->all();
-            // dd($TheHadith);
-            // $lang = $TheHadith['code'];
             if($r->has('image')){
                 //Resize the image file & upload it (250x250) (60x60) (650x650)
                 $img = ImageLib::make($r->image);
