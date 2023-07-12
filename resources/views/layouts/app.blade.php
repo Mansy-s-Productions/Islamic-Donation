@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'IslamHouse') }}</title>
+        <link rel="icon" href="{{url('public/img/logo.png')}}">
         @stack('head')
         <!-- font awesome -->
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">
@@ -14,8 +15,6 @@
         <link rel="stylesheet" href="{{url('public/css/flowbite-1.6.5.min.css')}}" />
         {{-- Css --}}
         <link href="{{url('public/css/admin.css')}}" rel="stylesheet">
-        {{-- <link href="{{url('public/build/assets/app-2db575ce.css')}}" rel="stylesheet">
-        <link href="{{url('public/build/assets/app-96b3474b.css')}}" rel="stylesheet"> --}}
 
     </head>
     <body class="font-sans antialiased">
@@ -34,7 +33,6 @@
                 {{ $slot }}
             </main>
         </div>
-        {{-- <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script> --}}
         {{-- Flowbite Js --}}
         <script src="{{url('public/js/flowbite-1.6.5.min.js')}}"></script>
         {{-- Font Awesome --}}
@@ -44,6 +42,5 @@
         {{-- FancyBox --}}
         @stack('other-scripts')
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/custom.js'])
-        {{-- <script src="{{url('public/build/assets/app-194e6bba.js')}}"></script> --}}
     </body>
 </html>

@@ -12,11 +12,14 @@
                     <div class="pb-4 bg-white dark:bg-gray-900 flex justify-end">
                         <select id="languages" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>اللغة</option>
-                            @foreach ($AllLanguages as $key => $language)
-                                <option @if ($keys[$key] == $lang) selected @endif value="{{$language}}" data-lang="{{$keys[$key]}}" data-key="{{$language}}">
-                                    {{ucfirst($language)}}
-                                </option>
-                            @endforeach
+                            <option @if ($lang == 'ar') selected @endif value="ar" data-lang="ar" data-key="ar">
+                                Arabic
+                            </option>
+                            @foreach ($Availableanguages as $key => $language)
+                            <option @if ($language == $lang) selected @endif value="{{$language}}" data-lang="{{strtolower($language)}}" data-key="{{$language}}">
+                                {{ucfirst($AllLanguages[$language])}}
+                            </option>
+                        @endforeach
                         </select>
                     </div>
                     <table class="table w-full text-left text-gray-500 dark:text-gray-400" id="myTable">

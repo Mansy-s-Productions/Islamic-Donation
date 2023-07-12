@@ -8,7 +8,7 @@ use App\Models\EventLog;
 use Illuminate\Support\Facades\Http;
 
     function HadithImageSrc($lang, $id){
-        return url('storage/app/public/hadith/').'/'.$lang.'_'.$id.'.jpg';
+        return url('storage/app/public/hadith/').'/'.$lang.'/'.$lang.'_'.$id.'.jpg';
     }
     function QuranImageSrc($lang, $sura_id, $aya_id){
         return url('storage/app/public/quran/').'/'.$lang.'/'.$lang.'_'.$sura_id.'_'.$aya_id.'.jpg';

@@ -31,6 +31,7 @@ class AdminController extends Controller{
     }
     public function getUserReport($id){
         $UserDesigns = VolunteerPhotos::where('user_id', $id)->with('User', 'Quran')->get();
+
         // dd($UserDesigns);
         return view('admin.users.report', compact('UserDesigns'));
     }

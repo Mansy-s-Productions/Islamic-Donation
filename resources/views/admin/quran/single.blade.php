@@ -10,10 +10,13 @@
                 <div class="p-6 text-gray-900">
                     <div class="pb-4 bg-white dark:bg-gray-900 flex justify-end">
                         <select id="languages" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>اللغة</option>
-                            @foreach ($AllLanguages as $key => $language)
-                                <option @if ($langKeys[$key] == $lang) selected @endif value="{{$language}}" data-lang="{{$langKeys[$key]}}" data-key="{{$language}}">
-                                    {{ucfirst($language)}}
+                            <option>اللغة</option>
+                            <option @if ($lang == 'ar') selected @endif value="ar" data-lang="ar" data-key="ar">
+                                Arabic
+                            </option>
+                            @foreach ($Availableanguages as $key => $language)
+                                <option @if ($language == $lang) selected @endif value="{{$language}}" data-lang="{{strtolower($language)}}" data-key="{{$language}}">
+                                    {{ucfirst($AllLanguages[$language])}}
                                 </option>
                             @endforeach
                         </select>
@@ -42,11 +45,11 @@
                                         <th scope="row" class="px-6 py-4">{{$TheSura[$key]['translation']}}</th>
                                     @endif
                                     <td class="px-6 py-4">
-                                        <a class="fancybox" href="{{QuranImageSrc($lang ,$TheSura[$key]['sura'] , $Aya->id)}}" data-fancybox="gallery{{$Aya->id}}">
-                                            <img width="100" src="{{QuranImageSrc($lang ,$TheSura[$key]['sura'], $Aya->id)}}" alt=""></td>
+                                        <a class="fancybox" href="{{QuranImageSrc($lang ,$TheSura[$key]['sura'], $Aya->aya_number)}}" data-fancybox="gallery{{$Aya->id}}">
+                                            <img width="100" src="{{QuranImageSrc($lang ,$TheSura[$key]['sura'], $Aya->aya_number)}}" alt=""></td>
                                         </a>
                                     <td class="px-6 py-4">
-                                        <a href="{{route('admin.aya.getEdit', [$lang ,$TheSura[0]['sura'] , $Aya->id])}}"><i class="fa-regular fa-eye"></i></a>
+                                        <a href="{{route('admin.aya.getEdit', [$lang ,$TheSura[0]['sura'] , $Aya->aya_number])}}"><i class="fa-regular fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -72,7 +75,7 @@
                                         <img width="100" src="{{QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->id)}}" alt=""></td>
                                     </a>
                                 <td class="px-6 py-4">
-                                    <a href="{{route('admin.aya.getEdit', [$lang ,$Aya->ar_sura_number ,$Aya->id])}}"><i class="fa-regular fa-eye"></i></a>
+                                    <a href="{{route('admin.aya.getEdit', [$lang ,$Aya->ar_sura_number ,$Aya->aya_number])}}"><i class="fa-regular fa-eye"></i></a>
                                 </td>
                             </tr>
                         @endforeach

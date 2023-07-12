@@ -79,6 +79,8 @@
                 </div>
             </div>
         </section>
+        @include('layouts.footer')
+
         @include('layouts.scripts')
     </body>
 </html>

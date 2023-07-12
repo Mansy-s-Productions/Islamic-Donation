@@ -22,14 +22,18 @@
                                 </button>
                                 <ul class="dropdown-menu languages-menu">
                                     @if ($lang == 'ar')
-                                        @foreach ($values as $key => $language)
-                                            <li><a class="dropdown-item" href="{{route('singleSura', [$keys[$key], $SuraTranslation[0]->ar_sura_number])}}">
-                                                {{ucfirst($language)}}</a></li>
+                                    <li><a class="dropdown-item" href="{{route('singleSura', ['ar', $SuraTranslation[0]->ar_sura_number])}}">
+                                        Arabic</a></li>
+                                        @foreach ($Availableanguages as $key => $language)
+                                            <li><a class="dropdown-item" href="{{route('singleSura', [$language, $SuraTranslation[0]->ar_sura_number])}}">
+                                                {{ucfirst($LanguagesList[$language])}}</a></li>
                                         @endforeach
                                     @else
-                                        @foreach ($values as $key => $language)
-                                            <li><a class="dropdown-item" href="{{route('singleSura', [$keys[$key], $SuraTranslation[0]['sura']])}}">
-                                            {{ucfirst($language)}}</a></li>
+                                    <li><a class="dropdown-item" href="{{route('singleSura', ['ar', $SuraTranslation[0]['sura']])}}">
+                                        Arabic</a></li>
+                                        @foreach ($Availableanguages as $key => $language)
+                                            <li><a class="dropdown-item" href="{{route('singleSura', [$language, $SuraTranslation[0]['sura']])}}">
+                                            {{ucfirst($LanguagesList[$language])}}</a></li>
                                         @endforeach
                                     @endif
                                 </ul>
@@ -135,7 +139,7 @@
             </div>
             </div>
         </div>
-
+        @include('layouts.footer')
         @include('layouts.scripts')
 
     </body>

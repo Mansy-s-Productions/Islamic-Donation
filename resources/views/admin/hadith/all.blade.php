@@ -76,17 +76,19 @@
             $(function(){
             $('#languages').on('change', function () {
                 var url = $(this).val(); // get selected value
+                var category = $('#categories').find(":selected").val(); // get selected value
+                console.log(category);
                 if (url) { // require a URL
-                    console.log(url);
-                    window.location = url; // redirect
+                    window.location.href = "{{URL::to('dashboard/hadith/all')}}"+'/'+url+'/'+category;
                 }
                 return false;
             });
             $('#categories').on('change', function () {
-                var url = $(this).val(); // get selected value
-                if (url) { // require a URL
-                    console.log(url);
-                    window.location = url; // redirect
+                var category = $(this).val(); // get selected value
+
+                if ($.isNumeric(category)) { // require a category
+                    console.log(category);
+                    window.location = category; // redirect
                 }
                 return false;
             });

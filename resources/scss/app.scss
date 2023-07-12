@@ -369,12 +369,13 @@ a{
   }
 
 #mainPage{
+    margin: 80px 0;
     .section{
         text-align: center;
-        height: 200px;
+        // height: 200px;
         padding: 0px 45px;
+        margin: 10px 0;
         a{
-            margin-top: 90px;
             display: flex;
             height: 100%;
             width: 100%;
@@ -410,4 +411,28 @@ a{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+.icon-group{
+    display: flex;
+}
+  .icon-item{
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #080809;
+    background-color: #eee;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    height: 2.5rem;
+    width: 2.5rem;
+    border: 0;
+    font-size: .875rem;
   }
