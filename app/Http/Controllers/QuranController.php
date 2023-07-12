@@ -97,8 +97,6 @@ class QuranController extends Controller{
         $ArSura = ArQuran::where([
             'ar_sura_number' => $id,
             ])->orderBy('aya_number', 'ASC')->get();
-            // dd($TheSura);
-            // dd('en' == 'en');
         return view('admin.quran.single', compact('TheSura' ,'TranslationsList' ,'AllLanguages' ,'ArSura' ,'lang', 'langKeys'));
     }
     public function getEditAya($lang ,$suraId ,$ayaId){

@@ -53,7 +53,7 @@
                                                 </svg>
                                             </div>
                                         </div>
-                                        <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['aya'])}}" data-src="{{QuranImageSrc($lang, $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
+                                        <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['surs'], $Aya['aya'])}}" data-src="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
                                             <i class="image fa-regular fa-image"></i>
                                         </a>
                                     </div>
@@ -63,7 +63,7 @@
                                         <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya['translation']}}</span><i class="fa-regular fa-copy"></i></a>
                                         <a class="btn bg-primary text-white rounded-2" href="{{route('login')}}">Login</a>
                                     </div>
-                                    <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
+                                    <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
                                         <i class="image fa-regular fa-image"></i>
                                     </a>
                                 </div>
