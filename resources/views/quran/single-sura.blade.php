@@ -53,35 +53,23 @@
                                                 </svg>
                                             </div>
                                         </div>
-                                        <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['surs'], $Aya['aya'])}}" data-src="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
+                                        <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-src="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
                                             <i class="image fa-regular fa-image"></i>
                                         </a>
                                     </div>
                                 @else
-                                <div class="note_btns d-flex justify-content-between" dir="ltr">
-                                    <div class="d-flex align-items-center">
-                                        <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya['translation']}}</span><i class="fa-regular fa-copy"></i></a>
-                                        <a class="btn bg-primary text-white rounded-2" href="{{route('login')}}">Login</a>
+                                    <div class="note_btns d-flex justify-content-between" dir="ltr">
+                                        <div class="d-flex align-items-center">
+                                            <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya['translation']}}</span><i class="fa-regular fa-copy"></i></a>
+                                            <a class="btn bg-primary text-white rounded-2" href="{{route('login')}}">Login</a>
+                                        </div>
+                                        <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
+                                            <i class="image fa-regular fa-image"></i>
+                                        </a>
                                     </div>
-                                    <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
-                                        <i class="image fa-regular fa-image"></i>
-                                    </a>
-                                </div>
                                 @endif
                             </div>
                         </div>
-                        {{-- <!-- Modal -->
-                        <div class="modal fade" id="platformModal{{$Aya['id']}}" tabindex="-1" aria-labelledby="platform" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" >
-                            <div class="modal-content">
-                                <div class="modal-body d-flex flex-column justify-content-center text-center">
-                                    <span class="social-platform facebook" data-platform="facebook" data-input="platformModal{{$Aya['id']}}" data-submit="#ModalSubmit{{$Aya['id']}}">Facebook</span>
-                                    <span class="social-platform whatsapp" data-platform="whatsapp" data-input="platformModal{{$Aya['id']}}" data-submit="#ModalSubmit{{$Aya['id']}}">Whatsapp</span>
-                                    <span class="social-platform instagram" data-platform="instagram" data-input="platformModal{{$Aya['id']}}" data-submit="#ModalSubmit{{$Aya['id']}}">Instagram</span>
-                                </div>
-                            </div>
-                            </div>
-                        </div> --}}
                     @empty
                     <p class="text-center">  <span class="badge text-bg-danger">لم يتم إضافة تصميمات بعد في هذه السورة</span></p>
                     @endforelse

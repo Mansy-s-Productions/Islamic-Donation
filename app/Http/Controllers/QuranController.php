@@ -26,10 +26,7 @@ class QuranController extends Controller{
         $keys = $LanguagesList->keys();
         $values = $LanguagesList->values();
         $SuraLanguage = Http::accept('application/json')->get('https://quranenc.com/api/v1/translations/list/'.$lang)->collect('translations')[0];
-        // dd('https://quranenc.com/api/v1/translation/sura/'.$SuraLanguage.'/'.$id);
         $SuraTranslation = Http::accept('application/json')->get('https://quranenc.com/api/v1/translation/sura/'.$SuraLanguage['key'].'/'.$id)->collect('result');
-        // dd($SuraTranslation);
-        //    dd($SuraTranslation);
         try {
             $ImagesFiles = [];
             $Images = File::files('storage/app/public/quran/'.$lang);
@@ -42,14 +39,14 @@ class QuranController extends Controller{
         } catch (Throwable $e) {
             report($e);
         }
-        // $FinalQuran =[];
-        // dd($SuraTranslation);
-        // foreach ($SuraTranslation as $key => $quran){
-        //     if (in_array($quran['id'], $ImagesFiles)){
-        //         array_push($FinalQuran, $quran);
-        //     }
-        // }
-        // $FinalQuran = collect($FinalQuran)->paginate(100);
+        $FinalQuran =[];
+        foreach ($SuraTranslation as $key => $quran){
+            // dd($lang.'_'.$quran['sura'].'_'.$quran['aya']);
+            if (in_array($lang.'_'.$quran['sura'].'_'.$quran['aya'], $ImagesFiles)){
+                array_push($FinalQuran, $quran);
+            }
+        }
+        $FinalQuran = collect($FinalQuran)->paginate(100);
             $ArSura = ArQuran::where([
                 'ar_sura_number' => $id,
                 ])->get();

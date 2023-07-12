@@ -34,6 +34,7 @@ class HadithController extends Controller{
     public function getAllHadith($lang = 'ar', $category_id = 1){
         try {
             $Images = File::files('storage/app/public/hadith/'.$lang);
+            dd($Images);
             $ImagesFiles = [];
             $string = ".jpg";
             foreach($Images as $key => $Image) {
@@ -49,7 +50,7 @@ class HadithController extends Controller{
         $AllHadith = collect($AllHadith)->paginate(100);
         $FinalHadith =[];
         foreach ($AllHadith as $key => $hadith){
-            if (in_array($hadith['id'], $ImagesFiles)){
+            if (in_array($lang.'_'.$hadith['id'], $ImagesFiles)){
                 array_push($FinalHadith, $hadith);
             }
         }
@@ -75,31 +76,6 @@ class HadithController extends Controller{
         $AllLanguages = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/languages')->collect();
         return view('admin.hadith.new', compact('AllLanguages'));
     }
-    // public function postCreateHadith(Request $r){
-    //     $Rules = [
-    //         'hadith_id' => 'required|numeric',
-    //         'title' =>'required',
-    //         'lang_code' =>'required',
-    //         'image' =>'required|image|mimes:png,jpg,jpeg,webp',
-    //     ];
-    //     $Validator = Validator::make($r->all(), $Rules);
-    //     if($Validator->fails()){
-    //         return back()->withErrors($Validator->errors()->all());
-    //     }else{
-    //         $Data = $r->all();
-    //         $lang = $Data['lang_code'];
-    //         // dd($Data);
-    //         $TimeNow = Carbon::now()->timestamp;
-    //         if($r->has('image')){
-    //             //Resize the image file & upload it (250x250) (60x60) (650x650)
-    //             $img = ImageLib::make($r->image);
-    //             $img->save('storage/app/public/hadith/'.$lang.'/'.$TimeNow.'.'.$r->image->getClientOriginalExtension());
-    //             $Data['image'] = $TimeNow.'.'.$r->image->getClientOriginalExtension();
-    //         }
-    //         Hadith::Create($Data);
-    //         return redirect()->route('admin.hadith.all')->withSuccess("تم إضافة الحديث بنجاح");
-    //     }
-    // }
     public function getEditHadith($id , $lang){
         $TheHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/one/?language='.$lang.'&id='.$id);
         $TheHadith = $TheHadith->collect();
@@ -125,32 +101,10 @@ class HadithController extends Controller{
                 if (!file_exists($save_path)) {
                     File::makeDirectory($save_path, 0777, true, true);
                 }
-                $img->save('storage/app/public/hadith/'.$lang.'/'.$TheHadith['id'].'.'.$r->image->getClientOriginalExtension());
-                $Data['image'] = $TheHadith['id'].'.'.$r->image->getClientOriginalExtension();
+                $img->save('storage/app/public/hadith/'.$lang.'/'.$lang.'_'.$TheHadith['id'].'.'.$r->image->getClientOriginalExtension());
+                $Data['image'] = $lang.'_'.$TheHadith['id'].'.'.$r->image->getClientOriginalExtension();
             }
             return redirect()->route('admin.hadith.all', [$lang, 1])->withSuccess("تم تعديل التصميم بنجاح");
         }
     }
-    public function deleteHadith($id){
-        $TheHadith = Hadith::findOrFail($id);
-        $lang = $TheHadith->lang_code;
-        if($TheHadith->image){
-            // dd('app/public/hadith/'.$lang.'/'.$TheHadith->image);
-            Storage::disk('local')->delete('storage/app/public/hadith/'.$lang.'/'.$TheHadith->image);
-        }
-        $TheHadith->delete();
-        return redirect()->route('admin.hadith.all')->withSuccess("تم مسح الحديث بنجاح");
-    }
-    // public function changeName(){
-    //     $AllHadith = Hadith::all();
-    //     foreach($AllHadith as $key => $Hadith){
-    //         //Generate the name
-    //         $name = $Hadith->hadith_id;
-
-    //         $FileArray['image'] = $name.'.jpg';
-    //         // dd($FileArray);
-    //         $Hadith->update($FileArray);
-    //     }
-    //     return redirect()->route('home');
-    // }
 }
