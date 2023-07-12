@@ -21,16 +21,63 @@
                                     <i class="fa-solid fa-language mx-2"></i> اللغة
                                 </button>
                                 <ul class="dropdown-menu languages-menu">
-                                    @foreach ($values as $key => $language)
-                                        <li><a class="dropdown-item" href="{{route('singleSura', [$keys[$key], $SuraTranslation[0]['sura']])}}">
+                                    @if ($lang == 'ar')
+                                        @foreach ($values as $key => $language)
+                                            <li><a class="dropdown-item" href="{{route('singleSura', [$keys[$key], $SuraTranslation[0]->ar_sura_number])}}">
+                                                {{ucfirst($language)}}</a></li>
+                                        @endforeach
+                                    @else
+                                        @foreach ($values as $key => $language)
+                                            <li><a class="dropdown-item" href="{{route('singleSura', [$keys[$key], $SuraTranslation[0]['sura']])}}">
                                             {{ucfirst($language)}}</a></li>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                    @if ($lang == 'ar')
+                        @forelse ($FinalQuran as $key => $Aya)
+                            <div class="col-12">
+                                <div class="aya rounded">
+                                    <p class="aya-ar-name">{{$Aya->aya_formed_text}}</p>
+                                    @if(Auth::check())
+                                        <div class="note_btns d-flex justify-content-between" dir="ltr">
+                                            <div class="d-flex align-items-ceeter">
+                                                <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya->aya_formed_text}}</span><i class="fa-regular fa-copy"></i></a>
+                                                <div class="checkbox-wrapper-31">
+                                                            <!-- Button trigger modal -->
+                                                    <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{$Aya->id}}" data-bs-target=".modal" data-type="quran" data-sura="{{$Aya->ar_sura_number}}" data-id="{{$Aya->id}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($lang.'_'.$Aya->ar_sura_number.'_'.$Aya->aya_number ,$arrays)) class="submit-design-btn active" checked disabled="true" data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/>
+                                                    <svg viewBox="0 0 35.6 35.6">
+                                                        <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>
+                                                        <circle class="stroke" cx="17.8" cy="17.8" r="14.37"></circle>
+                                                        <polyline class="check" points="11.78 18.12 15.55 22.23 25.17 12.87"></polyline>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <a class="fancybox" href="{{QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->aya_number)}}" data-src="{{QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->aya_number)}}" data-fancybox="gallery{{$Aya->id}}" data-caption="{{$Aya->aya_formed_text}}">
+                                                <i class="image fa-regular fa-image"></i>
+                                            </a>
+                                        </div>
+                                    @else
+                                        <div class="note_btns d-flex justify-content-between" dir="ltr">
+                                            <div class="d-flex align-items-center">
+                                                <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya->aya_formed_text}}</span><i class="fa-regular fa-copy"></i></a>
+                                                <a class="btn bg-primary text-white rounded-2" href="{{route('login')}}">Login</a>
+                                            </div>
+                                            <a class="fancybox" href="{{QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->aya_number)}}" data-fancybox="gallery{{$Aya->id}}" data-caption="{{$Aya->aya_formed_text}}">
+                                                <i class="image fa-regular fa-image"></i>
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @empty
+                        <p class="text-center">  <span class="badge text-bg-danger">لم يتم إضافة تصميمات بعد في هذه السورة</span></p>
+                        @endforelse
+                    @else
                     @forelse ($FinalQuran as $key => $Aya)
                         <div class="col-12">
                             <div class="aya rounded">
@@ -44,7 +91,6 @@
                                             <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya['translation']}}</span><i class="fa-regular fa-copy"></i></a>
                                             <div class="checkbox-wrapper-31">
                                                         <!-- Button trigger modal -->
-                                                {{-- <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{$Aya['id']}}" data-target="#platformModal{{$Aya['id']}}" data-type="quran" data-sura="{{$Aya['sura']}}" data-id="{{$Aya['id']}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($Aya['id'] ,$arrays)) class="submit-design-btn active" checked data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/> --}}
                                                 <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{$Aya['id']}}" data-bs-target=".modal" data-type="quran" data-sura="{{$Aya['sura']}}" data-id="{{$Aya['id']}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($Aya['id'] ,$arrays)) class="submit-design-btn active" checked disabled="true" data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/>
                                                 <svg viewBox="0 0 35.6 35.6">
                                                     <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>
@@ -73,10 +119,7 @@
                     @empty
                     <p class="text-center">  <span class="badge text-bg-danger">لم يتم إضافة تصميمات بعد في هذه السورة</span></p>
                     @endforelse
-                    {{-- @if (empty($ImagesFiles))
-                            <p class="text-center">التصميميات في هذه اللغة غير متوفرة بعد </p>
-                            @else
-                    @endif --}}
+                    @endif
                 </div>
             </div>
         </section>
