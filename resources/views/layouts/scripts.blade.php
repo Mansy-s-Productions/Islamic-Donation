@@ -8,4 +8,3 @@
 {{-- Js files --}}
 <script src="{{url('/build/assets/app-1455c32c.js')}}"></script>
 <script type="module" src="{{url('public/js/custom.js')}}"></script>
-

@@ -13,7 +13,10 @@
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">
 
         <link href="{{url('public/css/admin.css')}}" rel="stylesheet">
-
+        <!-- Css -->
+        <link href="{{url('/build/assets/app-2db575ce.css')}}" rel="stylesheet">
+        <link href="{{url('/build/assets/app-74930efa.css')}}" rel="stylesheet">
+        <link href="{{url('/build/assets/custom-a792a0dd.css')}}" rel="stylesheet">
         <!-- Scripts -->
     </head>
     <body class="font-sans text-gray-900 antialiased">
@@ -28,7 +31,10 @@
             </div>
         </div>
         <script src="{{url('public/js/all.min.js')}}"></script>
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/custom.js'])
+        <script src="{{url('/build/assets/app-1455c32c.js')}}"></script>
+        <script src="{{url('/build/assets/custom-7301d4ed.js')}}"></script>
+
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/custom.js']) --}}
 
 
     </body>
