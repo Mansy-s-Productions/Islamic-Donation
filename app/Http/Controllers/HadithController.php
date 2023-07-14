@@ -96,7 +96,6 @@ class HadithController extends Controller{
                 $image_path = public_path('storage/app/public/hadith/'.$lang.'/'.$lang.'_'.$TheHadith['id'].'.jpg');
                 if(File::exists($image_path)) {
                     File::delete($image_path);
-                    Cache::flush();
                 }
                 $img = ImageLib::make($r->image);
                 $save_path = 'storage/app/public/hadith/'.$lang;
@@ -104,6 +103,7 @@ class HadithController extends Controller{
                     File::makeDirectory($save_path, 0777, true, true);
                 }
                 $img->save('storage/app/public/hadith/'.$lang.'/'.$lang.'_'.$TheHadith['id'].'.jpg');
+                Cache::flush();
             }
             return redirect()->route('admin.hadith.all', [$lang, 1])->withSuccess("تم تعديل التصميم بنجاح");
         }

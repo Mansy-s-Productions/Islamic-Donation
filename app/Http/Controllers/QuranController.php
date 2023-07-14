@@ -161,13 +161,13 @@ class QuranController extends Controller{
                 $image_path = public_path('storage/app/public/quran/'.$lang.'/'.$lang.'_'.$suraId.'_'.$ayaId.'.jpg');
                 if(File::exists($image_path)) {
                     File::delete($image_path);
-                    Cache::flush();
                 }
                 $save_path = 'storage/app/public/quran/'.$lang;
                 if (!file_exists($save_path)) {
                     File::makeDirectory($save_path, 0777, true, true);
                 }
                 $img->save('storage/app/public/quran/'.$lang.'/'.$lang.'_'.$suraId.'_'.$ayaId.'.jpg');
+                Cache::flush();
             }
             return redirect()->back()->withSuccess("تم تعديل اﻵية بنجاح");
         }
