@@ -15,6 +15,10 @@
         <link rel="stylesheet" href="{{url('public/css/flowbite-1.6.5.min.css')}}" />
         {{-- Css --}}
         <link href="{{url('public/css/admin.css')}}" rel="stylesheet">
+        <!-- Css -->
+        <link href="{{url('/build/assets/app-2db575ce.css')}}" rel="stylesheet">
+        <link href="{{url('/build/assets/app-74930efa.css')}}" rel="stylesheet">
+        <link href="{{url('/build/assets/custom-a792a0dd.css')}}" rel="stylesheet">
 
     </head>
     <body class="font-sans antialiased">
@@ -41,6 +45,8 @@
         <script src="{{url('public/js/popper.min.js')}}"></script>
         {{-- FancyBox --}}
         @stack('other-scripts')
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/custom.js'])
+        <script src="{{url('public/js/all.min.js')}}"></script>
+        <script src="{{url('/build/assets/app-1455c32c.js')}}"></script>
+        <script src="{{url('/build/assets/custom-7301d4ed.js')}}"></script>
     </body>
 </html>

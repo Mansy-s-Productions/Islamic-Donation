@@ -163,11 +163,8 @@ class QuranController extends Controller{
                 if (!file_exists($save_path)) {
                     File::makeDirectory($save_path, 0777, true, true);
                 }
-                // dd('storage/app/public/quran/'.$lang.'/'.$lang.'_'.$suraId.'_'.$ayaId.'.'.$r->image->getClientOriginalExtension());
                 $img->save('storage/app/public/quran/'.$lang.'/'.$lang.'_'.$suraId.'_'.$ayaId.'.'.$r->image->getClientOriginalExtension());
-                // $Data['image'] = $lang.'_'.$suraId.'_'.$ayaId.'.'.$r->image->getClientOriginalExtension();
             }
-            // $TheAya->update($Data);
             return redirect()->back()->withSuccess("تم تعديل اﻵية بنجاح");
         }
     }
