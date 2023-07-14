@@ -31,16 +31,16 @@
 
         <link rel="icon" href="{{url('public/img/logo.png')}}">
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}" disabled media="all">
-        <link href="{{url('public/css/datatables.min.css')}}" rel="stylesheet"/ disabled media="all">
+        <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}" media="all">
+        <link href="{{url('public/css/datatables.min.css')}}" rel="stylesheet"/ media="all">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
         <!-- font awesome -->
-        <link href="{{url('public/css/all.min.css')}}" rel="stylesheet" disabled media="all">
+        <link href="{{url('public/css/all.min.css')}}" rel="stylesheet"  media="all">
         <!-- Css -->
-        <link href="{{url('/build/assets/app-2db575ce.css')}}" rel="stylesheet" disabled media="all">
-        <link href="{{url('/build/assets/app-74930efa.css')}}" rel="stylesheet" disabled media="all">
+        <link href="{{url('/build/assets/app-2db575ce.css')}}" rel="stylesheet" media="all">
+        <link href="{{url('/build/assets/app-74930efa.css')}}" rel="stylesheet" media="all">
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
