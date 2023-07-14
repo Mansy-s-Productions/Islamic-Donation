@@ -169,7 +169,7 @@ class QuranController extends Controller{
                 $img->save('storage/app/public/quran/'.$lang.'/'.$lang.'_'.$suraId.'_'.$ayaId.'.jpg');
                 Cache::flush();
             }
-            return redirect()->back()->withSuccess("تم تعديل اﻵية بنجاح");
+            return redirect()->route('admin.quran.all', 'en')->withSuccess("تم تعديل اﻵية بنجاح");
         }
     }
 }

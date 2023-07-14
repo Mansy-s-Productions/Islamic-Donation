@@ -65,20 +65,9 @@ Route::middleware('auth', 'verified', 'admin')->group(function () {
         });
         Route::prefix('hadith')->group(function () {
             Route::get('all/{category_id}/{lang}', [HadithController::class, 'getAdminAll'])->name('admin.hadith.all');
-            // Route::get('new', [HadithController::class , 'getCreateHadith'])->name('admin.hadith.getCreate');
-            // Route::post('new', [HadithController::class , 'postCreateHadith'])->name('admin.hadith.postCreate');
             Route::get('edit/{id}/{lang?}', [HadithController::class, 'getEditHadith'])->name('admin.hadith.getEdit');
             Route::post('edit/{id}/{lang?}', [HadithController::class, 'postEditHadith'])->name('admin.hadith.postEdit');
-            // Route::get('delete/{id}/{lang?}', [HadithController::class , 'deleteHadith'])->name('admin.hadith.delete');
         });
-        // Route::prefix('languages')->group(function(){
-        //     Route::get('/', [LanguageController::class , 'getAdminLanguages'])->name('admin.languages.all');
-        //     Route::get('new', [LanguageController::class , 'getCreateLanguage'])->name('admin.languages.getCreate');
-        //     Route::post('new', [LanguageController::class , 'postCreateLanguage'])->name('admin.languages.postCreate');
-        //     Route::get('edit/{id}', [LanguageController::class , 'getEditLanguage'])->name('admin.languages.getEdit');
-        //     Route::post('edit/{id}', [LanguageController::class , 'postEditLanguage'])->name('admin.languages.postEdit');
-        //     Route::get('delete/{id}', [LanguageController::class , 'deleteLanguage'])->name('admin.languages.delete');
-        // });
     });
 
 
