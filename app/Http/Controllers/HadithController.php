@@ -91,14 +91,17 @@ class HadithController extends Controller{
         }else{
             $Data = $r->all();
             if($r->has('image')){
-                //Resize the image file & upload it (250x250) (60x60) (650x650)
+                // Find Image and delete it first
+                $image_path = public_path('storage/app/public/hadith/'.$lang.'/'.$lang.'_'.$TheHadith['id'].'.jpg');
+                if(File::exists($image_path)) {
+                    File::delete($image_path);
+                }
                 $img = ImageLib::make($r->image);
                 $save_path = 'storage/app/public/hadith/'.$lang;
                 if (!file_exists($save_path)) {
                     File::makeDirectory($save_path, 0777, true, true);
                 }
-                $img->save('storage/app/public/hadith/'.$lang.'/'.$lang.'_'.$TheHadith['id'].'.'.$r->image->getClientOriginalExtension());
-                $Data['image'] = $lang.'_'.$TheHadith['id'].'.'.$r->image->getClientOriginalExtension();
+                $img->save('storage/app/public/hadith/'.$lang.'/'.$lang.'_'.$TheHadith['id'].'.jpg');
             }
             return redirect()->route('admin.hadith.all', [$lang, 1])->withSuccess("تم تعديل التصميم بنجاح");
         }

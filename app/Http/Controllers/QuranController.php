@@ -28,7 +28,6 @@ class QuranController extends Controller{
             $SuraTranslation = ArQuran::where([
                 'ar_sura_number' => $id,
                 ])->orderBy('aya_number', 'ASC')->get();
-                // dd($SuraTranslation[0]);
                 try {
                     $ImagesFiles = [];
                     $Images = File::files('storage/app/public/quran/'.$lang);
@@ -43,7 +42,6 @@ class QuranController extends Controller{
                 }
                 $FinalQuran =[];
                 foreach ($SuraTranslation as $key => $quran){
-                    // dd($lang.'_'.$quran->ar_sura_number.'_'.$quran->aya_number);
                     if (in_array($lang.'_'.$quran->ar_sura_number.'_'.$quran->aya_number, $ImagesFiles)){
                         array_push($FinalQuran, $quran);
                     }
@@ -159,11 +157,15 @@ class QuranController extends Controller{
             if($r->has('image')){
                 //Resize the image file & upload it (250x250) (60x60) (650x650)
                 $img = ImageLib::make($r->image);
+                $image_path = public_path('storage/app/public/quran/'.$lang.'/'.$lang.'_'.$suraId.'_'.$ayaId.'.jpg');
+                if(File::exists($image_path)) {
+                    File::delete($image_path);
+                }
                 $save_path = 'storage/app/public/quran/'.$lang;
                 if (!file_exists($save_path)) {
                     File::makeDirectory($save_path, 0777, true, true);
                 }
-                $img->save('storage/app/public/quran/'.$lang.'/'.$lang.'_'.$suraId.'_'.$ayaId.'.'.$r->image->getClientOriginalExtension());
+                $img->save('storage/app/public/quran/'.$lang.'/'.$lang.'_'.$suraId.'_'.$ayaId.'.jpg');
             }
             return redirect()->back()->withSuccess("تم تعديل اﻵية بنجاح");
         }
