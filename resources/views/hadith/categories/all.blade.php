@@ -7,7 +7,7 @@
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>
-                    <li class="breadcrumb-item">الحديث</li>
+                    <li class="breadcrumb-item">الأحادبث</li>
                     <li class="breadcrumb-item active">الأقسام</li>
                 </ol>
             </div>

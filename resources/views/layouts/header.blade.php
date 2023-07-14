@@ -15,10 +15,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
         <!-- font awesome -->
-        {{-- Fontawesome --}}
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">
         <!-- Css -->
+        <link href="{{url('/build/assets/app-2db575ce.css')}}" rel="stylesheet">
+        <link href="{{url('/build/assets/app-74930efa.css')}}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link href="{{url('public/css/app.css')}}" rel="stylesheet">
-        @vite(['resources/scss/app.scss' ,'resources/js/app.js'])
     </head>

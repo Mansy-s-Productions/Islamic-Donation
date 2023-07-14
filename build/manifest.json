@@ -1,8 +1,19 @@
 {
-  "resources/css/app.css": {
-    "file": "assets/app-a792a0dd.css",
-    "isEntry": true,
-    "src": "resources/css/app.css"
+  "public/fonts/droid-arabic-kufi.ttf": {
+    "file": "assets/droid-arabic-kufi-e8221342.ttf",
+    "src": "public/fonts/droid-arabic-kufi.ttf"
+  },
+  "public/fonts/hafs.otf": {
+    "file": "assets/hafs-59e20b24.otf",
+    "src": "public/fonts/hafs.otf"
+  },
+  "public/fonts/kufi-regular.ttf": {
+    "file": "assets/kufi-regular-b3378738.ttf",
+    "src": "public/fonts/kufi-regular.ttf"
+  },
+  "public/img/hero-section.jpg": {
+    "file": "assets/hero-section-96e6f62f.jpg",
+    "src": "public/img/hero-section.jpg"
   },
   "resources/js/app.css": {
     "file": "assets/app-2db575ce.css",
@@ -16,12 +27,21 @@
     "isEntry": true,
     "src": "resources/js/app.js"
   },
+  "resources/js/custom.css": {
+    "file": "assets/custom-a792a0dd.css",
+    "src": "resources/js/custom.css"
+  },
   "resources/js/custom.js": {
     "css": [
-      "assets/app-a792a0dd.css"
+      "assets/custom-a792a0dd.css"
     ],
-    "file": "assets/custom-1a5fc69f.js",
+    "file": "assets/custom-7301d4ed.js",
     "isEntry": true,
     "src": "resources/js/custom.js"
+  },
+  "resources/scss/app.scss": {
+    "file": "assets/app-74930efa.css",
+    "isEntry": true,
+    "src": "resources/scss/app.scss"
   }
 }

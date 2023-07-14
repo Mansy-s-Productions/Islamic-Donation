@@ -5,7 +5,7 @@
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fa-solid fa-bars-staggered"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
@@ -23,9 +23,23 @@
                         class="nav-link"
                         aria-current="page">الحديث</a>
                 </li>
+                <li>
+                    <div class="login-buttons second-login-btn">
+                        @if (Auth::check())
+                            <!-- Authentication -->
+                            <x-responsive-nav-link :href="route('logout')" class="login-btn">
+                                <i class="login-icon fa-solid fa-arrow-right-to-bracket"></i> {{ __('تسجيل الخروج') }}
+                            </x-responsive-nav-link>
+                        @else
+                            <x-responsive-nav-link :href="route('login')" class="login-btn">
+                                <i class="login-icon fa-solid fa-arrow-right-to-bracket"></i> {{ __('تسجيل الدخول') }}
+                            </x-responsive-nav-link>
+                        @endif
+                    </div>
+                </li>
             </ul>
         </div>
-        <div class="login-buttons">
+        <div class="login-buttons main-login-btn">
             @if (Auth::check())
                 <!-- Authentication -->
                 <x-responsive-nav-link :href="route('logout')" class="login-btn">
@@ -35,7 +49,6 @@
                 <x-responsive-nav-link :href="route('login')" class="login-btn">
                     <i class="login-icon fa-solid fa-arrow-right-to-bracket"></i> {{ __('تسجيل الدخول') }}
                 </x-responsive-nav-link>
-                {{-- <a class="nav-link" href="{{route('login')}}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  تسجيل الدخول  </a> --}}
             @endif
         </div>
     </div>

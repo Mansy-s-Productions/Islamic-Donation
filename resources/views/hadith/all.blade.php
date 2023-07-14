@@ -23,7 +23,7 @@
                 <div class="row">
                     @forelse ($FinalHadith as $key => $hadith)
                     <div class="col-12">
-                        <div class="hadith rounded">
+                        <div class="hadith">
                             @if ($lang == 'ar')
                                 @else
                                 <p class="mb-4">
@@ -59,7 +59,7 @@
                                 <div class="note_btns d-flex justify-content-between" dir="ltr">
                                     <div class="d-flex align-items-center">
                                         <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$hadith['title']}} </span><i class="fa-regular fa-copy"></i></a>
-                                        <a class="btn bg-primary text-white rounded-2" href="{{route('login')}}">Login</a>
+                                        <a class="btn bg-primary text-white login-btn" href="{{route('login')}}">Login</a>
                                     </div>
                                     <a class="fancybox" href="{{HadithImageSrc($lang, $hadith['id'])}}" data-fancybox="gallery{{$hadith['id']}}" data-caption="{{$hadith['title']}}">
                                         <i class="image fa-regular fa-image"></i>

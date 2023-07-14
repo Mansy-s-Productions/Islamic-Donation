@@ -1,16 +1,11 @@
+// import './bootstrap';
+// import '../css/app.css';
 import {Fancybox} from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import LazyLoad from "vanilla-lazyload";
-import './bootstrap';
-
-
 import Alpine from 'alpinejs';
-
 window.Alpine = Alpine;
-
 Alpine.start();
-
-
 // Fancybox Start
 const options = {
     Toolbar: {

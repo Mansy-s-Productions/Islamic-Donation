@@ -1,14 +1,42 @@
+
 @font-face {
     font-family: "kufi";
-    src: url("../fonts/droid-arabic-kufi.ttf");
+    src: url("/public/fonts/droid-arabic-kufi.ttf");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: "kufi-regular";
-    src: url("../fonts/kufi-regular.ttf");
+    src: url("/public/fonts/kufi-regular.ttf");
     font-weight: normal;
     font-style: normal;
+}
+//ScrollBar
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+html{
+    scroll-behavior: smooth;
 }
 body {
     font-family: kufi, sans-serif !important;
@@ -16,7 +44,7 @@ body {
 }
 @font-face {
     font-family: "hafs";
-    src: url("../fonts/hafs.otf");
+    src: url("/public/fonts/hafs.otf");
     font-weight: normal;
     font-style: normal;
 }
@@ -88,7 +116,6 @@ a{
             font-size: 17px;
             color: #1980B6;
         }
-
     .navbar-toggler{
         svg{
             font-size: 19px;
@@ -97,6 +124,7 @@ a{
     .navbar-collapse{
         justify-content: center;
         flex-wrap: wrap;
+        // padding-top: 15px;
     }
     .login-buttons{
         display: flex;
@@ -148,10 +176,10 @@ a{
             -o-transition: all 0.5s ease;
         }
     }
-
-
+    .nav-item{
+        text-align: center;
+    }
     @media screen and (min-width:768px) {
-        // padding: 0 5% !important;
         .nav-item{
             margin: 0 10px;
         }
@@ -159,6 +187,19 @@ a{
     @media screen and (min-width:576px) {
         img{
             width: 268px;
+        }
+    }
+    @media screen and (max-width:992px) {
+        .main-login-btn{
+            display: none;
+        }
+        .navbar-nav{
+            padding-top: 26px;
+        }
+    }
+    @media screen and (min-width:992px) {
+        .second-login-btn{
+            display: none;
         }
     }
     @media screen and (max-width:992px) {
@@ -177,19 +218,31 @@ a{
     }
 }
 .sura{
-    padding: 40px;
+    padding: 35px;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    margin: 25px 20px;
+    margin: 20px 20px;
     font-size: 21px;
     border-radius: .75rem;
     -webkit-border-radius: .75rem;
     -moz-border-radius: .75rem;
     -ms-border-radius: .75rem;
     -o-border-radius: .75rem;
-    p{
-        margin: 0;
-    }
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    display: block;
+    &:hover{
+        background-color: #1980B6;
+        color: #fff;
+        transition: all 0.4s ease;
+        -webkit-transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        -ms-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+}
 }
 #categoriesList{
     .category{
@@ -205,11 +258,16 @@ a{
 }
 #ayaList{
     .aya{
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-        padding: 20px 30px 10px;
-        margin: 15px 0;
-        text-align: center;
-        a{
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    padding: 20px 30px;
+    margin: 15px 0;
+    text-align: center;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    a{
             text-decoration: none;
             color: #252525;
         }
@@ -223,15 +281,23 @@ a{
         }
         .note_btns{
             text-align: left;
+            .login-btn{
+                border-radius: 20px;
+            }
         }
     }
 }
 #hadithList{
     .hadith{
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-        padding: 27px 30px 15px;
+        box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+        padding: 20px 30px;
         margin: 15px 0;
         text-align: center;
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
         a{
             text-decoration: none;
             color: #252525;
@@ -246,6 +312,9 @@ a{
         }
         .note_btns{
             text-align: left;
+            .login-btn{
+                border-radius: 20px;
+            }
         }
     }
 }
@@ -372,9 +441,9 @@ a{
     margin: 80px 0;
     .section{
         text-align: center;
-        // height: 200px;
         padding: 0px 45px;
-        margin: 10px 0;
+        height: 200px;
+
         a{
             display: flex;
             height: 100%;
@@ -382,57 +451,94 @@ a{
             justify-content: center;
             align-items: center;
             border-radius: 10px;
-            font-size: 22px;
-            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            font-size: 30px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+            background-color: #FFFEFE;
+            border-radius: 1.5rem;
+        }
+    }
+    @media screen and (max-width: 992px) {
+        .section{
+            margin-top: 30px;
         }
     }
 }
 
-//ScrollBar
-/* width */
-::-webkit-scrollbar {
-    width: 4px;
+
+#footer{
+    margin-top: 60px;
+    padding: 0 10px;
+    .content{
+        background-color: #EEF2F5;
+            border-radius: 0px;
+            padding: 40px 20px 0;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            -ms-border-radius: 0px;
+            -o-border-radius: 0px;
+    }
+    .icon-group{
+        display: flex;
+    }
+    .icon-item{
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 22px;
+        background-color: #fff;
+        transition: all 0.2s ease-in-out;
+        height: 2.5rem;
+        width: 2.5rem;
+        border: 0;
+        font-size: 23px;
+        margin: 0 10px;
+        #whatsapp{
+            color: #25d366;
+        }
+        #telegram{
+            color: #229ED9;
+        }
+        #rss{
+            color: #e3702d;
+        }
+    }
+    @media screen and (min-width:768px) {
+        .content{
+            border-radius: 129px 129px  0 0;
+            -webkit-border-radius: 129px 129px  0 0;
+            -moz-border-radius: 129px 129px  0 0;
+            -ms-border-radius: 129px 129px  0 0;
+            -o-border-radius: 129px 129px  0 0;
+        }
+    }
+
 }
 
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-}
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-.icon-group{
+.hero {
+    background-image: linear-gradient(to bottom, rgba(25, 128, 182, 0.2509803922), rgba(25, 128, 182, 0.6117647059)), url('../../public/img/hero-section.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
     display: flex;
-}
-  .icon-item{
-    border-radius: 50%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    color: #080809;
-    background-color: #eee;
-    -webkit-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    height: 2.5rem;
-    width: 2.5rem;
-    border: 0;
-    font-size: .875rem;
+    justify-content: center;
+    background-attachment: fixed;
   }
+
+  .hero-content {
+    text-align: center;
+    color: #fff;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+

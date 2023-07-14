@@ -45,7 +45,7 @@
                     @if ($lang == 'ar')
                         @forelse ($FinalQuran as $key => $Aya)
                             <div class="col-12">
-                                <div class="aya rounded">
+                                <div class="aya">
                                     <p class="aya-ar-name">{{$Aya->aya_formed_text}}</p>
                                     @if(Auth::check())
                                         <div class="note_btns d-flex justify-content-between" dir="ltr">
@@ -69,7 +69,7 @@
                                         <div class="note_btns d-flex justify-content-between" dir="ltr">
                                             <div class="d-flex align-items-center">
                                                 <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya->aya_formed_text}}</span><i class="fa-regular fa-copy"></i></a>
-                                                <a class="btn bg-primary text-white rounded-2" href="{{route('login')}}">Login</a>
+                                                <a class="btn bg-primary text-white login-btn" href="{{route('login')}}">Login</a>
                                             </div>
                                             <a class="fancybox" href="{{QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->aya_number)}}" data-fancybox="gallery{{$Aya->id}}" data-caption="{{$Aya->aya_formed_text}}">
                                                 <i class="image fa-regular fa-image"></i>
@@ -84,9 +84,9 @@
                     @else
                     @forelse ($FinalQuran as $key => $Aya)
                         <div class="col-12">
-                            <div class="aya rounded">
+                            <div class="aya">
                                 <p class="aya-ar-name">{{$Aya['arabic_text']}}</p>
-                                <p dir="ltr">
+                                <p class="mb-0" dir="ltr">
                                     {{$Aya['translation']}}
                                 </p>
                                 @if(Auth::check())
@@ -111,7 +111,7 @@
                                     <div class="note_btns d-flex justify-content-between" dir="ltr">
                                         <div class="d-flex align-items-center">
                                             <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya['translation']}}</span><i class="fa-regular fa-copy"></i></a>
-                                            <a class="btn bg-primary text-white rounded-2" href="{{route('login')}}">Login</a>
+                                            <a class="btn bg-primary text-white login-btn" href="{{route('login')}}">Login</a>
                                         </div>
                                         <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">
                                             <i class="image fa-regular fa-image"></i>
