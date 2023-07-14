@@ -8,6 +8,7 @@ use App\Models\VolunteerPhotos;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -95,6 +96,7 @@ class HadithController extends Controller{
                 $image_path = public_path('storage/app/public/hadith/'.$lang.'/'.$lang.'_'.$TheHadith['id'].'.jpg');
                 if(File::exists($image_path)) {
                     File::delete($image_path);
+                    Cache::flush();
                 }
                 $img = ImageLib::make($r->image);
                 $save_path = 'storage/app/public/hadith/'.$lang;
