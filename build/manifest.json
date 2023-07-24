@@ -11,6 +11,10 @@
     "file": "assets/kufi-regular.ttf",
     "src": "public/fonts/kufi-regular.ttf"
   },
+  "public/img/hero-section-3.jpg": {
+    "file": "assets/hero-section-3.jpg",
+    "src": "public/img/hero-section-3.jpg"
+  },
   "public/img/hero-section.jpg": {
     "file": "assets/hero-section.jpg",
     "src": "public/img/hero-section.jpg"

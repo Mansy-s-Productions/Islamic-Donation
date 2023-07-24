@@ -12,9 +12,7 @@
         <meta name="description" content="تطوع لنشر آيات القرآن الكريم والأحاديث النبوية الشريفة بعدة لغات">
         <meta name="keywords" content="القرآن الكريم , والأحاديث النبوية , تطوع , نشر , إسلام هاوس">
         <link rel="canonical" href="https://volunteer.islamhouse.com/">
-
         <title>مشاريع إسلام هاوس التطوعية</title>
-
         <meta property="og:title" content="مشاريع إسلام هاوس التطوعية">
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://volunteer.islamhouse.com/">
@@ -42,9 +40,8 @@
         <!-- Css -->
         @if(App::environment('local'))
         @else
+        <link href="{{url('/build/assets/style.css')}}" rel="stylesheet" media="all">
             <link href="{{url('/build/assets/app.css')}}" rel="stylesheet" media="all">
-            <link href="{{url('/build/assets/style.css')}}" rel="stylesheet" media="all">
-            <link href="{{url('/build/assets/custom.css')}}" rel="stylesheet" media="all">
         @endif
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=64bf0343c73e91001249184a&product=sticky-share-buttons&source=platform" async="async"></script>
