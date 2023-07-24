@@ -14,9 +14,12 @@
 
         <link href="{{url('public/css/admin.css')}}" rel="stylesheet">
         <!-- Css -->
-        <link href="{{url('/build/assets/app-2db575ce.css')}}" rel="stylesheet">
-        <link href="{{url('/build/assets/app-74930efa.css')}}" rel="stylesheet">
-        <link href="{{url('/build/assets/custom-a792a0dd.css')}}" rel="stylesheet">
+        @if(App::environment('local'))
+        @else
+            <link href="{{url('/build/assets/app.css')}}" rel="stylesheet">
+            <link href="{{url('/build/assets/style.css')}}" rel="stylesheet">
+            <link href="{{url('/build/assets/custom.css')}}" rel="stylesheet">
+        @endif
         <!-- Scripts -->
     </head>
     <body class="font-sans text-gray-900 antialiased">
@@ -30,12 +33,11 @@
                 {{ $slot }}
             </div>
         </div>
-        <script src="{{url('public/js/all.min.js')}}"></script>
-        <script src="{{url('/build/assets/app-1455c32c.js')}}"></script>
-        <script src="{{url('/build/assets/custom-7301d4ed.js')}}"></script>
-
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/custom.js']) --}}
-
-
+        @if(App::environment('local'))
+        @vite(['resources/scss/style.scss', 'resources/js/custom.js' ,'resources/js/app.js'])
+    @else
+        <script src="{{url('/build/assets/app.js')}}"></script>
+        <script src="{{url('/build/assets/custom.js')}}"></script>
+    @endif
     </body>
 </html>
