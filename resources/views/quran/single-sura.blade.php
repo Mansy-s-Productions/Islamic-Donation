@@ -50,7 +50,9 @@
                                     @if(Auth::check())
                                         <div class="note_btns d-flex justify-content-between" dir="ltr">
                                             <div class="d-flex align-items-ceeter">
-                                                <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya->aya_formed_text}}</span><i class="fa-regular fa-copy"></i></a>
+                                                <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">
+                                                    {{$Aya->aya_text}}
+                                                </span><i class="fa-regular fa-copy"></i></a>
                                                 <div class="checkbox-wrapper-31">
                                                             <!-- Button trigger modal -->
                                                     <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{$Aya->id}}" data-bs-target=".modal" data-type="quran" data-sura="{{$Aya->ar_sura_number}}" data-id="{{$Aya->id}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($lang.'_'.$Aya->ar_sura_number.'_'.$Aya->aya_number ,$arrays)) class="submit-design-btn active" checked disabled="true" data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/>
@@ -68,7 +70,7 @@
                                     @else
                                         <div class="note_btns d-flex justify-content-between" dir="ltr">
                                             <div class="d-flex align-items-center">
-                                                <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya->aya_formed_text}}</span><i class="fa-regular fa-copy"></i></a>
+                                                <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya->aya_text}}</span><i class="fa-regular fa-copy"></i></a>
                                                 <a class="btn bg-primary text-white login-btn" href="{{route('login')}}">Login</a>
                                             </div>
                                             <a class="fancybox" href="{{QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->aya_number)}}" data-fancybox="gallery{{$Aya->id}}" data-caption="{{$Aya->aya_formed_text}}">
@@ -92,7 +94,13 @@
                                 @if(Auth::check())
                                     <div class="note_btns d-flex justify-content-between" dir="ltr">
                                         <div class="d-flex align-items-ceeter">
-                                            <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya['translation']}}</span><i class="fa-regular fa-copy"></i></a>
+                                            <a class="btn btn-white btn-sm copy_bu copy-element">
+                                                <span class="d-none">
+                                                    <p class="aya-ar-name">{{$ArSura[$key]->aya_text}}</p>
+                                                    <p class="mb-0" dir="ltr">
+                                                        {{$Aya['translation']}}
+                                                    </p>
+                                                </span><i class="fa-regular fa-copy"></i></a>
                                             <div class="checkbox-wrapper-31">
                                                         <!-- Button trigger modal -->
                                                 <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{$Aya['id']}}" data-bs-target=".modal" data-type="quran" data-sura="{{$Aya['sura']}}" data-id="{{$Aya['id']}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($Aya['id'] ,$arrays)) class="submit-design-btn active" checked disabled="true" data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/>
@@ -110,7 +118,13 @@
                                 @else
                                     <div class="note_btns d-flex justify-content-between" dir="ltr">
                                         <div class="d-flex align-items-center">
-                                            <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya['translation']}}</span><i class="fa-regular fa-copy"></i></a>
+                                            <a class="btn btn-white btn-sm copy_bu copy-element">
+                                                <span class="d-none">
+                                                    <p class="aya-ar-name">{{$ArSura[$key]->aya_text}}</p>
+                                                    <p class="mb-0" dir="ltr">
+                                                        {{$Aya['translation']}}
+                                                    </p>
+                                                </span><i class="fa-regular fa-copy"></i></a>
                                             <a class="btn bg-primary text-white login-btn" href="{{route('login')}}">Login</a>
                                         </div>
                                         <a class="fancybox" href="{{QuranImageSrc($lang, $Aya['sura'], $Aya['aya'])}}" data-fancybox="gallery{{$Aya['id']}}" data-caption="{{$Aya['translation']}}">

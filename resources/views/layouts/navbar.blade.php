@@ -1,3 +1,5 @@
+<button id="scroll-to-top" class=""><i class="fa-solid fa-angle-up"></i></button>
+<div class="sharethis-sticky-share-buttons"></div>
 <nav class="main-navbar navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
@@ -22,6 +24,11 @@
                     <a href="{{ route('categoriesList', 'ar') }}"
                         class="nav-link"
                         aria-current="page">الحديث</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('islamicLinks') }}"
+                        class="nav-link"
+                        aria-current="page">بيان الإسلام</a>
                 </li>
                 <li>
                     <div class="login-buttons second-login-btn">

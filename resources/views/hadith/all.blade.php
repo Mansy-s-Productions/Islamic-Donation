@@ -36,12 +36,18 @@
                             @if(Auth::check())
                                 <div class="note_btns d-flex justify-content-between" dir="ltr">
                                     <div class="d-flex align-items-ceeter">
-                                        <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">    @if ($lang == 'ar')
-                                            @else
+                                        <a class="btn btn-white btn-sm copy_bu copy-element">
+                                            <span class="d-none">
+                                            @if ($lang == 'ar')
+                                                @else
+                                                <p class="mb-4">
+                                                    {{$AllArHadith['data'][$key]['title']}}
+                                                </p>
+                                            @endif
                                             <p class="mb-4">
-                                                {{$AllArHadith['data'][$key]['title']}}
+                                                {{$hadith['title']}}
                                             </p>
-                                        @endif</span><i class="fa-regular fa-copy"></i></a>
+                                    </span><i class="fa-regular fa-copy"></i></a>
                                         <div class="checkbox-wrapper-31">
                                             <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{$hadith['id']}}" data-bs-target=".modal" data-type="hadith" data-sura="{{$hadith['id']}}"  data-id="{{$hadith['id']}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($hadith['id'] ,$arrays)) class="submit-design-btn active" disabled="true" checked data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/>
                                             <svg viewBox="0 0 35.6 35.6">

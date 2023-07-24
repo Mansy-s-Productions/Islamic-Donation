@@ -90,9 +90,9 @@ class QuranController extends Controller{
             }
         }
         $FinalQuran = collect($FinalQuran);
-            $ArSura = ArQuran::where([
-                'ar_sura_number' => $id,
-                ])->get();
+        $ArSura = ArQuran::where([
+            'ar_sura_number' => $id,
+            ])->get();
         if(Auth::check()){
             $AllSubmitted = VolunteerPhotos::where([
                 'user_id' => Auth::user()->id,
@@ -171,5 +171,8 @@ class QuranController extends Controller{
             }
             return redirect()->route('admin.quran.all', 'en')->withSuccess("تم تعديل اﻵية بنجاح");
         }
+    }
+    public function getIslamicLinks() {
+        return view('islamic-links');
     }
 }

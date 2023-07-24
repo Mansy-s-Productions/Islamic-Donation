@@ -40,7 +40,12 @@
         <!-- font awesome -->
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet"  media="all">
         <!-- Css -->
-        <link href="{{url('/build/assets/app-2db575ce.css')}}" rel="stylesheet" media="all">
-        <link href="{{url('/build/assets/app-74930efa.css')}}" rel="stylesheet" media="all">
+        @if(App::environment('local'))
+        @else
+            <link href="{{url('/build/assets/app.css')}}" rel="stylesheet" media="all">
+            <link href="{{url('/build/assets/style.css')}}" rel="stylesheet" media="all">
+            <link href="{{url('/build/assets/custom.css')}}" rel="stylesheet" media="all">
+        @endif
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=64bf0343c73e91001249184a&product=sticky-share-buttons&source=platform" async="async"></script>
     </head>

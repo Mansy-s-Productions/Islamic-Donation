@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('quran', [QuranController::class, 'getAllQuran'])->name('quranList');
+Route::get('islamic-links', [QuranController::class, 'getIslamicLinks'])->name('islamicLinks');
 Route::get('{lang}/sura/{id}', [QuranController::class, 'singleSura'])->name('singleSura');
 
 Route::prefix('hadith/{lang?}')->group(function () {
