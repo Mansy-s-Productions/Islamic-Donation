@@ -1,50 +1,50 @@
 {
   "public/fonts/droid-arabic-kufi.ttf": {
-    "file": "assets/droid-arabic-kufi.ttf",
+    "file": "assets/2droid-arabic-kufi.ttf",
     "src": "public/fonts/droid-arabic-kufi.ttf"
   },
   "public/fonts/hafs.otf": {
-    "file": "assets/hafs.otf",
+    "file": "assets/2hafs.otf",
     "src": "public/fonts/hafs.otf"
   },
   "public/fonts/kufi-regular.ttf": {
-    "file": "assets/kufi-regular.ttf",
+    "file": "assets/2kufi-regular.ttf",
     "src": "public/fonts/kufi-regular.ttf"
   },
   "public/img/hero-section-3.jpg": {
-    "file": "assets/hero-section-3.jpg",
+    "file": "assets/2hero-section-3.jpg",
     "src": "public/img/hero-section-3.jpg"
   },
   "public/img/hero-section.jpg": {
-    "file": "assets/hero-section.jpg",
+    "file": "assets/2hero-section.jpg",
     "src": "public/img/hero-section.jpg"
   },
   "resources/js/app.css": {
-    "file": "assets/app.css",
+    "file": "assets/2app.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app.css"
+      "assets/2app.css"
     ],
     "file": "assets/app.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/custom.css": {
-    "file": "assets/custom.css",
+    "file": "assets/2custom.css",
     "src": "resources/js/custom.css"
   },
   "resources/js/custom.js": {
     "css": [
-      "assets/custom.css"
+      "assets/2custom.css"
     ],
     "file": "assets/custom.js",
     "isEntry": true,
     "src": "resources/js/custom.js"
   },
   "resources/scss/style.scss": {
-    "file": "assets/style.css",
+    "file": "assets/2style.css",
     "isEntry": true,
     "src": "resources/scss/style.scss"
   }

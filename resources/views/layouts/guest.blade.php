@@ -16,9 +16,9 @@
         <!-- Css -->
         @if(App::environment('local'))
         @else
-            <link href="{{url('/build/assets/app.css')}}" rel="stylesheet">
-            <link href="{{url('/build/assets/style.css')}}" rel="stylesheet">
-            <link href="{{url('/build/assets/custom.css')}}" rel="stylesheet">
+            <link href="{{url('/build/assets/2app.css')}}" rel="stylesheet">
+            <link href="{{url('/build/assets/2style.css')}}" rel="stylesheet">
+            <link href="{{url('/build/assets/2custom.css')}}" rel="stylesheet">
         @endif
         <!-- Scripts -->
     </head>

@@ -48,7 +48,7 @@
                                 <div class="aya">
                                     <p class="aya-ar-name">{{$Aya->aya_formed_text}}</p>
                                     @if(Auth::check())
-                                        <div class="note_btns d-flex justify-content-between" dir="ltr">
+                                        <div class="note_btns d-flex justify-content-between mt-3" dir="ltr">
                                             <div class="d-flex align-items-ceeter">
                                                 <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">
                                                     {{$Aya->aya_text}}
@@ -68,7 +68,7 @@
                                             </a>
                                         </div>
                                     @else
-                                        <div class="note_btns d-flex justify-content-between" dir="ltr">
+                                        <div class="note_btns d-flex justify-content-between mt-3" dir="ltr">
                                             <div class="d-flex align-items-center">
                                                 <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$Aya->aya_text}}</span><i class="fa-regular fa-copy"></i></a>
                                                 <a class="btn bg-primary text-white login-btn" href="{{route('login')}}">Login</a>
@@ -92,7 +92,7 @@
                                     {{$Aya['translation']}}
                                 </p>
                                 @if(Auth::check())
-                                    <div class="note_btns d-flex justify-content-between" dir="ltr">
+                                    <div class="note_btns d-flex justify-content-between mt-3" dir="ltr">
                                         <div class="d-flex align-items-ceeter">
                                             <a class="btn btn-white btn-sm copy_bu copy-element">
                                                 <span class="d-none">
@@ -116,7 +116,7 @@
                                         </a>
                                     </div>
                                 @else
-                                    <div class="note_btns d-flex justify-content-between" dir="ltr">
+                                    <div class="note_btns d-flex justify-content-between mt-3" dir="ltr">
                                         <div class="d-flex align-items-center">
                                             <a class="btn btn-white btn-sm copy_bu copy-element">
                                                 <span class="d-none">
