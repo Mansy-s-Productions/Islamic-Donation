@@ -17,9 +17,6 @@
                     <div class="col-12 col-sm-6 col-md-3 section">
                         <a href="{{route('categoriesList', 'ar')}}">الحديث</a>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-3 section">
-                        <a href="{{route('islamicLinks')}}">موسوعة بيان الإسلام </a>
-                    </div>
                 </div>
             </div>
         </section>
