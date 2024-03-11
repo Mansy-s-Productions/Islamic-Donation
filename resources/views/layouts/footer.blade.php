@@ -3,8 +3,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-12 mb-4 mb-md-6 ">
-                    <a href="https://islamhouse.com/ru/main"><img class="mb-4" src="{{ url('public/img/logo.png') }}"
-                            width="150" alt="islamhouse.com"></a>
+                    <a href="https://islamhouse.com/ru/main"><img class="mb-4" src="{{ url('public/img/islamic-service.png') }}"
+                            width="250" alt="islamhouse.com"></a>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12 mb-4 mb-md-6">
                     <h3 class="fw-medium font-sans-serif text-secondary mb-3">روابط هامة</h3>
@@ -32,11 +32,11 @@
                             <i id="rss" class="fa-solid fa-rss"></i>
                         </a>
                     </div>
-                    <a href="https://islamhouse.com/ar/subscribe" class="btn btn-transparent btn-primary btn-wide">انضم
+                    <a href="https://islamhouse.com/ar/subscribe" class="btn btn-transparent bg-dark text-white btn-wide">انضم
                         إلى القائمة البريدية</a>
                 </div>
                 <div class="col-12">
-                    <p class="text-center">  &copy; <script>document.write(new Date().getFullYear());</script> IslamHouse.com</p>
+                    <p class="text-center"> <script>document.write(new Date().getFullYear());</script>   &copy; IslamHouse.com</p>
                 </div>
             </div>
         </div>

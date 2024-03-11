@@ -7,7 +7,7 @@
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('quranList')}}">القرآن الكريم</a></li>
+                    <li class="breadcrumb-item"><a class="text-black" href="{{route('quranList')}}">القرآن الكريم</a></li>
                 </ol>
             </div>
         </nav>
