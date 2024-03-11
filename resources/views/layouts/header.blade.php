@@ -16,18 +16,18 @@
         <meta property="og:title" content="مشاريع إسلام هاوس التطوعية">
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://volunteer.islamhouse.com/">
-        <meta property="og:image" content=" {{url('public/img/logo.png')}} ">
+        <meta property="og:image" content=" {{url('public/img/islaminbrief_logo_text1.png')}} ">
         <meta property="og:description" content="تطوع لنشر القرآن الكريم والأحاديث النبوية الشريفة بعدة لغات">
         <meta property="og:site_name" content="Naqrah ﻧﻘﺮﺓ">
         <meta name="twitter:card" content="تطوع لنشر القرآن الكريم والأحاديث النبوية الشريفة بعدة لغات">
-        <meta name="twitter:image" content="{{url('public/img/logo.png')}}">
+        <meta name="twitter:image" content="{{url('public/img/islaminbrief_logo_text1.png')}}">
         <meta name="twitter:title" content="مشاريع إسلام هاوس التطوعية" />
         <meta name="twitter:description" content="تطوع لنشر القرآن الكريم والأحاديث النبوية الشريفة بعدة لغات">
         <meta name="application-name" content="إسلام هاوس">
-        <meta name="msapplication-TileImage" content="{{url('public/img/logo.png')}}">
+        <meta name="msapplication-TileImage" content="{{url('public/img/islaminbrief_logo_text1.png')}}">
         <meta name="msapplication-TileColor" content="#316eec">
 
-        <link rel="icon" href="{{url('public/img/logo.png')}}">
+        <link rel="icon" href="{{url('public/img/islaminbrief_logo_text1.png')}}">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}" media="all">
         <link href="{{url('public/css/datatables.min.css')}}" rel="stylesheet"/ media="all">

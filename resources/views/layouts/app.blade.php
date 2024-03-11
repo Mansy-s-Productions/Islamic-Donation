@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'IslamHouse') }}</title>
-        <link rel="icon" href="{{url('public/img/logo.png')}}">
+        <link rel="icon" href="{{url('public/img/islaminbrief_logo_text1.png')}}">
         @stack('head')
         <!-- font awesome -->
         <link href="{{url('public/css/all.min.css')}}" rel="stylesheet">

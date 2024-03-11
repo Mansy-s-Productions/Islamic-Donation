@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a class="d-block py-2" href="{{ route('home') }}">
-                        <img width="80px" src="{{url('public/img/logo.png')}}" alt="">
+                        <img width="80px" src="{{url('public/img/islaminbrief_logo_text1.png')}}" alt="">
                     </a>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
