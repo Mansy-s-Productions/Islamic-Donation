@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-12 mb-4 mb-md-6 ">
-                    <a href="https://islamhouse.com/ru/main"><img class="mb-4" src="{{ url('public/img/logo.png') }}"
+                    <a href="https://islamhouse.com/ru/main"><img class="mb-4" src="{{ url('public/img/islaminbrief_logo_text1.png') }}"
                             width="250" alt="islamhouse.com"></a>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12 mb-4 mb-md-6">

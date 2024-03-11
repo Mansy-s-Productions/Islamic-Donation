@@ -3,7 +3,7 @@
 <nav class="main-navbar navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ url('public/img/logo.png') }}" alt="">
+            <img src="{{ url('public/img/islaminbrief_logo_text1.png') }}" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
