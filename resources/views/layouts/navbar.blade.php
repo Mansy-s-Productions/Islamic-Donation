@@ -3,7 +3,7 @@
 <nav class="main-navbar navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ url('public/img/islamhouse.com-logo.png') }}" alt="">
+            <img src="{{ url('public/img/islamic-service.png') }}" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('islamicLinks') }}"
-                        class="nav-link"
+                        class="{{ request()->is('islamicLinks') ? 'active' : '' }} nav-link"
                         aria-current="page">بيان الإسلام</a>
                 </li>
                 <li>

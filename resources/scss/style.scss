@@ -53,7 +53,7 @@ body {
 }
 a {
     text-decoration: none;
-    color: #1980b6;
+    color: #C2A75E;
 }
 .grey-nav {
     background-color: #fafafa;
@@ -73,8 +73,7 @@ a {
 .languages-btn {
     border-radius: 7px;
     padding: 8px 15px;
-    background-color: #316eec;
-    // margin: 0 5px;
+    background-color: #C2A75E;
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -93,7 +92,7 @@ a {
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     &:hover {
-        background-color: #275bc4;
+        background-color: #000000;
         color: #fff;
         .login-icon {
             opacity: 1;
@@ -113,8 +112,8 @@ a {
         width: 245px;
     }
     a {
-        font-size: 17px;
-        color: #1980b6;
+        font-size: 19px;
+        color: #C2A75E;
     }
     .navbar-toggler {
         svg {
@@ -124,7 +123,6 @@ a {
     .navbar-collapse {
         justify-content: center;
         flex-wrap: wrap;
-        // padding-top: 15px;
     }
     .login-buttons {
         display: flex;
@@ -133,7 +131,7 @@ a {
         .login-btn {
             border-radius: 7px;
             padding: 10px 25px;
-            background-color: #316eec;
+            background-color: #221F1F;
             margin: 0 5px;
             color: #ffffff;
             display: flex;
@@ -153,7 +151,7 @@ a {
             -ms-transition: all 0.5s ease;
             -o-transition: all 0.5s ease;
             &:hover {
-                background-color: #275bc4;
+                background-color: #C2A75E;
                 color: #fff;
                 .login-icon {
                     opacity: 1;
@@ -257,7 +255,7 @@ a {
     -o-transition: all 0.4s ease;
     display: block;
     &:hover {
-        background-color: #1980b6;
+        background-color: #C2A75E;
         color: #fff;
         transition: all 0.4s ease;
         -webkit-transition: all 0.4s ease;
@@ -275,7 +273,7 @@ a {
         justify-content: flex-end;
         align-items: center;
         font-size: 18px;
-        color: #1980b6;
+        color: #C2A75E;
     }
 }
 #ayaList {
@@ -301,7 +299,7 @@ a {
         .aya-ar-name {
             font-family: "hafs", sans-serif;
             font-size: 21px;
-            color: #1980b6;
+            color: #C2A75E;
         }
         .note_btns {
             text-align: left;
@@ -326,7 +324,7 @@ a {
         -ms-border-radius: 20px;
         -o-border-radius: 20px;
         p{
-            color: #1980b6;
+            color: #C2A75E;
         }
         a {
             text-decoration: none;
@@ -338,7 +336,7 @@ a {
         .aya-ar-name {
             font-family: "hafs", sans-serif;
             font-size: 21px;
-            color: #1980b6;
+            color: #C2A75E;
         }
         .note_btns {
             text-align: left;
@@ -472,7 +470,7 @@ a {
     margin: 80px 0;
     .section {
         text-align: center;
-        padding: 0px 18px;
+        padding: 0px 10px;
         height: 130px;
         a {
             display: flex;
@@ -481,7 +479,7 @@ a {
             justify-content: center;
             align-items: center;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 21px;
             box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
             background-color: #fffefe;
             border-radius: 1.5rem;
@@ -497,8 +495,8 @@ a {
             -ms-transform: translate(0px, 0px);
             -o-transform: translate(0px, 0px);
             &:hover{
-                background-color: #1980b6;
-                color: #fff;
+                background-color: #221F1F;
+                color: #C2A75E;
                 transition: all 0.4s ease;
                 -webkit-transition: all 0.4s ease;
                 -moz-transition: all 0.4s ease;
@@ -574,10 +572,10 @@ a {
 }
 
 .hero {
-    background-image: linear-gradient(to bottom, rgba(25, 128, 182, 0.2509803922), rgba(25, 128, 182, 0.6117647059)),
+    background-image: linear-gradient(to bottom, #11100c91, #c2a75e6b),
         url("../../public/img/hero-section.jpg");
     &.bayan-islam{
-        background-image: linear-gradient(to bottom, rgba(25, 128, 182, 0.2509803922), rgba(25, 128, 182, 0.6117647059)),
+        background-image: linear-gradient(to bottom, #11100c91, #c2a75e6b),
         url("../../public/img/hero-section-3.jpg");
     }
     background-size: cover;
@@ -622,7 +620,6 @@ a {
 
 
 #scroll-to-top{
-
     position: fixed;
     right: 40px;
     bottom: 70px;
@@ -632,9 +629,9 @@ a {
     height: 45px;
     width: 45px;
     z-index: 50;
-    font-size: 18px;
-    color: #1980b6;
-    border: 2px solid ;
+    font-size: 20px;
+    color: #C2A75E;
+    border: 2px solid #525050;
     display: flex;
     justify-content: center;
     align-items: center;

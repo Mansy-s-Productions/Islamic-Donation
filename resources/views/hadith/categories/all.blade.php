@@ -6,7 +6,7 @@
             <h1 class="text-center">الأحاديث النبوية</h1>
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>
+                    <li class="breadcrumb-item"><a class="text-black" href="{{route('home')}}">الرئيسية</a></li>
                     <li class="breadcrumb-item">الأحادبث</li>
                     <li class="breadcrumb-item active">الأقسام</li>
                 </ol>
