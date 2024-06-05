@@ -1,49 +1,44 @@
 @include('layouts.header')
-    <body class="antialiased">
-        @include('layouts.navbar')
-        @include('layouts.noto')
-        <nav class="grey-nav">
-            <h1 class="text-center">الأحاديث النبوية</h1>
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('categoriesList', 'ar')}}">الأحاديث</a></li>
-                </ol>
-            </div>
-        </nav>
-        <section id="hadithList" class="mt-5" dir="ltr">
-            <div class="container">
-                <div class="row align-items-center flex-row-reverse flex-wrap">
-                    <div class="col-12 col-sm-6">
-                        <h2 class="text-start h4">
-                            قائمة الأحاديث <i class="fa-solid fa-list"></i>
-                        </h2>
-                    </div>
+<body class="antialiased">
+    @include('layouts.navbar')
+    @include('layouts.noto')
+
+    <nav class="grey-nav">
+        <h1 class="text-center">الأحاديث النبوية</h1>
+        <div aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">الرئيسية</a></li>
+                <li class="breadcrumb-item active"><a href="{{ route('categoriesList', 'ar') }}">الأحاديث</a></li>
+            </ol>
+        </div>
+    </nav>
+
+    <section id="hadithList" class="mt-5" dir="ltr">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse flex-wrap">
+                <div class="col-12 col-sm-6">
+                    <h2 class="text-start h4">
+                        قائمة الأحاديث <i class="fa-solid fa-list"></i>
+                    </h2>
                 </div>
-                <div class="row">
-                    @forelse ($FinalHadith as $key => $hadith)
+            </div>
+
+            <div class="row">
+                @forelse ($FinalHadith as $key => $hadith)
                     <div class="col-12">
                         <div class="hadith">
                             @if ($lang !== 'ar')
-                                <p class="mb-4">
-                                    {{ $AllArHadith['data'][$key]['title'] ?? '' }}
-                                </p>
+                                <p class="mb-4">{{ $AllArHadith['data'][$key]['title'] ?? '' }}</p>
                             @endif
-                            <p class="mb-4">
-                                {{ $hadith['title'] }}
-                            </p>
+                            <p class="mb-4">{{ $hadith['title'] }}</p>
                             <div class="note_btns d-flex justify-content-between mt-3" dir="ltr">
                                 <div class="d-flex align-items-center">
                                     <a class="btn btn-white btn-sm copy_bu copy-element">
                                         <span class="d-none">
                                             @if ($lang !== 'ar')
-                                                <p class="mb-4">
-                                                    {{ $AllArHadith['data'][$key]['title'] ?? '' }}
-                                                </p>
+                                                <p class="mb-4">{{ $AllArHadith['data'][$key]['title'] ?? '' }}</p>
                                             @endif
-                                            <p class="mb-4">
-                                                {{ $hadith['title'] }}
-                                            </p>
+                                            <p class="mb-4">{{ $hadith['title'] }}</p>
                                         </span>
                                         <i class="fa-regular fa-copy"></i>
                                     </a>
@@ -71,15 +66,16 @@
                     <p class="text-center"><span class="badge text-bg-danger">لم يتم إضافة تصميمات بعد في هذا القسم</span></p>
                 @endforelse
 
-                    <div class="mt-5">
-                        {{$FinalHadith->links('vendor.pagination.bootstrap-5')}}
-                    </div>
+                <div class="mt-5">
+                    {{ $FinalHadith->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>
-        </section>
-        <!-- Modal -->
-        <div class="modal fade" tabindex="-1" aria-labelledby="platform" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" >
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" aria-labelledby="platform" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body d-flex flex-column justify-content-center text-center">
                     <span class="social-platform facebook" data-platform="facebook">Facebook</span>
@@ -87,11 +83,10 @@
                     <span class="social-platform instagram" data-platform="instagram">Instagram</span>
                 </div>
             </div>
-            </div>
         </div>
-        @include('layouts.footer')
-        @include('layouts.scripts')
-    </body>
+    </div>
+
+    @include('layouts.footer')
+    @include('layouts.scripts')
+</body>
 </html>
-
-
