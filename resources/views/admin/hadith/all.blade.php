@@ -85,9 +85,7 @@
             });
             $('#categories').on('change', function () {
                 var category = $(this).val(); // get selected value
-
                 if ($.isNumeric(category)) { // require a category
-                    console.log(category);
                     window.location = category; // redirect
                 }
                 return false;
