@@ -18,6 +18,13 @@ use Throwable;
 
 class HadithController extends Controller{
     public function getAdminAll($lang = 'en', $category_id = 1){
+           // Base API URL
+            $apiBaseUrl = 'https://hadeethenc.com/api/v1';
+
+            // Cache keys
+            $hadithCacheKey = "hadith_{$lang}_{$category_id}";
+            $categoriesCacheKey = "categories_{$lang}";
+            $languagesCacheKey = 'languages';
         $AllHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language='.$lang.'&category_id='.$category_id.'&per_page=1600')->collect();
         $AllCategories = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/categories/roots/?language='.$lang)->collect();
         // dd($AllCategories);
@@ -32,55 +39,81 @@ class HadithController extends Controller{
         $AllCategories = $AllCategories->object();
         return view('hadith.categories.all', compact('AllCategories', 'lang'));
     }
-    public function getAllHadith($lang = 'ar', $category_id = 1){
+    public function getAllHadith($lang = 'ar', $category_id = 1)
+    {
         try {
-            $Images = File::files('storage/app/public/hadith/'.$lang);
-            $ImagesFiles = [];
-            $string = ".jpg";
-            foreach($Images as $key => $Image) {
-                $NewImage = trim(basename($Image), $string);
-                array_push($ImagesFiles, $NewImage);
-            }
-            // Validate the value...
+            // Fetch images and process filenames
+            $Images = File::files(storage_path('app/public/hadith/'.$lang));
+            $ImagesFiles = array_map(function($image) {
+                return pathinfo($image, PATHINFO_FILENAME);
+            }, $Images);
+
         } catch (Throwable $e) {
             report($e);
+            $ImagesFiles = [];
         }
-        $AllHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language='.$lang.'&category_id='.$category_id.'&per_page=1600')['data'];
-        $AllArHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language=ar'.'&category_id='.$category_id.'&per_page=1600');
-        $AllHadith = collect($AllHadith)->paginate(100);
-        $FinalHadith =[];
-        foreach ($AllHadith as $key => $hadith){
-            if (in_array($lang.'_'.$hadith['id'], $ImagesFiles)){
-                array_push($FinalHadith, $hadith);
-            }
-        }
-        $FinalHadith = collect($FinalHadith)->paginate(100);
-        if(Auth::check()){
+
+        // Base API URL
+        $apiBaseUrl = 'https://hadeethenc.com/api/v1';
+
+        // Cache keys
+        $hadithCacheKey = "hadith_{$lang}_{$category_id}";
+        $arHadithCacheKey = "hadith_ar_{$category_id}";
+
+        // Fetch Hadiths with caching
+        $AllHadith = Cache::remember($hadithCacheKey, 60, function() use ($apiBaseUrl, $lang, $category_id) {
+            $response = Http::accept('application/json')
+                            ->get("$apiBaseUrl/hadeeths/list", [
+                                'language' => $lang,
+                                'category_id' => $category_id,
+                                'per_page' => 1600
+                            ]);
+            return $response->collect()['data'];
+        });
+
+        $AllArHadith = Cache::remember($arHadithCacheKey, 60, function() use ($apiBaseUrl, $category_id) {
+            $response = Http::accept('application/json')
+                            ->get("$apiBaseUrl/hadeeths/list", [
+                                'language' => 'ar',
+                                'category_id' => $category_id,
+                                'per_page' => 1600
+                            ]);
+            return $response->collect();
+        });
+
+        // Filter Hadiths with images
+        $FilteredHadith = array_filter($AllHadith, function($hadith) use ($ImagesFiles, $lang) {
+            return in_array($lang.'_'.$hadith['id'], $ImagesFiles);
+        });
+
+        $FinalHadith = collect($FilteredHadith)->paginate(100);
+
+        // Handle authenticated user
+        $arrays = [];
+        if (Auth::check()) {
+            $userId = Auth::id();
             $AllSubmitted = VolunteerPhotos::where([
-                'user_id' => Auth::user()->id,
+                'user_id' => $userId,
                 'type' => 'hadith',
-                ])->get();
-                if(count($AllSubmitted)){
-                    foreach($AllSubmitted as $key => $object){
-                        $arrays[] = $object['design_id'];
-                    }
-                }else{
-                    $arrays = [];
-                }
-            return view('hadith.all', compact('FinalHadith','arrays', 'lang', 'AllArHadith', 'ImagesFiles'));
-        }else{
-            return view('hadith.all', compact('FinalHadith', 'lang', 'AllArHadith', 'ImagesFiles'));
+            ])->pluck('design_id')->toArray();
+
+            $arrays = !empty($AllSubmitted) ? $AllSubmitted : [];
         }
+
+        return view('hadith.all', compact('FinalHadith', 'arrays', 'lang', 'AllArHadith', 'ImagesFiles'));
     }
+
     public function getCreateHadith(){
         $AllLanguages = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/languages')->collect();
         return view('admin.hadith.new', compact('AllLanguages'));
     }
+
     public function getEditHadith($id , $lang){
         $TheHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/one/?language='.$lang.'&id='.$id);
         $TheHadith = $TheHadith->collect();
         return view('admin.hadith.edit', compact('TheHadith', 'lang'));
     }
+
     public function postEditHadith(Request $r, $id, $lang){
         $TheHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/one/?language='.$lang.'&id='.$id)->collect();
         $Rules = [
