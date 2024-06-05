@@ -43,8 +43,6 @@ class HadithController extends Controller{
             }
             // Validate the value...
         } catch (Throwable $e) {
-            dd($e);
-
             report($e);
         }
         $AllHadith = Http::accept('application/json')->get('https://hadeethenc.com/api/v1/hadeeths/list/?language='.$lang.'&category_id='.$category_id.'&per_page=1600')['data'];
