@@ -24,59 +24,53 @@
                     @forelse ($FinalHadith as $key => $hadith)
                     <div class="col-12">
                         <div class="hadith">
-                            @if ($lang == 'ar')
-                                @else
+                            @if ($lang !== 'ar')
                                 <p class="mb-4">
-                                    {{$AllArHadith['data'][$key]['title']}}
+                                    {{ $AllArHadith['data'][$key]['title'] ?? '' }}
                                 </p>
                             @endif
                             <p class="mb-4">
-                                {{$hadith['title']}}
+                                {{ $hadith['title'] }}
                             </p>
-                            @if(Auth::check())
-                                <div class="note_btns d-flex justify-content-between mt-3" dir="ltr">
-                                    <div class="d-flex align-items-ceeter">
-                                        <a class="btn btn-white btn-sm copy_bu copy-element">
-                                            <span class="d-none">
-                                            @if ($lang == 'ar')
-                                                @else
+                            <div class="note_btns d-flex justify-content-between mt-3" dir="ltr">
+                                <div class="d-flex align-items-center">
+                                    <a class="btn btn-white btn-sm copy_bu copy-element">
+                                        <span class="d-none">
+                                            @if ($lang !== 'ar')
                                                 <p class="mb-4">
-                                                    {{$AllArHadith['data'][$key]['title']}}
+                                                    {{ $AllArHadith['data'][$key]['title'] ?? '' }}
                                                 </p>
                                             @endif
                                             <p class="mb-4">
-                                                {{$hadith['title']}}
+                                                {{ $hadith['title'] }}
                                             </p>
-                                    </span><i class="fa-regular fa-copy"></i></a>
+                                        </span>
+                                        <i class="fa-regular fa-copy"></i>
+                                    </a>
+                                    @auth
                                         <div class="checkbox-wrapper-31">
-                                            <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{$hadith['id']}}" data-bs-target=".modal" data-type="hadith" data-sura="{{$hadith['id']}}"  data-id="{{$hadith['id']}}" data-language="{{$lang}}" data-user="{{ Auth()->user()->id }}" @if (in_array($hadith['id'] ,$arrays)) class="submit-design-btn active" disabled="true" checked data-checked="true" @else class="submit-design-btn" data-cheked="false" @endif/>
+                                            <input type="radio" data-bs-toggle="modal" id="ModalSubmit{{ $hadith['id'] }}" data-bs-target=".modal" data-type="hadith" data-sura="{{ $hadith['id'] }}" data-id="{{ $hadith['id'] }}" data-language="{{ $lang }}" data-user="{{ Auth::id() }}"
+                                                class="submit-design-btn @if (in_array($hadith['id'], $arrays)) active @endif" @if (in_array($hadith['id'], $arrays)) disabled="true" checked data-checked="true" @else data-checked="false" @endif />
                                             <svg viewBox="0 0 35.6 35.6">
                                                 <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>
                                                 <circle class="stroke" cx="17.8" cy="17.8" r="14.37"></circle>
                                                 <polyline class="check" points="11.78 18.12 15.55 22.23 25.17 12.87"></polyline>
                                             </svg>
                                         </div>
-                                    </div>
-                                    <a class="fancybox" href="{{HadithImageSrc($lang, $hadith['id'])}}" data-src="{{HadithImageSrc($lang, $hadith['id'])}}" data-fancybox="gallery{{$hadith['id']}}" data-caption="{{$hadith['title']}}">
-                                        <i class="image fa-regular fa-image"></i>
-                                    </a>
+                                    @else
+                                        <a class="btn bg-primary text-white login-btn" href="{{ route('login') }}">Login</a>
+                                    @endauth
                                 </div>
-                            @else
-                                <div class="note_btns d-flex justify-content-between mt-3" dir="ltr">
-                                    <div class="d-flex align-items-center">
-                                        <a class="btn btn-white btn-sm copy_bu copy-element"><span class="d-none">{{$hadith['title']}} </span><i class="fa-regular fa-copy"></i></a>
-                                        <a class="btn bg-primary text-white login-btn" href="{{route('login')}}">Login</a>
-                                    </div>
-                                    <a class="fancybox" href="{{HadithImageSrc($lang, $hadith['id'])}}" data-fancybox="gallery{{$hadith['id']}}" data-caption="{{$hadith['title']}}">
-                                        <i class="image fa-regular fa-image"></i>
-                                    </a>
-                                </div>
-                            @endif
+                                <a class="fancybox" href="{{ HadithImageSrc($lang, $hadith['id']) }}" data-src="{{ HadithImageSrc($lang, $hadith['id']) }}" data-fancybox="gallery{{ $hadith['id'] }}" data-caption="{{ $hadith['title'] }}">
+                                    <i class="image fa-regular fa-image"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                        @empty
-                        <p class="text-center">  <span class="badge text-bg-danger">لم يتم إضافة تصميمات بعد في هذا القسم</span></p>
-                    @endforelse
+                @empty
+                    <p class="text-center"><span class="badge text-bg-danger">لم يتم إضافة تصميمات بعد في هذا القسم</span></p>
+                @endforelse
+
                     <div class="mt-5">
                         {{$FinalHadith->links('vendor.pagination.bootstrap-5')}}
                     </div>
