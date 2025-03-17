@@ -175,10 +175,14 @@ class QuranController extends Controller
 
     private function filterQuranWithImages($quranList, $imagesFiles, $lang, $suraKey = 'ar_sura_number', $ayaKey = 'aya_number')
     {
-        return collect(array_filter($quranList, function ($quran) use ($imagesFiles, $lang, $suraKey, $ayaKey) {
-            return in_array("{$lang}_{$quran[$suraKey]}_{$quran[$ayaKey]}", $imagesFiles);
-        }));
+        return collect(array_filter(
+            $quranList->toArray(),
+            function ($quran) use ($imagesFiles, $lang, $suraKey, $ayaKey) {
+                return in_array("{$lang}_{$quran[$suraKey]}_{$quran[$ayaKey]}", $imagesFiles);
+            }
+        ));
     }
+
 
     private function getSubmittedDesigns($lang, $type)
     {

@@ -31,7 +31,7 @@
                                     @else
                                     <li><a class="dropdown-item" href="{{route('singleSura', ['ar', $SuraTranslation[0]['sura']])}}">
                                         Arabic</a></li>
-                                        @foreach ($Availableanguages as $key => $language)
+                                        @foreach ($AvailableLanguages as $key => $language)
                                             <li><a class="dropdown-item" href="{{route('singleSura', [$language, $SuraTranslation[0]['sura']])}}">
                                             {{ucfirst($LanguagesList[$language])}}</a></li>
                                         @endforeach
