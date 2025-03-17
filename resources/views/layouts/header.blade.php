@@ -14,27 +14,27 @@
         <meta property="og:title" content="مشاريع جمعية خدمة المحتوى الإسلامي التطوعية">
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://v.islamenc.com">
-        <meta property="og:image" content=" {{url('public/img/islaminbrief_logo_text1.png')}} ">
+        <meta property="og:image" content=" {{asset('img/islaminbrief_logo_text1.png')}} ">
         <meta property="og:description" content="تطوع لنشر القرآن الكريم والأحاديث النبوية الشريفة بعدة لغات">
         <meta property="og:site_name" content="جمعية خدمة المحتوى الإسلامي التطوعية">
         <meta name="twitter:card" content="تطوع لنشر القرآن الكريم والأحاديث النبوية الشريفة بعدة لغات">
-        <meta name="twitter:image" content="{{url('public/img/islaminbrief_logo_text1.png')}}">
+        <meta name="twitter:image" content="{{asset('img/islaminbrief_logo_text1.png')}}">
         <meta name="twitter:title" content="مشاريع جمعية خدمة المحتوى الإسلامي التطوعية" />
         <meta name="twitter:description" content="تطوع لنشر القرآن الكريم والأحاديث النبوية الشريفة بعدة لغات">
         <meta name="application-name" content="جمعية خدمة المحتوى الإسلامي التطوعية">
-        <meta name="msapplication-TileImage" content="{{url('public/img/islaminbrief_logo_text1.png')}}">
+        <meta name="msapplication-TileImage" content="{{asset('img/islaminbrief_logo_text1.png')}}">
         <meta name="msapplication-TileColor" content="#316eec">
 
-        <link rel="icon" href="{{url('public/img/islaminbrief_logo_text1.png')}}">
+        <link rel="icon" href="{{asset('img/islaminbrief_logo_text1.png')}}">
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="{{url('public/css/bootstrap.rtl.min.css')}}" media="all">
-        <link href="{{url('public/css/datatables.min.css')}}" rel="stylesheet"/ media="all">
+        <link rel="stylesheet" href="{{asset('css/bootstrap.rtl.min.css')}}" media="all">
+        <link href="{{asset('css/datatables.min.css')}}" rel="stylesheet"/ media="all">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
         <!-- font awesome -->
-        <link href="{{url('public/css/all.min.css')}}" rel="stylesheet"  media="all">
+        <link href="{{asset('css/all.min.css')}}" rel="stylesheet"  media="all">
         <!-- Css -->
         @if(App::environment('local'))
         @else
