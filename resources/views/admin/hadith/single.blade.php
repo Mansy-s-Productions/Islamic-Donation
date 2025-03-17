@@ -23,8 +23,8 @@
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$Sura->aya_number}}</th>
                                 <td class="px-6 py-4">{{$Sura->AyaOriginalText}}</td>
                                 <td class="px-6 py-4">
-                                    <a class="fancybox" href="{{$TheSura[$key]->AyaImage}}" data-fancybox="gallery{{$Sura->id}}">
-                                        <img width="100" src="{{$TheSura[$key]->AyaImage}}" alt=""></td>
+                                    <a class="fancybox" href="{{asset($TheSura[$key]->AyaImage)}}" data-fancybox="gallery{{$Sura->id}}">
+                                        <img width="100" src="{{asset($TheSura[$key]->AyaImage)}}" alt=""></td>
                                     </a>
                                 <td class="px-6 py-4">
                                     <a href="{{route('admin.aya.getEdit', [$lang, $Sura->id])}}"><i class="fa-regular fa-eye"></i></a>

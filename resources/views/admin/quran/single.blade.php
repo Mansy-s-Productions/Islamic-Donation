@@ -45,8 +45,8 @@
                                         <th scope="row" class="px-6 py-4">{{$TheSura[$key]['translation']}}</th>
                                     @endif
                                     <td class="px-6 py-4">
-                                        <a class="fancybox" href="{{QuranImageSrc($lang ,$TheSura[$key]['sura'], $Aya->aya_number)}}" data-fancybox="gallery{{$Aya->id}}">
-                                            <img width="100" src="{{QuranImageSrc($lang ,$TheSura[$key]['sura'], $Aya->aya_number)}}" alt=""></td>
+                                        <a class="fancybox" href="{{asset(QuranImageSrc($lang ,$TheSura[$key]['sura'], $Aya->aya_number))}}" data-fancybox="gallery{{$Aya->id}}">
+                                            <img width="100" src="{{asset(QuranImageSrc($lang ,$TheSura[$key]['sura'], $Aya->aya_number))}}" alt=""></td>
                                         </a>
                                     <td class="px-6 py-4">
                                         <a href="{{route('admin.aya.getEdit', [$lang ,$TheSura[0]['sura'] , $Aya->aya_number])}}"><i class="fa-regular fa-eye"></i></a>
@@ -71,8 +71,8 @@
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$Aya->aya_number}}</th>
                                 <td class="px-6 py-4">{{$Aya->AyaOriginalText}}</td>
                                 <td class="px-6 py-4">
-                                    <a class="fancybox" href="{{QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->id)}}" data-fancybox="gallery{{$Aya->id}}">
-                                        <img width="100" src="{{QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->id)}}" alt=""></td>
+                                    <a class="fancybox" href="{{asset(QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->id))}}" data-fancybox="gallery{{$Aya->id}}">
+                                        <img width="100" src="{{asset(QuranImageSrc($lang, $Aya->ar_sura_number, $Aya->id))}}" alt=""></td>
                                     </a>
                                 <td class="px-6 py-4">
                                     <a href="{{route('admin.aya.getEdit', [$lang ,$Aya->ar_sura_number ,$Aya->aya_number])}}"><i class="fa-regular fa-eye"></i></a>

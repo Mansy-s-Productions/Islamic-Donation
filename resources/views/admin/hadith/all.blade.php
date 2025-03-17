@@ -55,8 +55,8 @@
                                     @endif
                                     <td class="px-6 py-4" dir="rtl">{{$AllArHadith['data'][$key]['title']}}</td>
                                     <td class="px-6 py-4">
-                                        <a class="fancybox" href="{{HadithImageSrc($lang, $hadith['id'])}}" data-fancybox="gallery{{$hadith['id']}}">
-                                            <img width="100" class="lazy" data-src="{{HadithImageSrc($lang, $hadith['id'])}}" alt=""></td>
+                                        <a class="fancybox" href="{{asset(HadithImageSrc($lang, $hadith['id']))}}" data-fancybox="gallery{{$hadith['id']}}">
+                                            <img width="100" class="lazy" data-src="{{asset(HadithImageSrc($lang, $hadith['id']))}}" alt=""></td>
                                         </a>
                                     <td class="px-6 py-4">
                                         <a href="{{route('admin.hadith.getEdit', [$hadith['id'], $lang])}}"><i class="fa-regular fa-eye"></i></a>
