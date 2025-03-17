@@ -24,11 +24,11 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <div class="flex items-center mt-4">
+        {{-- <div class="flex items-center mt-4">
                 <a class="btn btn-danger px-4 py-2 rounded rounded-md text-sm google-btn" href="{{route('login.social' , 'google')}}">
                     <i class="fa-brands fa-google"></i> {{ __('Login with Google') }}
                 </a>
-        </div>
+        </div> --}}
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
                 <a class="px-4 py-2 bg-gray-200 rounded btn text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
