@@ -5,7 +5,6 @@ use App\Http\Controllers\QuranController;
 use App\Http\Controllers\VolunteerPhotosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Services\TelegramService;
 
 /*
 |--------------------------------------------------------------------------

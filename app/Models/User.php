@@ -44,16 +44,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function UserSubmits(){
+
+    public function UserSubmits()
+    {
         return $this->hasMany(VolunteerPhotos::class, 'user_id');
     }
-    public function getUserStatusAttribute(){
-        if($this->active == 0){
+
+    public function getUserStatusAttribute()
+    {
+        if ($this->active == 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-
-
 }

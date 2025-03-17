@@ -15,13 +15,13 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->check()){
-            if(auth()->user()->role == 1 && auth()->user()->active == 1){
+        if (auth()->check()) {
+            if (auth()->user()->role == 1 && auth()->user()->active == 1) {
                 return $next($request);
-            }else{
+            } else {
                 abort(404);
             }
-        }else{
+        } else {
             return redirect()->route('login.get');
         }
     }

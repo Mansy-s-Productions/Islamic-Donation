@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hadith;
-use App\Models\Language;
 use App\Models\VolunteerPhotos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +16,7 @@ use Throwable;
 class HadithController extends Controller
 {
     const API_BASE_URL = 'https://hadeethenc.com/api/v1';
+
     const CACHE_DURATION = 60;
 
     public function getAdminAll($lang = 'en', $category_id = 1)
@@ -27,22 +27,24 @@ class HadithController extends Controller
 
         $AllHadith = Cache::remember($hadithCacheKey, self::CACHE_DURATION, function () use ($lang, $category_id) {
             $response = Http::accept('application/json')
-                ->get(self::API_BASE_URL . '/hadeeths/list', [
+                ->get(self::API_BASE_URL.'/hadeeths/list', [
                     'language' => $lang,
                     'category_id' => $category_id,
                     'per_page' => 1600,
                 ]);
+
             return $response->collect()['data'];
         });
 
         $AllCategories = Cache::remember($categoriesCacheKey, self::CACHE_DURATION, function () use ($lang) {
             $response = Http::accept('application/json')
-                ->get(self::API_BASE_URL . '/categories/roots', ['language' => $lang]);
+                ->get(self::API_BASE_URL.'/categories/roots', ['language' => $lang]);
+
             return $response->collect();
         });
 
         $AllArHadith = Http::accept('application/json')
-            ->get(self::API_BASE_URL . '/hadeeths/list', [
+            ->get(self::API_BASE_URL.'/hadeeths/list', [
                 'language' => 'ar',
                 'category_id' => $category_id,
                 'per_page' => 3000,
@@ -52,7 +54,8 @@ class HadithController extends Controller
 
         $AllLanguages = Cache::remember($languagesCacheKey, self::CACHE_DURATION, function () {
             $response = Http::accept('application/json')
-                ->get(self::API_BASE_URL . '/languages');
+                ->get(self::API_BASE_URL.'/languages');
+
             return $response->collect();
         });
 
@@ -63,7 +66,8 @@ class HadithController extends Controller
     {
         $AllCategories = Cache::remember("categories_{$lang}", self::CACHE_DURATION, function () use ($lang) {
             $response = Http::accept('application/json')
-                ->get(self::API_BASE_URL . '/categories/roots', ['language' => $lang]);
+                ->get(self::API_BASE_URL.'/categories/roots', ['language' => $lang]);
+
             return $response->object();
         });
 
@@ -73,7 +77,7 @@ class HadithController extends Controller
     public function getAllHadith($lang = 'ar', $category_id = 1)
     {
         try {
-            $Images = File::files(storage_path('app/public/hadith/' . $lang));
+            $Images = File::files(storage_path('app/public/hadith/'.$lang));
             $ImagesFiles = array_map(function ($image) {
                 return pathinfo($image, PATHINFO_FILENAME);
             }, $Images);
@@ -87,26 +91,28 @@ class HadithController extends Controller
 
         $AllHadith = Cache::remember($hadithCacheKey, self::CACHE_DURATION, function () use ($lang, $category_id) {
             $response = Http::accept('application/json')
-                ->get(self::API_BASE_URL . '/hadeeths/list', [
+                ->get(self::API_BASE_URL.'/hadeeths/list', [
                     'language' => $lang,
                     'category_id' => $category_id,
                     'per_page' => 1600,
                 ]);
+
             return $response->collect()['data'];
         });
 
         $AllArHadith = Cache::remember($arHadithCacheKey, self::CACHE_DURATION, function () use ($category_id) {
             $response = Http::accept('application/json')
-                ->get(self::API_BASE_URL . '/hadeeths/list', [
+                ->get(self::API_BASE_URL.'/hadeeths/list', [
                     'language' => 'ar',
                     'category_id' => $category_id,
                     'per_page' => 1600,
                 ]);
+
             return $response->collect();
         });
 
         $FilteredHadith = array_filter($AllHadith, function ($hadith) use ($ImagesFiles, $lang) {
-            return in_array($lang . '_' . $hadith['id'], $ImagesFiles);
+            return in_array($lang.'_'.$hadith['id'], $ImagesFiles);
         });
 
         $FinalHadith = collect($FilteredHadith)->paginate(100);
@@ -127,7 +133,8 @@ class HadithController extends Controller
     {
         $AllLanguages = Cache::remember('languages', self::CACHE_DURATION, function () {
             $response = Http::accept('application/json')
-                ->get(self::API_BASE_URL . '/languages');
+                ->get(self::API_BASE_URL.'/languages');
+
             return $response->collect();
         });
 
@@ -138,10 +145,11 @@ class HadithController extends Controller
     {
         $TheHadith = Cache::remember("hadith_{$lang}_{$id}", self::CACHE_DURATION, function () use ($id, $lang) {
             $response = Http::accept('application/json')
-                ->get(self::API_BASE_URL . '/hadeeths/one', [
+                ->get(self::API_BASE_URL.'/hadeeths/one', [
                     'language' => $lang,
                     'id' => $id,
                 ]);
+
             return $response->collect();
         });
 
@@ -151,7 +159,7 @@ class HadithController extends Controller
     public function postEditHadith(Request $r, $id, $lang)
     {
         $TheHadith = Http::accept('application/json')
-            ->get(self::API_BASE_URL . '/hadeeths/one', [
+            ->get(self::API_BASE_URL.'/hadeeths/one', [
                 'language' => $lang,
                 'id' => $id,
             ])->collect();
@@ -165,35 +173,37 @@ class HadithController extends Controller
             return back()->withErrors($validator->errors()->all());
         } else {
             if ($r->has('image')) {
-                $imagePath = storage_path('app/public/hadith/' . $lang . '/' . $lang . '_' . $TheHadith['id'] . '.jpg');
+                $imagePath = storage_path('app/public/hadith/'.$lang.'/'.$lang.'_'.$TheHadith['id'].'.jpg');
                 if (File::exists($imagePath)) {
                     File::delete($imagePath);
                 }
 
                 $img = ImageLib::make($r->image);
-                $savePath = storage_path('app/public/hadith/' . $lang);
+                $savePath = storage_path('app/public/hadith/'.$lang);
 
-                if (!File::exists($savePath)) {
+                if (! File::exists($savePath)) {
                     File::makeDirectory($savePath, 0777, true, true);
                 }
 
-                $img->save($savePath . '/' . $lang . '_' . $TheHadith['id'] . '.jpg');
+                $img->save($savePath.'/'.$lang.'_'.$TheHadith['id'].'.jpg');
                 Cache::flush();
             }
-            return redirect()->route('admin.hadith.all', [$lang, 1])->withSuccess("تم تعديل التصميم بنجاح");
+
+            return redirect()->route('admin.hadith.all', [$lang, 1])->withSuccess('تم تعديل التصميم بنجاح');
         }
     }
+
     public function getHadithImage($lang, $hadith_id)
     {
         // البحث عن الحديث في الكاش أو قاعدة البيانات
         $hadithData = Cache::remember("hadith_{$lang}_{$hadith_id}", self::CACHE_DURATION, function () use ($lang, $hadith_id) {
             return Hadith::where('lang_code', $lang)
-                         ->where('hadith_id', $hadith_id)
-                         ->first();
+                ->where('hadith_id', $hadith_id)
+                ->first();
         });
 
         // التحقق مما إذا كان الحديث موجودًا
-        if (!$hadithData) {
+        if (! $hadithData) {
             return response()->json(['message' => 'الحديث غير موجود'], 404);
         }
 

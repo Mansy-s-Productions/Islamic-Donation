@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class RequestCount extends Model
 {
     use HasFactory;
-    protected $guarded = [];
 
+    protected $guarded = [];
 }

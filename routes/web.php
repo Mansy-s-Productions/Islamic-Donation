@@ -3,10 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HadithController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuranController;
-use App\Http\Controllers\SuraListController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +23,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('quran', [QuranController::class, 'getAllQuran'])->name('quranList');
 Route::get('islamic-links', [QuranController::class, 'getIslamicLinks'])->name('islamicLinks');
@@ -36,11 +33,11 @@ Route::prefix('hadith/{lang?}')->group(function () {
     Route::get('list/category/{id?}', [HadithController::class, 'getAllHadith'])->name('hadithList');
 });
 
-//Auth System Routes
+// Auth System Routes
 Route::middleware('guest')->group(function () {
-    //Social Signup System
-    Route::get('social-login/{provider}', [UserController::class , 'redirectToProvider'])->name('login.social');
-    Route::get('login/{driver}/callback', [UserController::class , 'handleProviderCallback'])->name('login.social.callback');
+    // Social Signup System
+    Route::get('social-login/{provider}', [UserController::class, 'redirectToProvider'])->name('login.social');
+    Route::get('login/{driver}/callback', [UserController::class, 'handleProviderCallback'])->name('login.social.callback');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -71,7 +68,5 @@ Route::middleware('auth', 'verified', 'admin')->group(function () {
         });
     });
 
-
 });
 require __DIR__.'/auth.php';
-
