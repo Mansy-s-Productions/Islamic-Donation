@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Http;
 
 function HadithImageSrc($lang, $id)
 {
-    return storage_path('hadith/').'/'.$lang.'/'.$lang.'_'.$id.'.jpg';
+    return url('storage/hadith/').'/'.$lang.'/'.$lang.'_'.$id.'.jpg';
 }
 function QuranImageSrc($lang, $sura_id, $aya_id)
 {
-    return storage_path('quran/'.$lang.'/'.$lang.'_'.$sura_id.'_'.$aya_id.'.jpg');
+    return url('storage/quran/').'/'.$lang.'/'.$lang.'_'.$sura_id.'_'.$aya_id.'.jpg';
 }
 function LanguagesLIst()
 {
