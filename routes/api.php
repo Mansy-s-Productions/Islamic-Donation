@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\HadithController;
+use App\Http\Controllers\QuranController;
 use App\Http\Controllers\VolunteerPhotosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Services\TelegramService;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('request.limit')->group(function () {
     Route::post('submit-design', [VolunteerPhotosController::class, 'submitDesign'])->name('submitDesign');
 });
+
+Route::get('/ayah/{lang}/{sura}/{ayah}', [QuranController::class, 'getAyahImage']);
+Route::get('/hadith/{lang}/{hadith_id}', [HadithController::class, 'getHadithImage']);

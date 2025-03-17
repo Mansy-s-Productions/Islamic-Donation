@@ -25,7 +25,7 @@ class HadithController extends Controller
         $categoriesCacheKey = "categories_{$lang}";
         $languagesCacheKey = 'languages';
 
-        $AllHadith = Cache::remember($hadithCacheKey, self::CACHE_DURATION, function() use ($lang, $category_id) {
+        $AllHadith = Cache::remember($hadithCacheKey, self::CACHE_DURATION, function () use ($lang, $category_id) {
             $response = Http::accept('application/json')
                 ->get(self::API_BASE_URL . '/hadeeths/list', [
                     'language' => $lang,
@@ -35,7 +35,7 @@ class HadithController extends Controller
             return $response->collect()['data'];
         });
 
-        $AllCategories = Cache::remember($categoriesCacheKey, self::CACHE_DURATION, function() use ($lang) {
+        $AllCategories = Cache::remember($categoriesCacheKey, self::CACHE_DURATION, function () use ($lang) {
             $response = Http::accept('application/json')
                 ->get(self::API_BASE_URL . '/categories/roots', ['language' => $lang]);
             return $response->collect();
@@ -50,7 +50,7 @@ class HadithController extends Controller
 
         $AllHadith = collect($AllHadith)->paginate(100);
 
-        $AllLanguages = Cache::remember($languagesCacheKey, self::CACHE_DURATION, function() {
+        $AllLanguages = Cache::remember($languagesCacheKey, self::CACHE_DURATION, function () {
             $response = Http::accept('application/json')
                 ->get(self::API_BASE_URL . '/languages');
             return $response->collect();
@@ -61,7 +61,7 @@ class HadithController extends Controller
 
     public function getAllCategories($lang = 'ar')
     {
-        $AllCategories = Cache::remember("categories_{$lang}", self::CACHE_DURATION, function() use ($lang) {
+        $AllCategories = Cache::remember("categories_{$lang}", self::CACHE_DURATION, function () use ($lang) {
             $response = Http::accept('application/json')
                 ->get(self::API_BASE_URL . '/categories/roots', ['language' => $lang]);
             return $response->object();
@@ -125,7 +125,7 @@ class HadithController extends Controller
 
     public function getCreateHadith()
     {
-        $AllLanguages = Cache::remember('languages', self::CACHE_DURATION, function() {
+        $AllLanguages = Cache::remember('languages', self::CACHE_DURATION, function () {
             $response = Http::accept('application/json')
                 ->get(self::API_BASE_URL . '/languages');
             return $response->collect();
@@ -136,7 +136,7 @@ class HadithController extends Controller
 
     public function getEditHadith($id, $lang)
     {
-        $TheHadith = Cache::remember("hadith_{$lang}_{$id}", self::CACHE_DURATION, function() use ($id, $lang) {
+        $TheHadith = Cache::remember("hadith_{$lang}_{$id}", self::CACHE_DURATION, function () use ($id, $lang) {
             $response = Http::accept('application/json')
                 ->get(self::API_BASE_URL . '/hadeeths/one', [
                     'language' => $lang,
@@ -182,5 +182,31 @@ class HadithController extends Controller
             }
             return redirect()->route('admin.hadith.all', [$lang, 1])->withSuccess("تم تعديل التصميم بنجاح");
         }
+    }
+    public function getHadithImage($lang, $hadith_id)
+    {
+        // البحث عن الحديث في الكاش أو قاعدة البيانات
+        $hadithData = Cache::remember("hadith_{$lang}_{$hadith_id}", self::CACHE_DURATION, function () use ($lang, $hadith_id) {
+            return Hadith::where('lang_code', $lang)
+                         ->where('hadith_id', $hadith_id)
+                         ->first();
+        });
+
+        // التحقق مما إذا كان الحديث موجودًا
+        if (!$hadithData) {
+            return response()->json(['message' => 'الحديث غير موجود'], 404);
+        }
+
+        // جلب الصورة من قاعدة البيانات
+        $imageFileName = $hadithData->image;
+        $imageUrl = $imageFileName ? asset("storage/hadith/{$lang}/{$imageFileName}") : null;
+
+        return response()->json([
+            'hadith_id' => $hadithData->hadith_id,
+            'text' => $hadithData->title, // نفترض أن `title` يحتوي على نص الحديث
+            'grade' => $hadithData->grade, // درجة الحديث
+            'link' => $hadithData->link, // رابط المصدر
+            'image_url' => $imageUrl,
+        ]);
     }
 }
