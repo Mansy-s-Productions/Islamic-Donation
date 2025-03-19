@@ -9,7 +9,7 @@
 @if(App::environment('local'))
 @vite(['resources/scss/style.scss', 'resources/js/app.js'])
 @else
-<script src="{{asset('build/assets/app.js')}}"></script>
-<script src="{{asset('build/assets/custom.js')}}"></script>
+<script src="{{asset('build/app.js')}}"></script>
+<script src="{{asset('build/custom.js')}}"></script>
 @endif
 
