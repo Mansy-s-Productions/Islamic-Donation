@@ -183,7 +183,6 @@ class QuranController extends Controller
         ));
     }
 
-
     private function getSubmittedDesigns($lang, $type)
     {
         if (Auth::check()) {

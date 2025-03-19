@@ -3,12 +3,13 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     build: {
-        outDir: './build',
+        outDir: 'public/build',
+        manifest: true,
         rollupOptions: {
             output: {
-                entryFileNames: `assets/[name].js`,
-                assetFileNames: `assets/[name].[ext]`
-            }
+                entryFileNames: `[name].js`,
+                assetFileNames: `[name].[ext]`
+            },
         },
     },
     plugins: [
