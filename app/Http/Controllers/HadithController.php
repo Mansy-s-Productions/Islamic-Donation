@@ -209,7 +209,7 @@ class HadithController extends Controller
 
         // جلب الصورة من قاعدة البيانات
         $imageFileName = $hadithData->image;
-        $imageUrl = $imageFileName ? asset("storage/hadith/{$lang}/{$imageFileName}") : null;
+        $imageUrl = $imageFileName ? asset("storage/hadith/{$lang}/{$lang}_{$imageFileName}") : null;
 
         return response()->json([
             'hadith_id' => $hadithData->hadith_id,
