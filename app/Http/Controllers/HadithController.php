@@ -216,11 +216,10 @@ class HadithController extends Controller
 
         // 4. Optionally, add image handling as before
         $imageFileName = "{$lang}_{$hadith_id}.jpg";
-        $imagePath = storage_path("app/public/hadith/{$lang}/{$imageFileName}");
+        $imagePath = asset("storage/hadith/{$lang}/{$imageFileName}");
         $imageUrl = File::exists($imagePath)
             ? asset("storage/hadith/{$lang}/{$imageFileName}")
             : null;
-
         // 5. Return both language data and Arabic data
         return response()->json([
             'hadith_id'        => $responseLang['id'],
