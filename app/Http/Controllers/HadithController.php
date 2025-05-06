@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Image as ImageLib;
 use Throwable;
 
+
 class HadithController extends Controller
 {
     const API_BASE_URL = 'https://hadeethenc.com/api/v1';
@@ -193,30 +194,55 @@ class HadithController extends Controller
         }
     }
 
+
+
     public function getHadithImage($lang, $hadith_id)
     {
-        // البحث عن الحديث في الكاش أو قاعدة البيانات
-        $hadithData = Cache::remember("hadith_{$lang}_{$hadith_id}", self::CACHE_DURATION, function () use ($lang, $hadith_id) {
-            return Hadith::where('lang_code', $lang)
-                ->where('hadith_id', $hadith_id)
-                ->first();
-        });
+        // 1. Fetch hadith in requested language
+        $apiUrlLang = "https://hadeethenc.com/api/v1/hadeeths/one/?language={$lang}&id={$hadith_id}";
+        $responseLang = Http::get($apiUrlLang);
 
-        // التحقق مما إذا كان الحديث موجودًا
-        if (! $hadithData) {
-            return response()->json(['message' => 'الحديث غير موجود'], 404);
+        // 2. Fetch hadith in Arabic
+        $apiUrlAr = "https://hadeethenc.com/api/v1/hadeeths/one/?language=ar&id={$hadith_id}";
+        $responseAr = Http::get($apiUrlAr);
+
+        // 3. Check if both responses are OK
+        if (!$responseLang->ok() || empty($responseLang['id'])) {
+            return response()->json(['message' => 'Hadith not found in requested language'], 404);
+        }
+        if (!$responseAr->ok() || empty($responseAr['id'])) {
+            return response()->json(['message' => 'Hadith not found in Arabic'], 404);
         }
 
-        // جلب الصورة من قاعدة البيانات
-        $imageFileName = $hadithData->image;
-        $imageUrl = $imageFileName ? asset("storage/hadith/{$lang}/{$lang}_{$imageFileName}") : null;
+        // 4. Optionally, add image handling as before
+        $imageFileName = "{$lang}_{$hadith_id}.jpg";
+        $imagePath = storage_path("app/public/hadith/{$lang}/{$imageFileName}");
+        $imageUrl = File::exists($imagePath)
+            ? asset("storage/hadith/{$lang}/{$imageFileName}")
+            : null;
 
+        // 5. Return both language data and Arabic data
         return response()->json([
-            'hadith_id' => $hadithData->hadith_id,
-            'text' => $hadithData->title, // نفترض أن `title` يحتوي على نص الحديث
-            'grade' => $hadithData->grade, // درجة الحديث
-            'link' => $hadithData->link, // رابط المصدر
-            'image_url' => $imageUrl,
+            'hadith_id'        => $responseLang['id'],
+            'lang'             => $lang,
+            'hadith'           => [
+                'title'        => $responseLang['title'] ?? '',
+                'hadeeth'      => $responseLang['hadeeth'] ?? '',
+                'attribution'  => $responseLang['attribution'] ?? '',
+                'grade'        => $responseLang['grade'] ?? '',
+                'explanation'  => $responseLang['explanation'] ?? '',
+            ],
+            'hadith_ar'        => [
+                'title'        => $responseAr['title'] ?? '',
+                'hadeeth'      => $responseAr['hadeeth'] ?? '',
+                'attribution'  => $responseAr['attribution'] ?? '',
+                'grade'        => $responseAr['grade'] ?? '',
+                'explanation'  => $responseAr['explanation'] ?? '',
+            ],
+            'image_url'        => $imageUrl,
         ]);
     }
+
+
+
 }
