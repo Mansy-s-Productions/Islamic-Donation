@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Image as ImageLib;
 use Throwable;
 
@@ -240,4 +242,36 @@ class QuranController extends Controller
             'image_url' => $imageUrl,
         ]);
     }
+    public function getAyatWithImages()
+{
+    $groupedAyat = [];
+
+    // List all language folders under public/quran/
+    $languages = Storage::disk('public')->directories('quran');
+
+    foreach ($languages as $langDir) {
+        $lang = basename($langDir);
+        $files = Storage::disk('public')->files("quran/{$lang}");
+
+        foreach ($files as $filePath) {
+            if (Str::endsWith($filePath, '.jpg')) {
+                $filename = basename($filePath, '.jpg');
+                $parts = explode('_', $filename);
+                if (count($parts) !== 3) {
+                    continue;
+                }
+                [$fileLang, $sura, $ayah] = $parts;
+                $groupedAyat[$fileLang][$sura][] = [
+                    'ayah'      => $ayah,
+                    'image_url' => asset("storage/{$filePath}"),
+                ];
+            }
+        }
+    }
+
+    return response()->json([
+        'count' => array_sum(array_map(fn($langs) => array_sum(array_map('count', $langs)), $groupedAyat)),
+        'grouped_by_language' => $groupedAyat,
+    ]);
+}
 }

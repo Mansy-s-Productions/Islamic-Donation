@@ -195,9 +195,6 @@ class HadithController extends Controller
             return redirect()->route('admin.hadith.all', [$lang, 1])->withSuccess('تم تعديل التصميم بنجاح');
         }
     }
-
-
-
     public function getHadithImage($lang, $hadith_id)
     {
         // 1. Fetch hadith in requested language
