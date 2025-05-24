@@ -244,7 +244,6 @@ class HadithController extends Controller
         $directories = $lang
             ? [ "hadith/{$lang}" ]
             : Storage::disk('public')->directories('hadith');
-
         foreach ($directories as $dirPath) {
             $currentLang = basename($dirPath);
             $files = Storage::disk('public')->files($dirPath);
