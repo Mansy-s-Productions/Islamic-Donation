@@ -242,36 +242,50 @@ class QuranController extends Controller
             'image_url' => $imageUrl,
         ]);
     }
-    public function getAyatWithImages()
-{
-    $groupedAyat = [];
+    public function getAyatWithImagesFiltered($lang = null, $sura = null)
+    {
+        $grouped = [];
 
-    // List all language folders under public/quran/
-    $languages = Storage::disk('public')->directories('quran');
+        $languageDirs = $lang
+            ? [ "quran/{$lang}" ]
+            : Storage::disk('public')->directories('quran');
 
-    foreach ($languages as $langDir) {
-        $lang = basename($langDir);
-        $files = Storage::disk('public')->files("quran/{$lang}");
+        foreach ($languageDirs as $dirPath) {
+            $currentLang = basename($dirPath);
+            $files = Storage::disk('public')->files($dirPath);
 
-        foreach ($files as $filePath) {
-            if (Str::endsWith($filePath, '.jpg')) {
-                $filename = basename($filePath, '.jpg');
-                $parts = explode('_', $filename);
-                if (count($parts) !== 3) {
-                    continue;
+            foreach ($files as $filePath) {
+                if (Str::endsWith($filePath, '.jpg')) {
+                    $filename = basename($filePath, '.jpg');
+                    $parts = explode('_', $filename);
+
+                    if (count($parts) !== 3) continue;
+
+                    [$fileLang, $fileSura, $ayah] = $parts;
+
+                    if (($lang && $fileLang !== $lang) || ($sura && (int) $fileSura !== (int) $sura)) {
+                        continue;
+                    }
+
+                    $grouped[$fileLang][$fileSura][] = [
+                        'ayah'      => $ayah,
+                        'image_url' => asset("storage/{$filePath}"),
+                    ];
                 }
-                [$fileLang, $sura, $ayah] = $parts;
-                $groupedAyat[$fileLang][$sura][] = [
-                    'ayah'      => $ayah,
-                    'image_url' => asset("storage/{$filePath}"),
-                ];
             }
         }
-    }
 
-    return response()->json([
-        'count' => array_sum(array_map(fn($langs) => array_sum(array_map('count', $langs)), $groupedAyat)),
-        'grouped_by_language' => $groupedAyat,
-    ]);
-}
+        if (empty($grouped)) {
+            return response()->json(['message' => 'No ayat images found for this criteria.'], 404);
+        }
+
+        return response()->json([
+            'filter' => [
+                'lang' => $lang,
+                'sura' => $sura,
+            ],
+            'count' => array_sum(array_map(fn($langs) => array_sum(array_map('count', $langs)), $grouped)),
+            'grouped_by_language' => $grouped,
+        ]);
+    }
 }
