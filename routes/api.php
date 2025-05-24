@@ -27,3 +27,5 @@ Route::middleware('request.limit')->group(function () {
 
 Route::get('/ayah/{lang}/{sura}/{ayah}', [QuranController::class, 'getAyahImage']);
 Route::get('/hadith/{lang}/{hadith_id}', [HadithController::class, 'getHadithImage']);
+Route::get('/hadiths/with-images', [HadithController::class, 'getHadithsWithImages']);
+
