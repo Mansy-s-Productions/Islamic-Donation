@@ -29,5 +29,7 @@ Route::get('/ayah/{lang}/{sura}/{ayah}', [QuranController::class, 'getAyahImage'
 Route::get('/quran/with-images/{lang?}/{sura?}', [QuranController::class, 'getAyatWithImagesFiltered'])
      ->name('quran.with-images.filtered');
 Route::get('/hadith/{lang}/{hadith_id}', [HadithController::class, 'getHadithImage']);
-Route::get('/hadiths/with-images', [HadithController::class, 'getHadithsWithImages']);
+Route::get('/hadith/with-images/{lang?}', [HadithController::class, 'getHadithsWithImages'])
+     ->name('hadith.with-images.filtered');
+
 

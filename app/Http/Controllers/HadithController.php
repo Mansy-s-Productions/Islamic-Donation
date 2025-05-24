@@ -238,29 +238,30 @@ class HadithController extends Controller
         ]);
     }
 
-    public function getHadithsWithImages()
+    public function getHadithsWithImages($lang = null)
     {
-        $groupedHadiths = [];
+        $grouped = [];
+        $directories = $lang
+            ? [ "hadith/{$lang}" ]
+            : Storage::disk('public')->directories('hadith');
 
-        $languages = Storage::disk('public')->directories('hadith');
-
-        foreach ($languages as $langDir) {
-            $lang = basename($langDir);
-            $files = Storage::disk('public')->files("hadith/{$lang}");
+        foreach ($directories as $dirPath) {
+            $currentLang = basename($dirPath);
+            $files = Storage::disk('public')->files($dirPath);
 
             foreach ($files as $filePath) {
                 if (Str::endsWith($filePath, '.jpg')) {
                     $filename = basename($filePath, '.jpg');
                     $parts = explode('_', $filename);
-
-                    if (count($parts) !== 2) {
-                        continue;
-                    }
+                    if (count($parts) !== 2) continue;
 
                     [$fileLang, $hadithId] = $parts;
 
-                    // Group by language
-                    $groupedHadiths[$fileLang][] = [
+                    if ($lang && $fileLang !== $lang) {
+                        continue;
+                    }
+
+                    $grouped[$fileLang][] = [
                         'hadith_id' => $hadithId,
                         'image_url' => asset("storage/{$filePath}"),
                     ];
@@ -268,10 +269,16 @@ class HadithController extends Controller
             }
         }
 
+        if (empty($grouped)) {
+            return response()->json(['message' => 'No hadith images found for this criteria.'], 404);
+        }
+
         return response()->json([
-            'count'   => array_sum(array_map('count', $groupedHadiths)),
-            'grouped_by_language' => $groupedHadiths,
+            'filter' => [
+                'lang' => $lang,
+            ],
+            'count' => array_sum(array_map('count', $grouped)),
+            'grouped_by_language' => $grouped,
         ]);
     }
-
 }
