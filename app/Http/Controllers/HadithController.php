@@ -243,26 +243,37 @@ class HadithController extends Controller
 
     public function getHadithsWithImages()
     {
-        $hadithsWithImages = [];
+        $groupedHadiths = [];
+
         $languages = Storage::disk('public')->directories('hadith');
+
         foreach ($languages as $langDir) {
             $lang = basename($langDir);
             $files = Storage::disk('public')->files("hadith/{$lang}");
+
             foreach ($files as $filePath) {
                 if (Str::endsWith($filePath, '.jpg')) {
                     $filename = basename($filePath, '.jpg');
-                    [$fileLang, $hadithId] = explode('_', $filename);
-                    $hadithsWithImages[] = [
+                    $parts = explode('_', $filename);
+
+                    if (count($parts) !== 2) {
+                        continue;
+                    }
+
+                    [$fileLang, $hadithId] = $parts;
+
+                    // Group by language
+                    $groupedHadiths[$fileLang][] = [
                         'hadith_id' => $hadithId,
-                        'lang'      => $fileLang,
                         'image_url' => asset("storage/{$filePath}"),
                     ];
                 }
             }
         }
+
         return response()->json([
-            'count'   => count($hadithsWithImages),
-            'hadiths' => $hadithsWithImages,
+            'count'   => array_sum(array_map('count', $groupedHadiths)),
+            'grouped_by_language' => $groupedHadiths,
         ]);
     }
 
