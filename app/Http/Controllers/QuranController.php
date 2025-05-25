@@ -246,6 +246,12 @@ class QuranController extends Controller
     {
         $grouped = [];
 
+        // تحميل كل الآيات من قاعدة البيانات مرة واحدة
+        $allAyat = ArQuran::query()
+            ->when($sura, fn($q) => $q->where('ar_sura_number', $sura))
+            ->get()
+            ->keyBy(fn($item) => "{$item->ar_sura_number}_{$item->aya_number}");
+
         $languageDirs = $lang
             ? [ "quran/{$lang}" ]
             : Storage::disk('public')->directories('quran');
@@ -255,40 +261,34 @@ class QuranController extends Controller
             $files = Storage::disk('public')->files($dirPath);
 
             foreach ($files as $filePath) {
-                if (Str::endsWith($filePath, '.jpg')) {
-                    $filename = basename($filePath, '.jpg');
-                    $parts = explode('_', $filename);
-
-                    if (count($parts) !== 3) continue;
-
-                    [$fileLang, $fileSura, $ayah] = $parts;
-
-                    if (($lang && $fileLang !== $lang) || ($sura && (int) $fileSura !== (int) $sura)) {
-                        continue;
-                    }
-
-                    // جلب نص الآية
-                    $ayahData = ArQuran::where('ar_sura_number', $fileSura)
-                        ->where('aya_number', $ayah)
-                        ->first();
-
-                    if (! $ayahData) {
-                        continue;
-                    }
-
-                    $grouped[$fileLang][$fileSura][] = [
-                        'ayah' => (int) $ayah,
-                        'aya_text' => $ayahData->aya_text,
-                        'image_url' => asset("storage/{$filePath}"),
-                    ];
+                if (!Str::endsWith($filePath, '.jpg')) {
+                    continue;
                 }
-            }
-        }
 
-        if (empty($grouped)) {
-            return response()->json([
-                'message' => 'No ayat images found for this criteria.'
-            ], 404);
+                $filename = basename($filePath, '.jpg');
+                $parts = explode('_', $filename);
+
+                if (count($parts) !== 3) continue;
+
+                [$fileLang, $fileSura, $ayah] = $parts;
+
+                if (($lang && $fileLang !== $lang) || ($sura && (int) $fileSura !== (int) $sura)) {
+                    continue;
+                }
+
+                $key = "{$fileSura}_{$ayah}";
+                $ayaData = $allAyat->get($key);
+
+                if (! $ayaData) {
+                    continue;
+                }
+
+                $grouped[$fileLang][$fileSura][] = [
+                    'ayah' => (int) $ayah,
+                    'aya_text' => $ayaData->aya_text,
+                    'image_url' => asset("storage/{$filePath}"),
+                ];
+            }
         }
 
         return response()->json([
@@ -300,5 +300,6 @@ class QuranController extends Controller
             'grouped_by_language' => $grouped,
         ]);
     }
+
 
 }
