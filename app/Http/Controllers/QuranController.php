@@ -238,7 +238,7 @@ class QuranController extends Controller
         return response()->json([
             'surah' => $ayahData->ar_sura_number,
             'ayah' => $ayahData->aya_number,
-            'text' => $ayahData->text,
+            'text' => $ayahData->aya_text,
             'image_url' => $imageUrl,
         ]);
     }
@@ -267,8 +267,18 @@ class QuranController extends Controller
                         continue;
                     }
 
+                    // جلب نص الآية
+                    $ayahData = ArQuran::where('ar_sura_number', $fileSura)
+                        ->where('aya_number', $ayah)
+                        ->first();
+
+                    if (! $ayahData) {
+                        continue;
+                    }
+
                     $grouped[$fileLang][$fileSura][] = [
-                        'ayah'      => $ayah,
+                        'ayah' => (int) $ayah,
+                        'aya_text' => $ayahData->aya_text,
                         'image_url' => asset("storage/{$filePath}"),
                     ];
                 }
@@ -276,7 +286,9 @@ class QuranController extends Controller
         }
 
         if (empty($grouped)) {
-            return response()->json(['message' => 'No ayat images found for this criteria.'], 404);
+            return response()->json([
+                'message' => 'No ayat images found for this criteria.'
+            ], 404);
         }
 
         return response()->json([
@@ -288,4 +300,5 @@ class QuranController extends Controller
             'grouped_by_language' => $grouped,
         ]);
     }
+
 }
