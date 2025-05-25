@@ -238,38 +238,57 @@ class HadithController extends Controller
         ]);
     }
 
-    public function getHadithsWithImages($lang = null)
+    public function getHadithsWithImages(Request $request)
     {
+        $lang = $request->input('lang', null);
+
+        $directory = storage_path('app/public/hadith');
+        $files = File::allFiles($directory);
+
         $grouped = [];
-        $directories = $lang
-            ? [ "hadith/{$lang}" ]
-            : Storage::disk('public')->directories('hadith');
-        foreach ($directories as $dirPath) {
-            $currentLang = basename($dirPath);
-            $files = Storage::disk('public')->files($dirPath);
 
-            foreach ($files as $filePath) {
-                if (Str::endsWith($filePath, '.jpg')) {
-                    $filename = basename($filePath, '.jpg');
-                    $parts = explode('_', $filename);
-                    if (count($parts) !== 2) continue;
-
-                    [$fileLang, $hadithId] = $parts;
-
-                    if ($lang && $fileLang !== $lang) {
-                        continue;
-                    }
-
-                    $grouped[$fileLang][] = [
-                        'hadith_id' => $hadithId,
-                        'image_url' => asset("storage/{$filePath}"),
-                    ];
-                }
+        foreach ($files as $file) {
+            $filename = $file->getFilename(); // ex: en_123.jpg
+            if (!Str::endsWith($filename, '.jpg')) {
+                continue;
             }
-        }
 
-        if (empty($grouped)) {
-            return response()->json(['message' => 'No hadith images found for this criteria.'], 404);
+            [$fileLang, $hadithId] = explode('_', pathinfo($filename, PATHINFO_FILENAME));
+            if ($lang && $fileLang !== $lang) {
+                continue;
+            }
+
+            // Get hadith in requested lang
+            $apiLang = "https://hadeethenc.com/api/v1/hadeeths/one/?language={$fileLang}&id={$hadithId}";
+            $resLang = Http::get($apiLang);
+
+            // Get hadith in Arabic
+            $apiAr = "https://hadeethenc.com/api/v1/hadeeths/one/?language=ar&id={$hadithId}";
+            $resAr = Http::get($apiAr);
+
+            if (!$resLang->ok() || !$resAr->ok()) {
+                continue;
+            }
+
+            $grouped[$fileLang][] = [
+                'hadith_id' => $hadithId,
+                'lang' => $fileLang,
+                'hadith' => [
+                    'title'       => $resLang['title'] ?? '',
+                    'hadeeth'     => $resLang['hadeeth'] ?? '',
+                    'attribution' => $resLang['attribution'] ?? '',
+                    'grade'       => $resLang['grade'] ?? '',
+                    'explanation' => $resLang['explanation'] ?? '',
+                ],
+                'hadith_ar' => [
+                    'title'       => $resAr['title'] ?? '',
+                    'hadeeth'     => $resAr['hadeeth'] ?? '',
+                    'attribution' => $resAr['attribution'] ?? '',
+                    'grade'       => $resAr['grade'] ?? '',
+                    'explanation' => $resAr['explanation'] ?? '',
+                ],
+                'image_url' => asset("storage/hadith/{$fileLang}/{$filename}")
+            ];
         }
 
         return response()->json([
@@ -280,4 +299,5 @@ class HadithController extends Controller
             'grouped_by_language' => $grouped,
         ]);
     }
+
 }
